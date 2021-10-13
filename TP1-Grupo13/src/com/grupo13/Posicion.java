@@ -17,6 +17,14 @@ public class Posicion {
         this.x = x;
     }
 
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     public void avanzar() {
         this.x++;
     }
