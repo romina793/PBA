@@ -1,4 +1,4 @@
-package com.grupo13;
+package tp1.grupo13;
 
 public class Aldeano extends Personaje {
 

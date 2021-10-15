@@ -1,4 +1,4 @@
-package com.grupo13;
+package tp1.grupo13;
 
 public class Personaje {
     private String nombre;
@@ -25,6 +25,12 @@ public class Personaje {
         this.pantalon = pantalon;
         this.gorro = gorro;
         this.inicial = inicial;
+        this.posicion = new Posicion(posicionX, posicionY);
+        this.orientacion = orientacion;
+    }
+    
+    public Personaje(String nombre, int posicionX, int posicionY, String orientacion) {
+        this.nombre = nombre;
         this.posicion = new Posicion(posicionX, posicionY);
         this.orientacion = orientacion;
     }
