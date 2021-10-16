@@ -112,24 +112,33 @@ public class SuperMarioBros {
 
         int opcion = elegirOpcionDeMenu();
         int valor = ingresarValor();
-
-        while (princesaPeach.getPosicion().getX() != valor) {
-            presentarMenu();
-            opcion = elegirOpcionDeMenu();
-            valor = ingresarValor();
-
+        boolean isGameOver = false; 
+        
+        while (!isGameOver) {
             boolean esValido = whallum.esRespuestaValida(princesaPeach.getPosicion(), valor, opcion);
             switch (opcion) {
                 case 1:
                     System.out.println("¿La posición de la Princesa Peach es mayor que: " + valor + "?");
-                    System.out.println("Respuesta: " + devolverRespuesta(esValido));
+                    System.out.println("Respuesta: " + devolverRespuesta(esValido) + "\n");
+                    presentarMenu();
+                    opcion = elegirOpcionDeMenu();
+                    valor = ingresarValor();
                     break;
                 case 2:
                     System.out.println("¿La posición de la Princesa Peach es menor que: " + valor + "?");
-                    System.out.println("Respuesta: " + devolverRespuesta(esValido));
+                    System.out.println("Respuesta: " + devolverRespuesta(esValido) + "\n");
+                    presentarMenu();
+                    opcion = elegirOpcionDeMenu();
+                    valor = ingresarValor();
                     break;
                 case 3:
-                    
+                    if (valor == princesaPeach.getPosicion().getX()){
+                        //CAMBIAR EL TEXTO - VA A LA SIGUIENTE SECCIÓN
+                       System.out.println("Continúa con la segunda etapa volviendo al modo tercera persona"); 
+                    } else {
+                       System.out.println("GAME OVER"); 
+                    }
+                    isGameOver = true; 
                     break;
                 default:
                     break;
