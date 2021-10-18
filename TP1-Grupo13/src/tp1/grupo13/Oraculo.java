@@ -6,7 +6,7 @@ public class Oraculo extends Personaje {
         super(nombre, posicionX, posicionY, orientacion);
     }
     
-    public boolean esRespuestaValida(Posicion posicionPersonaje, int puntoX, int opcion) {
+    public String esRespuestaValida(Posicion posicionPersonaje, int puntoX, int opcion) {
         boolean resultado = false;
         switch (opcion) {
             case 1:
@@ -21,6 +21,10 @@ public class Oraculo extends Personaje {
             default:
                 break;
         }
-        return resultado;
+        if (resultado) {
+            return "Verdadero";
+        } else {
+            return "Falso";
+        }
     }
 }
