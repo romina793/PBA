@@ -7,7 +7,7 @@ public class SuperMarioBros {
     protected static Aldeano luigi;
     protected static Aldeano mario;
     protected static Aldeano princesaPeach;
-    
+
     protected static Scanner entrada;
 
     public static void main(String[] args) {
@@ -21,7 +21,7 @@ public class SuperMarioBros {
     public static void nivel1() {
         luigi = crearLuigi();
         mario = crearMario();
-        
+
         mostrarUbicacion(luigi.indicarUbicacion(), mario.indicarUbicacion());
 
         if (luigi.getPosicion().getX() > mario.getPosicion().getX()) {
@@ -79,7 +79,7 @@ public class SuperMarioBros {
         princesaPeach = crearPrincesaPeach();
         etapa1();
     }
-    
+
     private static Aldeano crearPrincesaPeach() {
         return new Aldeano(
                 "Princesa Peach",
@@ -99,7 +99,7 @@ public class SuperMarioBros {
     private static void etapa1() {
         Oraculo whallum = crearWhallum();
         entrada = new Scanner(System.in);
-        
+
         Aldeano protagonista = elegirProtagonista();
         presentarMenu();
 
@@ -126,7 +126,6 @@ public class SuperMarioBros {
                     break;
                 case 3:
                     if (valor == princesaPeach.getPosicion().getX()) {
-                        System.out.println("\nFelicitaciones " + protagonista.getNombre() + " se encontró con la Princesa Peach!!");
                         etapa2();
                     } else {
                         System.out.println("GAME OVER");
@@ -138,7 +137,7 @@ public class SuperMarioBros {
             }
         }
     }
-    
+
     private static Oraculo crearWhallum() {
         return new Oraculo(
                 "Whallum",
@@ -198,13 +197,15 @@ public class SuperMarioBros {
         int cantFloresMario = 0;
         int cantFloresLuigi = 0;
 
+        System.out.println("\nMario y Luigi caminan hacia la torre...");
+
         while (mario.getPosicion().getX() != princesaPeach.getPosicion().getX()) {
             mario.caminar();
             luigi.caminar();
-            
+
             int posicionMario = Math.abs(mario.getPosicion().getX());
             int posicionLuigi = Math.abs(luigi.getPosicion().getX());
-            
+
             if (posicionMario % 2 == 0 || posicionMario % 7 == 0) {
                 cantFloresMario++;
             }
@@ -212,7 +213,7 @@ public class SuperMarioBros {
                 cantFloresLuigi++;
             }
         }
-        
+
         elegirGanador(cantFloresMario, cantFloresLuigi);
     }
 
@@ -234,7 +235,7 @@ public class SuperMarioBros {
         } else {
             princesaPeach.getMoneda().lanzar();
             String lado = princesaPeach.getMoneda().getLado();
-            
+
             if (lado.equals("Cruz")) {
                 System.out.println("Princesa Peach se quedó con Mario");
             } else {
