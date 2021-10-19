@@ -116,7 +116,8 @@ public class SuperMarioBros {
     private static void etapa1() {
         Oraculo whallum = crearWhallum();
         entrada = new Scanner(System.in);
-
+        
+        elegirProtagonista();
         presentarMenu();
 
         int opcion = elegirOpcionDeMenu();
@@ -127,13 +128,12 @@ public class SuperMarioBros {
             String respuesta = whallum.esRespuestaValida(princesaPeach.getPosicion(), valor, opcion);
             switch (opcion) {
                 case 1:
-                    respuestaDelOraculo(valor, respuesta);
+                    respuestaDelOraculo(valor, ">", respuesta);
                     opcion = elegirOpcionDeMenu();
                     valor = ingresarValor();
-
                     break;
                 case 2:
-                    respuestaDelOraculo(valor, respuesta);
+                    respuestaDelOraculo(valor, "<", respuesta);
                     opcion = elegirOpcionDeMenu();
                     valor = ingresarValor();
                     break;
@@ -141,7 +141,9 @@ public class SuperMarioBros {
                     if (valor == princesaPeach.getPosicion().getX()) {
                         etapa2();
                     } else {
-                        System.out.println("GAME OVER");
+                        System.err.println("\nGAME OVER");
+                        System.out.println("La posicion de la Princesa Peach es: "
+                                + princesaPeach.getPosicion().toString());
                     }
                     esGameOver = true;
                     break;
@@ -149,12 +151,6 @@ public class SuperMarioBros {
                     break;
             }
         }
-    }
-
-    private static void respuestaDelOraculo(int valor, String respuesta) {
-        System.out.println("\n¿La posición de la Princesa Peach es mayor que: " + valor + "?");
-        System.out.println("Respuesta: " + respuesta + "\n");
-        presentarMenu();
     }
 
     private static Oraculo crearWhallum() {
@@ -166,23 +162,24 @@ public class SuperMarioBros {
         );
     }
 
-    private static Aldeano elegirProtagonista() {
+    private static void elegirProtagonista() {
         System.out.print("\nElija un personaje mediante su inicial: Mario 'M' o Luigi 'L': ");
         String inicial = entrada.nextLine().toUpperCase();
 
         while (!inicial.equals("M") && !inicial.equals("L")) {
-            System.err.println("No es una inicial valida, ingrese 'M' o 'L': ");
+            System.err.print("No es una inicial valida, ingrese 'M' o 'L': ");
             inicial = entrada.nextLine().toUpperCase();
         }
-        if (inicial.equals("M")) {
-            return mario;
-        } else {
-            return luigi;
+        Aldeano protagonista = mario;
+        if (inicial.equals("L")) {
+            protagonista = luigi;
         }
+        System.out.println("EL personaje seleccionado es: " + protagonista.getNombre());
     }
 
     private static void presentarMenu() {
-        System.out.println("Oráculo Whallum, te tengo que hacer una pregunta sobre la ubicación de\n"
+        System.out.println("\nOráculo Whallum, te tengo que hacer una pregunta "
+                + "sobre la ubicación de "
                 + "Princesa Peach:\n"
                 + "1.- Posición de Princesa Peach mayor que ...\n"
                 + "2.- Posición de Princesa Peach menor que ...\n"
@@ -197,7 +194,6 @@ public class SuperMarioBros {
         while (opcion != 1 && opcion != 2 && opcion != 3) {
             System.err.print("No es una opcion valida, ingrese (1-2-3): ");
             opcion = entrada.nextInt();
-            System.out.println();
         }
         return opcion;
     }
@@ -205,6 +201,13 @@ public class SuperMarioBros {
     private static int ingresarValor() {
         System.out.print("Ingrese el valor de X: ");
         return entrada.nextInt();
+    }
+
+    private static void respuestaDelOraculo(int valor, String pregunta, String respuesta) {
+        System.out.println("\n¿La posición de la Princesa Peach es "
+                + pregunta + " que: " + valor + "?");
+        System.out.println("Respuesta: " + respuesta);
+        presentarMenu();
     }
 
     /**
@@ -216,7 +219,7 @@ public class SuperMarioBros {
         int cantFloresMario = 0;
         int cantFloresLuigi = 0;
 
-        System.out.println("\nMario y Luigi caminan hacia la torre...");
+        System.out.println("\nAcertaste! Mario y Luigi caminan hacia la torre...");
 
         while (mario.getPosicion().getX() != princesaPeach.getPosicion().getX()) {
             mario.caminar();
