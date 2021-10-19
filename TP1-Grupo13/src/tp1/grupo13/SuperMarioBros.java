@@ -23,19 +23,27 @@ public class SuperMarioBros {
         mario = crearMario();
 
         mostrarUbicacion(luigi.indicarUbicacion(), mario.indicarUbicacion());
+        girarPersonajes();
+        caminarPersonajes();
+        mostrarSaludo(luigi.saludar(), mario.saludar());
+    }
 
+    private static void girarPersonajes() {
         if (luigi.getPosicion().getX() > mario.getPosicion().getX()) {
             luigi.girar();
         } else if (mario.getPosicion().getX() > luigi.getPosicion().getX()) {
             mario.girar();
         }
+    }
+
+    private static void caminarPersonajes() {
         while (luigi.getPosicion().getX() != mario.getPosicion().getX()) {
             luigi.caminar();
-            mario.caminar();
-
+            if (luigi.getPosicion().getX() != mario.getPosicion().getX()) {
+                mario.caminar();
+            }
             mostrarUbicacion(luigi.indicarUbicacion(), mario.indicarUbicacion());
         }
-        mostrarSaludo(luigi.saludar(), mario.saludar());
     }
 
     private static Aldeano crearLuigi() {
@@ -45,10 +53,19 @@ public class SuperMarioBros {
                 "Azul oscuro",
                 "Verde",
                 'L',
-                (int) (Math.random() * 99 - 50),
+                obtenerNumeroRandom(),
                 0,
                 "Derecha"
         );
+    }
+
+    private static int obtenerNumeroRandom() {
+        int min = - 50;
+        int max = 50;
+        int range = max - min + 1;
+
+        int number = (int) (Math.random() * range) + min;
+        return number;
     }
 
     private static Aldeano crearMario() {
@@ -100,7 +117,6 @@ public class SuperMarioBros {
         Oraculo whallum = crearWhallum();
         entrada = new Scanner(System.in);
 
-        Aldeano protagonista = elegirProtagonista();
         presentarMenu();
 
         int opcion = elegirOpcionDeMenu();
@@ -111,16 +127,13 @@ public class SuperMarioBros {
             String respuesta = whallum.esRespuestaValida(princesaPeach.getPosicion(), valor, opcion);
             switch (opcion) {
                 case 1:
-                    System.out.println("¿La posición de la Princesa Peach es mayor que: " + valor + "?");
-                    System.out.println("Respuesta: " + respuesta + "\n");
-                    presentarMenu();
+                    respuestaDelOraculo(valor, respuesta);
                     opcion = elegirOpcionDeMenu();
                     valor = ingresarValor();
+
                     break;
                 case 2:
-                    System.out.println("¿La posición de la Princesa Peach es menor que: " + valor + "?");
-                    System.out.println("Respuesta: " + respuesta + "\n");
-                    presentarMenu();
+                    respuestaDelOraculo(valor, respuesta);
                     opcion = elegirOpcionDeMenu();
                     valor = ingresarValor();
                     break;
@@ -138,11 +151,17 @@ public class SuperMarioBros {
         }
     }
 
+    private static void respuestaDelOraculo(int valor, String respuesta) {
+        System.out.println("\n¿La posición de la Princesa Peach es mayor que: " + valor + "?");
+        System.out.println("Respuesta: " + respuesta + "\n");
+        presentarMenu();
+    }
+
     private static Oraculo crearWhallum() {
         return new Oraculo(
                 "Whallum",
                 0,
-                (int) (Math.random() * 99 - 50),
+                obtenerNumeroRandom(),
                 "Derecha"
         );
     }
