@@ -1,6 +1,6 @@
 package tp2.grupo13;
 
-public class Alumno {
+public class Alumno implements Comparable <Alumno> {
 
     private int numeroLegajo;
     private String apellido;
@@ -60,4 +60,13 @@ public class Alumno {
     public String toString() {
         return "    " + numeroLegajo + " | " + apellido + ", " + nombre;
     }    
+
+    @Override
+    public int compareTo(Alumno alumno) {
+        int compararApellidos = apellido.compareTo(alumno.getApellido());
+        if (compararApellidos != 0) {
+             return compararApellidos;
+        }
+        return nombre.compareTo(alumno.getNombre());
+    }
 }

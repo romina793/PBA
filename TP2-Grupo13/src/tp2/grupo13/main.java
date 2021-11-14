@@ -120,7 +120,7 @@ public class main {
 
         System.out.print("\nIngrese el número de legajo: ");
         int numeroLegajo = entradaInt.nextInt();
-
+        
         System.out.print("Ingrese el Apellido: ");
         String apellido = entradaString.nextLine().toUpperCase();
 
@@ -181,6 +181,10 @@ public class main {
      * por apellido y luego por nombres:
      */
     private static void visualizarAsistencia() {
+        if (asistencia != null){
         asistencia.VisualizarAsistencia();
+        } else {
+          System.out.print("\n No hay asistencias registradas\n\n");
+        }
     }
 }
