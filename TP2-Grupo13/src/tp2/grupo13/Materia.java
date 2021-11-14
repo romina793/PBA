@@ -1,6 +1,7 @@
 package tp2.grupo13;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Materia implements IMateria {
@@ -79,6 +80,7 @@ public class Materia implements IMateria {
         System.out.println("----------------------------------------------------------------");
         System.out.println("    Legajo | Apellido y Nombres");
         System.out.println("----------------------------------------------------------------");
+        Collections.sort(alumnos);
         for (Alumno alumno : alumnos){
             System.out.println(alumno.toString());
         }
