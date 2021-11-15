@@ -85,7 +85,7 @@ public class Materia implements IMateria {
             System.out.println(alumno.toString());
         }
         System.out.println("----------------------------------------------------------------");
-        System.out.println("\t\t\tTotal inscriptos: " + alumnos.size());
+        System.out.println("\t\t\t\tTotal inscriptos: " + alumnos.size());
 
     }
 

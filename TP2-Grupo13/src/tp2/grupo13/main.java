@@ -4,23 +4,24 @@ import java.util.Scanner;
 
 public class main {
 
+    public static Scanner entrada = new Scanner(System.in);
+
     public static Materia materia;
     public static Alumno alumno;
     public static Asistencia asistencia;
 
     public static void main(String[] args) {
         presentarMenuInicio();
-
-        Scanner entrada = new Scanner(System.in);
-        int opcion = entrada.nextInt();
-        while (opcion != 1 && opcion != 9) {
+        
+        String opcion = entrada.nextLine();
+        while (!Util.esNumerico(opcion) || !opcion.equals("1") && !opcion.equals("9")) {
             System.err.print("No es una opción valida, ingrese 1 o 9: ");
-            opcion = entrada.nextInt();
+            opcion = entrada.nextLine();
         }
-        if (opcion == 1) {
+        if (opcion.equals("1")) {
             registrarMateria();
             gestionarMateria();
-        } else if (opcion == 9) {
+        } else if (opcion.equals(9)) {
             System.exit(0);
         }
     }
@@ -39,16 +40,14 @@ public class main {
      * Programación Básica”.
      */
     private static void registrarMateria() {
-        Scanner entrada = new Scanner(System.in);
-
         System.out.print("\nIngrese el identificador de la materia (sigla de 3 letras): ");
         String identificador = entrada.nextLine().toUpperCase();
-        while (identificador.length() != 3) {
+        while (Util.esNumerico(identificador) || identificador.length() != 3) {
             System.err.print("El identificador debe de contener 3 letras: ");
             identificador = entrada.nextLine().toUpperCase();
         }
         System.out.print("Ingrese el nombre de la materia: ");
-        String nombre = entrada.nextLine().toUpperCase();
+        String nombre = entrada.nextLine();
 
         materia = new Materia();
         materia.RegistrarMateria(identificador, nombre);
@@ -57,12 +56,16 @@ public class main {
     private static void gestionarMateria() {
         presentarMenuGestionarMateria();
 
-        Scanner entrada = new Scanner(System.in);
-        int opcion = entrada.nextInt();
-        while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4
-                && opcion != 5 && opcion != 9) {
+        String opcion = entrada.nextLine();
+        while (!Util.esNumerico(opcion)
+                || !opcion.equals("1")
+                && !opcion.equals("2")
+                && !opcion.equals("3")
+                && !opcion.equals("4")
+                && !opcion.equals("5")
+                && !opcion.equals("9")) {
             System.err.print("No es una opción valida, ingrese 1, 2, 3, 4, 5 o 9: ");
-            opcion = entrada.nextInt();
+            opcion = entrada.nextLine();
         }
         ejecutarOpcionSeleccionada(opcion);
     }
@@ -80,25 +83,25 @@ public class main {
         System.out.print("\nIngrese una opción: ");
     }
 
-    private static void ejecutarOpcionSeleccionada(int opcion) {
+    private static void ejecutarOpcionSeleccionada(String opcion) {
         switch (opcion) {
-            case 1:
+            case "1":
                 matricularAlumno();
                 gestionarMateria();
                 break;
-            case 2:
+            case "2":
                 desmatricularAlumno();
                 gestionarMateria();
                 break;
-            case 3:
+            case "3":
                 gestionarAsistencia();
                 gestionarMateria();
                 break;
-            case 4:
+            case "4":
                 visualizarListadoDeInscritos();
                 gestionarMateria();
                 break;
-            case 5:
+            case "5":
                 visualizarAsistencia();
                 gestionarMateria();
                 break;
@@ -115,25 +118,27 @@ public class main {
      * número de legajo.
      */
     private static void matricularAlumno() {
-        Scanner entradaInt = new Scanner(System.in);
-        Scanner entradaString = new Scanner(System.in);
-
         System.out.print("\nIngrese el número de legajo: ");
-        int numeroLegajo = entradaInt.nextInt();
+        String numeroLegajo = entrada.nextLine();
         
-        System.out.print("Ingrese el Apellido: ");
-        String apellido = entradaString.nextLine().toUpperCase();
+        while (!Util.esNumerico(numeroLegajo)) {
+            System.err.print("El valor ingresado debe ser numérico, ingrese el número de legajo: ");
+            numeroLegajo = entrada.nextLine();
+        }
 
-        System.out.print("Ingrese los Nombres separados por una coma: ");
-        String nombre = entradaString.nextLine().toUpperCase();
+        System.out.print("Ingrese el Apellido: ");
+        String apellido = entrada.nextLine();
+
+        System.out.print("Ingrese los Nombres: ");
+        String nombre = entrada.nextLine();
 
         System.out.print("Ingrese la Fecha de Nacimiento con el formato (dd/mm/aaaa): ");
-        String fechaNacimiento = entradaString.nextLine().toUpperCase();
+        String fechaNacimiento = entrada.nextLine();
 
         System.out.print("Ingrese el correo electrónico: ");
-        String correoElectronico = entradaString.nextLine().toLowerCase();
+        String correoElectronico = entrada.nextLine().toLowerCase();
 
-        alumno = new Alumno(numeroLegajo, apellido, nombre, fechaNacimiento, correoElectronico);
+        alumno = new Alumno(Integer.parseInt(numeroLegajo), apellido, nombre, fechaNacimiento, correoElectronico);
         materia.MatricularAlumno(alumno);
     }
 
@@ -142,12 +147,15 @@ public class main {
      * ingresando su número de legajo.
      */
     private static void desmatricularAlumno() {
-        Scanner entrada = new Scanner(System.in);
-
         System.out.print("\nIngrese el número de legajo: ");
-        int numeroLegajo = entrada.nextInt();
+        String numeroLegajo = entrada.nextLine();
 
-        materia.DesmatricularAlumno(numeroLegajo);
+        while (!Util.esNumerico(numeroLegajo)) {
+            System.err.print("El valor ingresado debe ser numérico, ingrese el número de legajo: ");
+            numeroLegajo = entrada.nextLine();
+        }
+
+        materia.DesmatricularAlumno(Integer.parseInt(numeroLegajo));
     }
 
     /**
@@ -157,11 +165,9 @@ public class main {
      * clase.
      */
     private static void gestionarAsistencia() {
-        Scanner entrada = new Scanner(System.in);
-        
         System.out.print("\nIngrese la fecha a tomar asistecia con el formato (dd/mm/aaa): ");
-        String fecha = entrada.nextLine().toUpperCase();
-        
+        String fecha = entrada.nextLine();
+
         asistencia = new Asistencia(fecha, materia);
         asistencia.GestionarAsistencia();
     }
@@ -173,22 +179,22 @@ public class main {
      */
     private static void visualizarListadoDeInscritos() {
         if (materia.getAlumnos().size() > 0) {
-         materia.ListadoDeInscritos();   
+            materia.ListadoDeInscritos();
         } else {
-           System.out.println("\nNo existen inscriptos registrados"); 
+            System.out.println("\nNo existen inscriptos registrados");
         }
     }
 
     /**
-     * Visualizar Asistencia: Muestra por pantalla los datos correspondientes 
-     * a la asistencia de una clase, ordenados ascendentemente en primer lugar 
-     * por apellido y luego por nombres:
+     * Visualizar Asistencia: Muestra por pantalla los datos correspondientes a
+     * la asistencia de una clase, ordenados ascendentemente en primer lugar por
+     * apellido y luego por nombres:
      */
     private static void visualizarAsistencia() {
-        if (asistencia != null){
-        asistencia.VisualizarAsistencia();
+        if (asistencia != null) {
+            asistencia.VisualizarAsistencia();
         } else {
-          System.out.println("\nNo existen asistencias registradas");
+            System.out.println("\nNo existen asistencias registradas");
         }
     }
 }

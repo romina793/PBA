@@ -54,7 +54,7 @@ public class Asistencia implements IAsistencia {
             System.out.println(alumno.toString());
         }
         System.out.println("----------------------------------------------------------------");
-        System.out.println("\t\t\tTotal asistentes: " + alumnos.size());
+        System.out.println("\t\t\t\tTotal asistentes: " + alumnos.size());
         }
 
     private boolean validarAsistencia(Alumno alumno) {
