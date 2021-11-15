@@ -29,8 +29,8 @@ public class main {
         System.out.println("\n\tMENÚ INICIO");
         System.out.println("==========================");
         System.out.println("   1.- Registrar Materia\n");
-        System.out.println("   9.- Salir\n");
-        System.out.print("   Ingrese una opción: ");
+        System.out.println("   9.- Salir");
+        System.out.print("\n   Ingrese una opción: ");
     }
 
     /**
@@ -68,7 +68,7 @@ public class main {
     }
 
     private static void presentarMenuGestionarMateria() {
-        System.out.println("\n    GESTIONAR MATERIA");
+        System.out.println("\n\n    GESTIONAR MATERIA");
         System.out.println("==========================");
         System.out.println("1.-  Matricular Alumno");
         System.out.println("2.-  Desmatricular Alumno");
@@ -77,7 +77,7 @@ public class main {
         System.out.println(" 4.- Listado de Inscriptos");
         System.out.println(" 5.- Visualizar Asistencia\n");
         System.out.println("9.- Salir");
-        System.out.print("Ingrese una opción: ");
+        System.out.print("\nIngrese una opción: ");
     }
 
     private static void ejecutarOpcionSeleccionada(int opcion) {
@@ -124,7 +124,7 @@ public class main {
         System.out.print("Ingrese el Apellido: ");
         String apellido = entradaString.nextLine().toUpperCase();
 
-        System.out.print("Ingrese el Nombre: ");
+        System.out.print("Ingrese los Nombres separados por una coma: ");
         String nombre = entradaString.nextLine().toUpperCase();
 
         System.out.print("Ingrese la Fecha de Nacimiento con el formato (dd/mm/aaaa): ");
@@ -172,7 +172,11 @@ public class main {
      * por apellido y luego por nombres:
      */
     private static void visualizarListadoDeInscritos() {
-        materia.ListadoDeInscritos();
+        if (materia.getAlumnos().size() > 0) {
+         materia.ListadoDeInscritos();   
+        } else {
+           System.out.println("\nNo existen inscriptos registrados"); 
+        }
     }
 
     /**
@@ -184,7 +188,7 @@ public class main {
         if (asistencia != null){
         asistencia.VisualizarAsistencia();
         } else {
-          System.out.print("\n No hay asistencias registradas\n\n");
+          System.out.println("\nNo existen asistencias registradas");
         }
     }
 }
