@@ -4,4 +4,8 @@
 private.properties
 
 /TP1-Grupo13/build/*
+/TP1-Grupo13/nbproject/*
+/TP1-Grupo13/test/*
 /TP2-Grupo13/build/*
+/TP2-Grupo13/nbproject/*
+/TP2-Grupo13/test/*
