@@ -11,22 +11,14 @@ public class Util {
         }
     }
 
-    public static boolean letras(String cadena) {
-        String cad = cadena;
+    public static boolean contieneSoloLetras(String cadena) {
         int contador = 0;
-        for (int i = 0; i < cad.length(); i++) {
-            char guardar = cad.charAt(i);
-
-            if (Character.isDigit(guardar)) {
-                contador=contador+1;
+        for (int i = 0; i < cadena.length(); i++) {
+            char caracter = cadena.charAt(i);
+            if (Character.isDigit(caracter)) {
+                contador = contador + 1;
             }
         }
-        if (contador != 0) {
-            return true;
-        } else {
-
-            return false;
-        }
-
+        return (contador != 0);
     }
 }

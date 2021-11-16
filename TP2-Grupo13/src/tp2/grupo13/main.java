@@ -12,7 +12,7 @@ public class main {
 
     public static void main(String[] args) {
         presentarMenuInicio();
-        
+
         String opcion = entrada.nextLine();
         while (!Util.esNumerico(opcion) || !opcion.equals("1") && !opcion.equals("9")) {
             System.err.print("No es una opción valida, ingrese 1 o 9: ");
@@ -42,7 +42,9 @@ public class main {
     private static void registrarMateria() {
         System.out.print("\nIngrese el identificador de la materia (sigla de 3 letras): ");
         String identificador = entrada.nextLine().toUpperCase();
-        while (Util.esNumerico(identificador) || identificador.length() != 3 || Util.letras(identificador)) {
+        while (Util.esNumerico(identificador)
+                || Util.contieneSoloLetras(identificador)
+                || identificador.length() != 3) {
             System.err.print("El identificador debe de contener 3 letras: ");
             identificador = entrada.nextLine().toUpperCase();
         }
@@ -120,7 +122,7 @@ public class main {
     private static void matricularAlumno() {
         System.out.print("\nIngrese el número de legajo: ");
         String numeroLegajo = entrada.nextLine();
-        
+
         while (!Util.esNumerico(numeroLegajo)) {
             System.err.print("El valor ingresado debe ser numérico, ingrese el número de legajo: ");
             numeroLegajo = entrada.nextLine();
