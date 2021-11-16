@@ -42,7 +42,7 @@ public class main {
     private static void registrarMateria() {
         System.out.print("\nIngrese el identificador de la materia (sigla de 3 letras): ");
         String identificador = entrada.nextLine().toUpperCase();
-        while (Util.esNumerico(identificador) || identificador.length() != 3) {
+        while (Util.esNumerico(identificador) || identificador.length() != 3 || Util.letras(identificador)) {
             System.err.print("El identificador debe de contener 3 letras: ");
             identificador = entrada.nextLine().toUpperCase();
         }
