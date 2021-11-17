@@ -1,5 +1,9 @@
 package tp2.grupo13;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class Util {
 
     public static boolean esNumerico(String cadena) {
@@ -7,6 +11,20 @@ public class Util {
             Integer.parseInt(cadena);
             return true;
         } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    public static boolean esFechaVaida(String fecha) {
+        if (fecha == null || !fecha.matches("\\d{2}-\\d{2}-\\d{4}")) {
+            return false;
+        }
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        df.setLenient(false);
+        try {
+            df.parse(fecha);
+            return true;
+        } catch (ParseException ex) {
             return false;
         }
     }

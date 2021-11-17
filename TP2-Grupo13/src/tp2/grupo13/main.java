@@ -128,14 +128,30 @@ public class main {
             numeroLegajo = entrada.nextLine();
         }
 
-        System.out.print("Ingrese el Apellido: ");
+        System.out.print("Ingrese el apellido: ");
         String apellido = entrada.nextLine();
+        
+        while (apellido.isBlank()) {
+            System.err.print("El apellido no puede estar en blanco, ingrese el apellido: ");
+            apellido = entrada.nextLine();
+        }
 
-        System.out.print("Ingrese los Nombres: ");
+        System.out.print("Ingrese los nombres: ");
         String nombre = entrada.nextLine();
+        
+        while (nombre.isBlank()) {
+            System.err.print("Los nombres no pueden estar vacios, ingrese los nombres: ");
+            numeroLegajo = entrada.nextLine();
+        }
 
-        System.out.print("Ingrese la Fecha de Nacimiento con el formato (dd/mm/aaaa): ");
+        System.out.print("Ingrese la fecha de nacimiento con el formato (dd-mm-aaaa): ");
         String fechaNacimiento = entrada.nextLine();
+        
+        while (!Util.esFechaVaida(fechaNacimiento)) {
+            System.err.print("El valor ingresado no corresponde a una fecha valida, "
+                    + "ingrese la fecha de nacimiento con el formato (dd-mm-aaaa): ");
+            fechaNacimiento = entrada.nextLine();
+        }
 
         System.out.print("Ingrese el correo electrónico: ");
         String correoElectronico = entrada.nextLine().toLowerCase();
@@ -167,8 +183,14 @@ public class main {
      * clase.
      */
     private static void gestionarAsistencia() {
-        System.out.print("\nIngrese la fecha a tomar asistecia con el formato (dd/mm/aaa): ");
+        System.out.print("\nIngrese la fecha a tomar asistecia con el formato (dd-mm-aaa): ");
         String fecha = entrada.nextLine();
+        
+        while (!Util.esFechaVaida(fecha)) {
+            System.err.print("El valor ingresado no corresponde a una fecha valida, "
+                    + "ingrese la fecha a tomar asistencia con el formato (dd-mm-aaaa): ");
+            fecha = entrada.nextLine();
+        }
 
         asistencia = new Asistencia(fecha, materia);
         asistencia.GestionarAsistencia();

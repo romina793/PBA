@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Materia implements IMateria {
+public class Materia {
 
     private String identificador;
     private String nombre;
@@ -50,20 +50,17 @@ public class Materia implements IMateria {
         this.alumnos = alumnos;
     }
 
-    @Override
     public void RegistrarMateria(String identificador, String nombre) {
         this.identificador = identificador;
         this.nombre = nombre;
         
         materias.add(this);
     }
-
-    @Override
+    
     public void MatricularAlumno(Alumno alumno) {
         alumnos.add(alumno);
     }
 
-    @Override
     public void DesmatricularAlumno(int numeroLegajo) {
         for (Alumno alumno : alumnos){
             if (alumno.getNumeroLegajo() == numeroLegajo) {
@@ -73,7 +70,6 @@ public class Materia implements IMateria {
         }
     }
 
-    @Override
     public void ListadoDeInscritos() {
         System.out.println("\n----------------------------------------------------------------");
         System.out.println(toString());

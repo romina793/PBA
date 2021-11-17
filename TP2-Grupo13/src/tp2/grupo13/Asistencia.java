@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Asistencia implements IAsistencia {
+public class Asistencia {
 
     private String fecha;
     private Materia materia;
@@ -33,7 +33,6 @@ public class Asistencia implements IAsistencia {
         this.materia = materia;
     }
 
-    @Override
     public void GestionarAsistencia() {
         for (Alumno alumno : materia.getAlumnos()) {
             boolean presente = validarAsistencia(alumno);
@@ -43,7 +42,6 @@ public class Asistencia implements IAsistencia {
         }
     }
 
-    @Override
     public void VisualizarAsistencia() {
         System.out.println("\n----------------------------------------------------------------");
         System.out.println(toString());
@@ -55,7 +53,7 @@ public class Asistencia implements IAsistencia {
         }
         System.out.println("----------------------------------------------------------------");
         System.out.println("\t\t\t\tTotal asistentes: " + alumnos.size());
-        }
+    }
 
     private boolean validarAsistencia(Alumno alumno) {
         Scanner entrada = new Scanner(System.in);
