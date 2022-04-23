@@ -23,13 +23,264 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Component id="separador" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="opcion1RadioButtonEspejo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="opcion2RadioButtonEspejo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="opcion3RadioButtonEspejo" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="opción3CheckBoxEspejo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="opción2CheckBoxEspejo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="opción1CheckBoxEspejo" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="textFieldEspejo" pref="148" max="32767" attributes="0"/>
+                          <Component id="comboBoxEspejo" max="32767" attributes="0"/>
+                          <Component id="spinnerEspejo" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="originalLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="opcion1RadioButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="opcion2RadioButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="opcion3RadioButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="opción1CheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="opción2CheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="opción3CheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="textFieldOriginal" max="32767" attributes="0"/>
+                          <Component id="comboBoxOriginal" pref="148" max="32767" attributes="0"/>
+                          <Component id="spinnerOriginal" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="espejoLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="93" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="originalLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="opcion1RadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="opción1CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textFieldOriginal" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="opcion2RadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="opción2CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboBoxOriginal" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="opcion3RadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="opción3CheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spinnerOriginal" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Component id="separador" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="espejoLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="opcion1RadioButtonEspejo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="opción1CheckBoxEspejo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textFieldEspejo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="opcion2RadioButtonEspejo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="opción2CheckBoxEspejo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboBoxEspejo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="opcion3RadioButtonEspejo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="opción3CheckBoxEspejo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spinnerEspejo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="originalLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Original"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="opcion1RadioButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opci&#xf3;n 1"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opcion1RadioButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="opcion2RadioButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opci&#xf3;n 2"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opcion2RadioButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="opcion3RadioButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opci&#xf3;n 3"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opcion3RadioButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="opci&#xf3;n1CheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opci&#xf3;n 4"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opci&#xf3;n1CheckBoxActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="opci&#xf3;n2CheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opci&#xf3;n 5"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opci&#xf3;n2CheckBoxActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="opci&#xf3;n3CheckBox">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opci&#xf3;n 6"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opci&#xf3;n3CheckBoxActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textFieldOriginal">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textFieldOriginalKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboBoxOriginal">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxOriginalActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="spinnerOriginal">
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="spinnerOriginalStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="separador">
+    </Component>
+    <Component class="javax.swing.JLabel" name="espejoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Espejo"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="opcion1RadioButtonEspejo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opci&#xf3;n 1"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="opcion2RadioButtonEspejo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opci&#xf3;n 2"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="opcion3RadioButtonEspejo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opci&#xf3;n 3"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="opci&#xf3;n3CheckBoxEspejo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opci&#xf3;n 6"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="opci&#xf3;n2CheckBoxEspejo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opci&#xf3;n 5"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="opci&#xf3;n1CheckBoxEspejo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Opci&#xf3;n 4"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textFieldEspejo">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboBoxEspejo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="spinnerEspejo">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>
