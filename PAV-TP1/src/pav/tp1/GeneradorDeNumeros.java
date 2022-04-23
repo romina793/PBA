@@ -27,21 +27,90 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        numero1Label = new javax.swing.JLabel();
+        numero1ComboBox = new javax.swing.JComboBox<>();
+        numero2Label = new javax.swing.JLabel();
+        numero2ComboBox = new javax.swing.JComboBox<>();
+        numero3Label = new javax.swing.JLabel();
+        textFieldNumeroMayor = new javax.swing.JTextField();
+        botonGenerador = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        numero1Label.setText("Número 1");
+
+        numero1ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+
+        numero2Label.setText("Número 2");
+
+        numero2ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+
+        numero3Label.setText("Número generado");
+
+        textFieldNumeroMayor.setEditable(false);
+
+        botonGenerador.setText("Generar");
+        botonGenerador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGeneradorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(numero3Label)
+                    .addComponent(numero1Label, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(numero2Label, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonGenerador, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldNumeroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numero1ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numero2ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(numero1Label)
+                    .addComponent(numero1ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(numero2Label)
+                    .addComponent(numero2ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(numero3Label)
+                    .addComponent(textFieldNumeroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(botonGenerador)
+                .addGap(43, 43, 43))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonGeneradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGeneradorActionPerformed
+        String numero1Text = (String)numero1ComboBox.getSelectedItem();
+        String numero2Text = (String)numero2ComboBox.getSelectedItem();
+        Integer numero1 = Integer.parseInt(numero1Text);
+        Integer numero2 = Integer.parseInt(numero2Text);
+
+        if (numero1 > numero2){
+            textFieldNumeroMayor.setText(numero1Text);
+        } else {
+            textFieldNumeroMayor.setText(numero2Text);
+        }
+
+        
+    }//GEN-LAST:event_botonGeneradorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -69,6 +138,9 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GeneradorDeNumeros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -79,5 +151,12 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonGenerador;
+    private javax.swing.JComboBox<String> numero1ComboBox;
+    private javax.swing.JLabel numero1Label;
+    private javax.swing.JComboBox<String> numero2ComboBox;
+    private javax.swing.JLabel numero2Label;
+    private javax.swing.JLabel numero3Label;
+    private javax.swing.JTextField textFieldNumeroMayor;
     // End of variables declaration//GEN-END:variables
 }
