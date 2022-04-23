@@ -40,7 +40,7 @@ public class MiniEncuesta extends javax.swing.JFrame {
         disenoGrafico = new javax.swing.JCheckBox();
         administracion = new javax.swing.JCheckBox();
         separator2 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
+        descripcionHoras = new javax.swing.JLabel();
         totalHoras = new javax.swing.JLabel();
         sliderHoras = new javax.swing.JSlider();
         generar = new javax.swing.JButton();
@@ -79,7 +79,7 @@ public class MiniEncuesta extends javax.swing.JFrame {
 
         administracion.setText("Administración");
 
-        jLabel1.setText("Horas que dedicas en el ordenador");
+        descripcionHoras.setText("Horas que dedicas en el ordenador");
 
         totalHoras.setText("0");
 
@@ -139,7 +139,7 @@ public class MiniEncuesta extends javax.swing.JFrame {
                                     .addComponent(sliderHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGap(29, 29, 29)
-                                    .addComponent(jLabel1))))
+                                    .addComponent(descripcionHoras))))
                         .addGap(0, 35, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -167,7 +167,7 @@ public class MiniEncuesta extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(separator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(descripcionHoras)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sliderHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -282,10 +282,10 @@ public class MiniEncuesta extends javax.swing.JFrame {
     private javax.swing.JCheckBox administracion;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel descripcionEspecialidad;
+    private javax.swing.JLabel descripcionHoras;
     private javax.swing.JLabel descripcionSO;
     private javax.swing.JCheckBox disenoGrafico;
     private javax.swing.JButton generar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton linux;
     private javax.swing.JRadioButton mac;
     private javax.swing.JCheckBox programacion;

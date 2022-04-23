@@ -5,6 +5,8 @@
  */
 package pav.tp1;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Gerardo
@@ -36,6 +38,7 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
         botonGenerador = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Generador de números");
 
         numero1Label.setText("Número 1");
 
@@ -61,18 +64,24 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(numero3Label)
-                    .addComponent(numero1Label, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(numero2Label, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(botonGenerador, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFieldNumeroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numero1ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numero2ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(88, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(numero2Label)
+                            .addComponent(numero1Label)
+                            .addComponent(numero3Label))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(numero2ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(numero1ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(textFieldNumeroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,35 +90,35 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numero1Label)
                     .addComponent(numero1ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numero2Label)
-                    .addComponent(numero2ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                    .addComponent(numero2ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numero2Label))
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numero3Label)
                     .addComponent(textFieldNumeroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(botonGenerador)
-                .addGap(43, 43, 43))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonGeneradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGeneradorActionPerformed
-        String numero1Text = (String)numero1ComboBox.getSelectedItem();
-        String numero2Text = (String)numero2ComboBox.getSelectedItem();
-        Integer numero1 = Integer.parseInt(numero1Text);
-        Integer numero2 = Integer.parseInt(numero2Text);
+        String numero1Text = numero1ComboBox.getSelectedItem().toString();
+        String numero2Text = numero2ComboBox.getSelectedItem().toString();
+        int numero1 = Integer.parseInt(numero1Text);
+        int numero2 = Integer.parseInt(numero2Text);
 
-        if (numero1 > numero2){
+        if (numero1 == numero2) {
+            JOptionPane.showMessageDialog(this, "Ambos números tienen el mismo valor");
+        } else if (numero1 > numero2){
             textFieldNumeroMayor.setText(numero1Text);
         } else {
             textFieldNumeroMayor.setText(numero2Text);
-        }
-
-        
+        }       
     }//GEN-LAST:event_botonGeneradorActionPerformed
 
     /**
