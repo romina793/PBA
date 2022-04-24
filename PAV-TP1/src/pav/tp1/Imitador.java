@@ -27,30 +27,44 @@ public class Imitador extends javax.swing.JFrame {
     private void initComponents() {
 
         originalLabel = new javax.swing.JLabel();
+        panelOriginal1 = new javax.swing.JPanel();
         opcion1RadioButton = new javax.swing.JRadioButton();
-        opcion2RadioButton = new javax.swing.JRadioButton();
-        opcion3RadioButton = new javax.swing.JRadioButton();
         opción1CheckBox = new javax.swing.JCheckBox();
-        opción2CheckBox = new javax.swing.JCheckBox();
-        opción3CheckBox = new javax.swing.JCheckBox();
         textFieldOriginal = new javax.swing.JTextField();
+        panelOriginal2 = new javax.swing.JPanel();
+        opcion2RadioButton = new javax.swing.JRadioButton();
+        opción2CheckBox = new javax.swing.JCheckBox();
         comboBoxOriginal = new javax.swing.JComboBox<>();
+        panelOriginal3 = new javax.swing.JPanel();
+        opcion3RadioButton = new javax.swing.JRadioButton();
+        opción3CheckBox = new javax.swing.JCheckBox();
         spinnerOriginal = new javax.swing.JSpinner();
         separador = new javax.swing.JSeparator();
         espejoLabel = new javax.swing.JLabel();
+        panelEspejo1 = new javax.swing.JPanel();
         opcion1RadioButtonEspejo = new javax.swing.JRadioButton();
-        opcion2RadioButtonEspejo = new javax.swing.JRadioButton();
-        opcion3RadioButtonEspejo = new javax.swing.JRadioButton();
-        opción3CheckBoxEspejo = new javax.swing.JCheckBox();
-        opción2CheckBoxEspejo = new javax.swing.JCheckBox();
         opción1CheckBoxEspejo = new javax.swing.JCheckBox();
         textFieldEspejo = new javax.swing.JTextField();
+        panelEspejo2 = new javax.swing.JPanel();
+        opcion2RadioButtonEspejo = new javax.swing.JRadioButton();
+        opción2CheckBoxEspejo = new javax.swing.JCheckBox();
         comboBoxEspejo = new javax.swing.JComboBox<>();
+        panelEspejo3 = new javax.swing.JPanel();
+        opcion3RadioButtonEspejo = new javax.swing.JRadioButton();
+        opción3CheckBoxEspejo = new javax.swing.JCheckBox();
         spinnerEspejo = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 600));
+        getContentPane().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 20));
 
+        originalLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         originalLabel.setText("Original");
+        originalLabel.setPreferredSize(new java.awt.Dimension(60, 16));
+        getContentPane().add(originalLabel);
+
+        panelOriginal1.setPreferredSize(new java.awt.Dimension(600, 50));
+        panelOriginal1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 70, 20));
 
         opcion1RadioButton.setText("Opción 1");
         opcion1RadioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -58,20 +72,7 @@ public class Imitador extends javax.swing.JFrame {
                 opcion1RadioButtonActionPerformed(evt);
             }
         });
-
-        opcion2RadioButton.setText("Opción 2");
-        opcion2RadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opcion2RadioButtonActionPerformed(evt);
-            }
-        });
-
-        opcion3RadioButton.setText("Opción 3");
-        opcion3RadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opcion3RadioButtonActionPerformed(evt);
-            }
-        });
+        panelOriginal1.add(opcion1RadioButton);
 
         opción1CheckBox.setText("Opción 4");
         opción1CheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +80,28 @@ public class Imitador extends javax.swing.JFrame {
                 opción1CheckBoxActionPerformed(evt);
             }
         });
+        panelOriginal1.add(opción1CheckBox);
+
+        textFieldOriginal.setPreferredSize(new java.awt.Dimension(150, 22));
+        textFieldOriginal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textFieldOriginalKeyTyped(evt);
+            }
+        });
+        panelOriginal1.add(textFieldOriginal);
+
+        getContentPane().add(panelOriginal1);
+
+        panelOriginal2.setPreferredSize(new java.awt.Dimension(600, 50));
+        panelOriginal2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 70, 20));
+
+        opcion2RadioButton.setText("Opción 2");
+        opcion2RadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcion2RadioButtonActionPerformed(evt);
+            }
+        });
+        panelOriginal2.add(opcion2RadioButton);
 
         opción2CheckBox.setText("Opción 5");
         opción2CheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +109,29 @@ public class Imitador extends javax.swing.JFrame {
                 opción2CheckBoxActionPerformed(evt);
             }
         });
+        panelOriginal2.add(opción2CheckBox);
+
+        comboBoxOriginal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxOriginal.setPreferredSize(new java.awt.Dimension(150, 22));
+        comboBoxOriginal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxOriginalActionPerformed(evt);
+            }
+        });
+        panelOriginal2.add(comboBoxOriginal);
+
+        getContentPane().add(panelOriginal2);
+
+        panelOriginal3.setPreferredSize(new java.awt.Dimension(600, 50));
+        panelOriginal3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 70, 20));
+
+        opcion3RadioButton.setText("Opción 3");
+        opcion3RadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcion3RadioButtonActionPerformed(evt);
+            }
+        });
+        panelOriginal3.add(opcion3RadioButton);
 
         opción3CheckBox.setText("Opción 6");
         opción3CheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -93,143 +139,80 @@ public class Imitador extends javax.swing.JFrame {
                 opción3CheckBoxActionPerformed(evt);
             }
         });
+        panelOriginal3.add(opción3CheckBox);
 
-        textFieldOriginal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                textFieldOriginalKeyTyped(evt);
-            }
-        });
-
-        comboBoxOriginal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboBoxOriginal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxOriginalActionPerformed(evt);
-            }
-        });
-
+        spinnerOriginal.setPreferredSize(new java.awt.Dimension(150, 22));
         spinnerOriginal.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spinnerOriginalStateChanged(evt);
             }
         });
+        panelOriginal3.add(spinnerOriginal);
 
+        getContentPane().add(panelOriginal3);
+
+        separador.setPreferredSize(new java.awt.Dimension(600, 2));
+        getContentPane().add(separador);
+
+        espejoLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         espejoLabel.setText("Espejo");
+        espejoLabel.setPreferredSize(new java.awt.Dimension(60, 16));
+        getContentPane().add(espejoLabel);
+
+        panelEspejo1.setPreferredSize(new java.awt.Dimension(600, 50));
+        panelEspejo1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 70, 20));
 
         opcion1RadioButtonEspejo.setText("Opción 1");
         opcion1RadioButtonEspejo.setEnabled(false);
+        panelEspejo1.add(opcion1RadioButtonEspejo);
+
+        opción1CheckBoxEspejo.setText("Opción 4");
+        opción1CheckBoxEspejo.setEnabled(false);
+        panelEspejo1.add(opción1CheckBoxEspejo);
+
+        textFieldEspejo.setEnabled(false);
+        textFieldEspejo.setPreferredSize(new java.awt.Dimension(150, 22));
+        panelEspejo1.add(textFieldEspejo);
+
+        getContentPane().add(panelEspejo1);
+
+        panelEspejo2.setPreferredSize(new java.awt.Dimension(600, 50));
+        panelEspejo2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 70, 20));
 
         opcion2RadioButtonEspejo.setText("Opción 2");
         opcion2RadioButtonEspejo.setEnabled(false);
-
-        opcion3RadioButtonEspejo.setText("Opción 3");
-        opcion3RadioButtonEspejo.setToolTipText("");
-        opcion3RadioButtonEspejo.setEnabled(false);
-
-        opción3CheckBoxEspejo.setText("Opción 6");
-        opción3CheckBoxEspejo.setEnabled(false);
+        panelEspejo2.add(opcion2RadioButtonEspejo);
 
         opción2CheckBoxEspejo.setText("Opción 5");
         opción2CheckBoxEspejo.setToolTipText("");
         opción2CheckBoxEspejo.setEnabled(false);
-
-        opción1CheckBoxEspejo.setText("Opción 4");
-        opción1CheckBoxEspejo.setEnabled(false);
-
-        textFieldEspejo.setEnabled(false);
+        panelEspejo2.add(opción2CheckBoxEspejo);
 
         comboBoxEspejo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBoxEspejo.setEnabled(false);
+        comboBoxEspejo.setPreferredSize(new java.awt.Dimension(150, 22));
+        panelEspejo2.add(comboBoxEspejo);
+
+        getContentPane().add(panelEspejo2);
+
+        panelEspejo3.setMinimumSize(new java.awt.Dimension(600, 50));
+        panelEspejo3.setPreferredSize(new java.awt.Dimension(600, 50));
+        panelEspejo3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 70, 20));
+
+        opcion3RadioButtonEspejo.setText("Opción 3");
+        opcion3RadioButtonEspejo.setToolTipText("");
+        opcion3RadioButtonEspejo.setEnabled(false);
+        panelEspejo3.add(opcion3RadioButtonEspejo);
+
+        opción3CheckBoxEspejo.setText("Opción 6");
+        opción3CheckBoxEspejo.setEnabled(false);
+        panelEspejo3.add(opción3CheckBoxEspejo);
 
         spinnerEspejo.setEnabled(false);
+        spinnerEspejo.setPreferredSize(new java.awt.Dimension(150, 22));
+        panelEspejo3.add(spinnerEspejo);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(separador)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(opcion1RadioButtonEspejo)
-                            .addComponent(opcion2RadioButtonEspejo)
-                            .addComponent(opcion3RadioButtonEspejo))
-                        .addGap(116, 116, 116)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(opción3CheckBoxEspejo)
-                            .addComponent(opción2CheckBoxEspejo)
-                            .addComponent(opción1CheckBoxEspejo))
-                        .addGap(78, 78, 78)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textFieldEspejo, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                            .addComponent(comboBoxEspejo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(spinnerEspejo)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(originalLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(opcion1RadioButton)
-                            .addComponent(opcion2RadioButton)
-                            .addComponent(opcion3RadioButton))
-                        .addGap(116, 116, 116)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(opción1CheckBox)
-                            .addComponent(opción2CheckBox)
-                            .addComponent(opción3CheckBox))
-                        .addGap(78, 78, 78)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textFieldOriginal)
-                            .addComponent(comboBoxOriginal, 0, 148, Short.MAX_VALUE)
-                            .addComponent(spinnerOriginal)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(espejoLabel)))
-                .addContainerGap(93, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(originalLabel)
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(opcion1RadioButton)
-                    .addComponent(opción1CheckBox)
-                    .addComponent(textFieldOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(opcion2RadioButton)
-                    .addComponent(opción2CheckBox)
-                    .addComponent(comboBoxOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(opcion3RadioButton)
-                    .addComponent(opción3CheckBox)
-                    .addComponent(spinnerOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(espejoLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(opcion1RadioButtonEspejo)
-                    .addComponent(opción1CheckBoxEspejo)
-                    .addComponent(textFieldEspejo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(opcion2RadioButtonEspejo)
-                    .addComponent(opción2CheckBoxEspejo)
-                    .addComponent(comboBoxEspejo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(opcion3RadioButtonEspejo)
-                    .addComponent(opción3CheckBoxEspejo)
-                    .addComponent(spinnerEspejo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48))
-        );
+        getContentPane().add(panelEspejo3);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -321,6 +304,12 @@ public class Imitador extends javax.swing.JFrame {
     private javax.swing.JCheckBox opción3CheckBox;
     private javax.swing.JCheckBox opción3CheckBoxEspejo;
     private javax.swing.JLabel originalLabel;
+    private javax.swing.JPanel panelEspejo1;
+    private javax.swing.JPanel panelEspejo2;
+    private javax.swing.JPanel panelEspejo3;
+    private javax.swing.JPanel panelOriginal1;
+    private javax.swing.JPanel panelOriginal2;
+    private javax.swing.JPanel panelOriginal3;
     private javax.swing.JSeparator separador;
     private javax.swing.JSpinner spinnerEspejo;
     private javax.swing.JSpinner spinnerOriginal;

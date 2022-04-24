@@ -33,14 +33,18 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
         panelNumero1 = new javax.swing.JPanel();
         numero1Label = new javax.swing.JLabel();
         numero1ComboBox = new javax.swing.JSpinner();
-        jPanel1 = new javax.swing.JPanel();
-        numero3Label = new javax.swing.JLabel();
+        panelNumeroGenerado = new javax.swing.JPanel();
+        numeroGeneradoLabel = new javax.swing.JLabel();
         textFieldNumeroMayor = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         botonGenerador = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(400, 410));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelNumero2.setMinimumSize(new java.awt.Dimension(400, 50));
+        panelNumero2.setPreferredSize(new java.awt.Dimension(400, 50));
         panelNumero2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 90, 20));
 
         numero2Label.setText("Número 2");
@@ -49,7 +53,11 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
         numero2ComboBox.setPreferredSize(new java.awt.Dimension(80, 25));
         panelNumero2.add(numero2ComboBox);
 
+        getContentPane().add(panelNumero2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
         panelNumero1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panelNumero1.setMinimumSize(new java.awt.Dimension(400, 60));
+        panelNumero1.setPreferredSize(new java.awt.Dimension(400, 50));
         panelNumero1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 90, 20));
 
         numero1Label.setText("Número 1");
@@ -59,16 +67,32 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
         numero1ComboBox.setPreferredSize(new java.awt.Dimension(80, 25));
         panelNumero1.add(numero1ComboBox);
 
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 45, 20));
+        getContentPane().add(panelNumero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
 
-        numero3Label.setText("Número generado");
-        jPanel1.add(numero3Label);
+        panelNumeroGenerado.setPreferredSize(new java.awt.Dimension(400, 50));
+        panelNumeroGenerado.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 45, 20));
+
+        numeroGeneradoLabel.setText("Número generado");
+        panelNumeroGenerado.add(numeroGeneradoLabel);
 
         textFieldNumeroMayor.setEditable(false);
         textFieldNumeroMayor.setPreferredSize(new java.awt.Dimension(80, 30));
-        jPanel1.add(textFieldNumeroMayor);
+        panelNumeroGenerado.add(textFieldNumeroMayor);
 
-        jPanel2.setLayout(new java.awt.CardLayout());
+        getContentPane().add(panelNumeroGenerado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, -1, -1));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 180, -1, -1));
 
         botonGenerador.setText("Generar");
         botonGenerador.setPreferredSize(new java.awt.Dimension(80, 30));
@@ -77,44 +101,7 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
                 botonGeneradorActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(botonGenerador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(199, 199, 199))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(panelNumero2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(panelNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(panelNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelNumero2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(botonGenerador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 94, Short.MAX_VALUE))
-        );
+        getContentPane().add(botonGenerador, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -174,15 +161,15 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonGenerador;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSpinner numero1ComboBox;
     private javax.swing.JLabel numero1Label;
     private javax.swing.JSpinner numero2ComboBox;
     private javax.swing.JLabel numero2Label;
-    private javax.swing.JLabel numero3Label;
+    private javax.swing.JLabel numeroGeneradoLabel;
     private javax.swing.JPanel panelNumero1;
     private javax.swing.JPanel panelNumero2;
+    private javax.swing.JPanel panelNumeroGenerado;
     private javax.swing.JTextField textFieldNumeroMayor;
     // End of variables declaration//GEN-END:variables
 }
