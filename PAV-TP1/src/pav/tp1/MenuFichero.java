@@ -20,6 +20,7 @@ public class MenuFichero extends javax.swing.JFrame {
      */
     public MenuFichero() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
