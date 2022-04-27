@@ -29,14 +29,17 @@ public class Saludador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        descripcion = new javax.swing.JLabel();
-        nombreIngresado = new javax.swing.JTextField();
+        contenedor = new javax.swing.JPanel();
         saludar = new javax.swing.JButton();
+        nombreIngresado = new javax.swing.JTextField();
+        descripcion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Saludador");
+        setMinimumSize(new java.awt.Dimension(380, 250));
+        setResizable(false);
 
-        descripcion.setText("Escribe un nombre para saudar");
+        contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         saludar.setText("¡Saludar!");
         saludar.addActionListener(new java.awt.event.ActionListener() {
@@ -44,34 +47,30 @@ public class Saludador extends javax.swing.JFrame {
                 saludarActionPerformed(evt);
             }
         });
+        contenedor.add(saludar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
+
+        nombreIngresado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        nombreIngresado.setMinimumSize(new java.awt.Dimension(4, 2));
+        nombreIngresado.setPreferredSize(new java.awt.Dimension(6, 6));
+        nombreIngresado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreIngresadoActionPerformed(evt);
+            }
+        });
+        contenedor.add(nombreIngresado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 290, 30));
+
+        descripcion.setText("Escribe un nombre para saudar");
+        contenedor.add(descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(descripcion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(nombreIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(saludar)))
-                .addContainerGap(80, Short.MAX_VALUE))
+            .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(descripcion)
-                .addGap(18, 18, 18)
-                .addComponent(nombreIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(saludar)
-                .addContainerGap(43, Short.MAX_VALUE))
+            .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
         );
 
         pack();
@@ -83,6 +82,10 @@ public class Saludador extends javax.swing.JFrame {
         
         nombreIngresado.setText("");
     }//GEN-LAST:event_saludarActionPerformed
+
+    private void nombreIngresadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreIngresadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreIngresadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,6 +113,9 @@ public class Saludador extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Saludador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -120,6 +126,7 @@ public class Saludador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel contenedor;
     private javax.swing.JLabel descripcion;
     private javax.swing.JTextField nombreIngresado;
     private javax.swing.JButton saludar;
