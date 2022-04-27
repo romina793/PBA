@@ -29,92 +29,92 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        numero1Label = new javax.swing.JLabel();
-        numero1ComboBox = new javax.swing.JComboBox<>();
+        panelNumero2 = new javax.swing.JPanel();
         numero2Label = new javax.swing.JLabel();
-        numero2ComboBox = new javax.swing.JComboBox<>();
-        numero3Label = new javax.swing.JLabel();
+        numero2ComboBox = new javax.swing.JSpinner();
+        panelNumero1 = new javax.swing.JPanel();
+        numero1Label = new javax.swing.JLabel();
+        numero1ComboBox = new javax.swing.JSpinner();
+        panelNumeroGenerado = new javax.swing.JPanel();
+        numeroGeneradoLabel = new javax.swing.JLabel();
         textFieldNumeroMayor = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
         botonGenerador = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Generador de números");
+        setPreferredSize(new java.awt.Dimension(400, 410));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        numero1Label.setText("Número 1");
-
-        numero1ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        panelNumero2.setMinimumSize(new java.awt.Dimension(400, 50));
+        panelNumero2.setPreferredSize(new java.awt.Dimension(400, 50));
+        panelNumero2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 90, 20));
 
         numero2Label.setText("Número 2");
+        panelNumero2.add(numero2Label);
 
-        numero2ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        numero2ComboBox.setPreferredSize(new java.awt.Dimension(80, 25));
+        panelNumero2.add(numero2ComboBox);
 
-        numero3Label.setText("Número generado");
+        getContentPane().add(panelNumero2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        panelNumero1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panelNumero1.setMinimumSize(new java.awt.Dimension(400, 60));
+        panelNumero1.setPreferredSize(new java.awt.Dimension(400, 50));
+        panelNumero1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 90, 20));
+
+        numero1Label.setText("Número 1");
+        panelNumero1.add(numero1Label);
+
+        numero1ComboBox.setMinimumSize(new java.awt.Dimension(80, 25));
+        numero1ComboBox.setPreferredSize(new java.awt.Dimension(80, 25));
+        panelNumero1.add(numero1ComboBox);
+
+        getContentPane().add(panelNumero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
+
+        panelNumeroGenerado.setPreferredSize(new java.awt.Dimension(400, 50));
+        panelNumeroGenerado.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 45, 20));
+
+        numeroGeneradoLabel.setText("Número generado");
+        panelNumeroGenerado.add(numeroGeneradoLabel);
 
         textFieldNumeroMayor.setEditable(false);
+        textFieldNumeroMayor.setPreferredSize(new java.awt.Dimension(80, 30));
+        panelNumeroGenerado.add(textFieldNumeroMayor);
+
+        getContentPane().add(panelNumeroGenerado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, -1, -1));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 180, -1, -1));
 
         botonGenerador.setText("Generar");
+        botonGenerador.setPreferredSize(new java.awt.Dimension(80, 30));
         botonGenerador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonGeneradorActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(botonGenerador, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(numero2Label)
-                            .addComponent(numero1Label)
-                            .addComponent(numero3Label))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(numero2ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(numero1ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(textFieldNumeroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numero1Label)
-                    .addComponent(numero1ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numero2ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numero2Label))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numero3Label)
-                    .addComponent(textFieldNumeroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(botonGenerador)
-                .addContainerGap(37, Short.MAX_VALUE))
-        );
+        getContentPane().add(botonGenerador, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonGeneradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGeneradorActionPerformed
-        String numero1Text = numero1ComboBox.getSelectedItem().toString();
-        String numero2Text = numero2ComboBox.getSelectedItem().toString();
-        int numero1 = Integer.parseInt(numero1Text);
-        int numero2 = Integer.parseInt(numero2Text);
+        Integer numero1 = (Integer) numero1ComboBox.getValue();
+        Integer numero2 = (Integer)numero2ComboBox.getValue();
+        String numero1Text = String.valueOf(numero1);
+        String numero2Text = String.valueOf(numero2);
 
-        if (numero1 == numero2) {
-            JOptionPane.showMessageDialog(this, "Ambos números tienen el mismo valor");
-        } else if (numero1 > numero2){
+        if (numero1 > numero2){
             textFieldNumeroMayor.setText(numero1Text);
         } else {
             textFieldNumeroMayor.setText(numero2Text);
@@ -161,11 +161,15 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonGenerador;
-    private javax.swing.JComboBox<String> numero1ComboBox;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSpinner numero1ComboBox;
     private javax.swing.JLabel numero1Label;
-    private javax.swing.JComboBox<String> numero2ComboBox;
+    private javax.swing.JSpinner numero2ComboBox;
     private javax.swing.JLabel numero2Label;
-    private javax.swing.JLabel numero3Label;
+    private javax.swing.JLabel numeroGeneradoLabel;
+    private javax.swing.JPanel panelNumero1;
+    private javax.swing.JPanel panelNumero2;
+    private javax.swing.JPanel panelNumeroGenerado;
     private javax.swing.JTextField textFieldNumeroMayor;
     // End of variables declaration//GEN-END:variables
 }
