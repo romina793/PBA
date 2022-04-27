@@ -30,48 +30,55 @@ public class Saludador extends javax.swing.JFrame {
     private void initComponents() {
 
         contenedor = new javax.swing.JPanel();
-        saludar = new javax.swing.JButton();
-        nombreIngresado = new javax.swing.JTextField();
         descripcion = new javax.swing.JLabel();
+        nombreIngresado = new javax.swing.JTextField();
+        saludar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Saludador");
         setMinimumSize(new java.awt.Dimension(380, 250));
         setResizable(false);
 
-        contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        contenedor.setPreferredSize(new java.awt.Dimension(400, 300));
+        contenedor.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 50));
 
-        saludar.setText("¡Saludar!");
-        saludar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saludarActionPerformed(evt);
-            }
-        });
-        contenedor.add(saludar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
+        descripcion.setText("Escribe un nombre para saudar");
+        contenedor.add(descripcion);
 
-        nombreIngresado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        nombreIngresado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         nombreIngresado.setMinimumSize(new java.awt.Dimension(4, 2));
-        nombreIngresado.setPreferredSize(new java.awt.Dimension(6, 6));
+        nombreIngresado.setPreferredSize(new java.awt.Dimension(300, 22));
         nombreIngresado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreIngresadoActionPerformed(evt);
             }
         });
-        contenedor.add(nombreIngresado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 290, 30));
+        contenedor.add(nombreIngresado);
 
-        descripcion.setText("Escribe un nombre para saudar");
-        contenedor.add(descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
+        saludar.setText("¡Saludar!");
+        saludar.setVerifyInputWhenFocusTarget(false);
+        saludar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        saludar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        saludar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saludarActionPerformed(evt);
+            }
+        });
+        contenedor.add(saludar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+            .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+            .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        contenedor.getAccessibleContext().setAccessibleDescription("");
+        contenedor.getAccessibleContext().setAccessibleParent(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
