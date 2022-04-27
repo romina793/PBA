@@ -5,11 +5,14 @@
  */
 package pav.tp1;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Franco
  */
-
 public class RutaFichero extends javax.swing.JFrame {
 
     /**
@@ -88,10 +91,30 @@ public class RutaFichero extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        this.jTextField1.setText(Util.abrirPanel(this.jPanel1));
+        String archivoElegido = "";
+        JFileChooser jFileChooser = new JFileChooser();
+        jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(null, "txt");
+        jFileChooser.setFileFilter(filter);
+
+        int result = jFileChooser.showOpenDialog(this.jTextField1);
+
+        if (result != JFileChooser.CANCEL_OPTION) {
+
+            File fileName = jFileChooser.getSelectedFile();
+
+            if ((fileName == null) || (fileName.getName().equals(""))) {
+                archivoElegido = "...";
+            } else {
+                archivoElegido = fileName.getAbsolutePath();
+            }
+        }
+
+        this.jTextField1.setText(archivoElegido);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

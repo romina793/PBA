@@ -5,6 +5,10 @@
  */
 package pav.tp1;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Franco
@@ -66,7 +70,7 @@ public class MenuFichero extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        jMenuItem1.setText("Abril...");
+        jMenuItem1.setText("Abrir...");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -90,7 +94,27 @@ public class MenuFichero extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-         this.jTextField1.setText(Util.abrirPanel(this));
+        String archivoElegido = "";
+        JFileChooser jFileChooser = new JFileChooser();
+        jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(null, "txt");
+        jFileChooser.setFileFilter(filter);
+
+        int result = jFileChooser.showOpenDialog(this.jTextField1);
+
+        if (result != JFileChooser.CANCEL_OPTION) {
+
+            File fileName = jFileChooser.getSelectedFile();
+
+            if ((fileName == null) || (fileName.getName().equals(""))) {
+                archivoElegido = "...";
+            } else {
+                archivoElegido = fileName.getAbsolutePath();
+            }
+        }
+
+        this.jTextField1.setText(archivoElegido);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
