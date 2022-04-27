@@ -5,6 +5,8 @@
  */
 package pav.tp1;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Gerardo
@@ -27,16 +29,25 @@ public class Peliculas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        descripcion = new javax.swing.JLabel();
+        contenedor = new javax.swing.JPanel();
         tituloPelicula = new javax.swing.JTextField();
+        descripcion = new javax.swing.JLabel();
+        listaPelicula = new javax.swing.JComboBox<>();
         agregar = new javax.swing.JButton();
         descripcionPeliculas = new javax.swing.JLabel();
-        listaPelicula = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Películas");
 
+        contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        contenedor.add(tituloPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 55, 146, -1));
+
         descripcion.setText("Escribe el título de una película");
+        contenedor.add(descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 30, -1, -1));
+
+        listaPelicula.setEnabled(false);
+        listaPelicula.setMinimumSize(new java.awt.Dimension(6, 20));
+        contenedor.add(listaPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 55, 166, -1));
 
         agregar.setText("Añadir");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -44,68 +55,44 @@ public class Peliculas extends javax.swing.JFrame {
                 agregarActionPerformed(evt);
             }
         });
+        contenedor.add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 93, -1, -1));
 
         descripcionPeliculas.setText("Películas");
-
-        listaPelicula.setEnabled(false);
-        listaPelicula.setMinimumSize(new java.awt.Dimension(6, 20));
+        contenedor.add(descripcionPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(279, 30, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(agregar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(descripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tituloPelicula))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(listaPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(24, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(descripcionPeliculas)
-                        .addGap(82, 82, 82))))
+            .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(descripcion)
-                    .addComponent(descripcionPeliculas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tituloPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(listaPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(agregar)
-                .addContainerGap(28, Short.MAX_VALUE))
+            .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        // Habilita el combo
-        if (!listaPelicula.isEnabled()) {
-            listaPelicula.setEnabled(true);
-        }
-        // Agrega la película a la lista
         String pelicula = tituloPelicula.getText();        
-        listaPelicula.addItem(pelicula);
         
-        // Setea el último item agregado a mostrarse en el combo
-        int ultimo = listaPelicula.getItemCount() -1;
-        listaPelicula.setSelectedIndex(ultimo);
-        
-        tituloPelicula.setText("");
+        if (pelicula.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Escribe el título de una película");
+        } else {
+            // Habilita el combo
+            if (!listaPelicula.isEnabled()) {
+                listaPelicula.setEnabled(true);
+            }
+            // Agrega la película a la lista        
+            listaPelicula.addItem(pelicula);
+
+            // Setea el último item agregado a mostrarse en el combo
+            int ultimo = listaPelicula.getItemCount() -1;
+            listaPelicula.setSelectedIndex(ultimo);
+
+            tituloPelicula.setText("");
+        }
     }//GEN-LAST:event_agregarActionPerformed
 
     /**
@@ -134,6 +121,9 @@ public class Peliculas extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Peliculas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -145,6 +135,7 @@ public class Peliculas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
+    private javax.swing.JPanel contenedor;
     private javax.swing.JLabel descripcion;
     private javax.swing.JLabel descripcionPeliculas;
     private javax.swing.JComboBox<String> listaPelicula;

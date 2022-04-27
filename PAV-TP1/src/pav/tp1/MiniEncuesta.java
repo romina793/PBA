@@ -30,6 +30,7 @@ public class MiniEncuesta extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        contenedor = new javax.swing.JPanel();
         descripcionSO = new javax.swing.JLabel();
         windows = new javax.swing.JRadioButton();
         linux = new javax.swing.JRadioButton();
@@ -40,7 +41,7 @@ public class MiniEncuesta extends javax.swing.JFrame {
         disenoGrafico = new javax.swing.JCheckBox();
         administracion = new javax.swing.JCheckBox();
         separator2 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
+        descripcionHoras = new javax.swing.JLabel();
         totalHoras = new javax.swing.JLabel();
         sliderHoras = new javax.swing.JSlider();
         generar = new javax.swing.JButton();
@@ -48,7 +49,10 @@ public class MiniEncuesta extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mini Encuesta");
 
+        contenedor.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         descripcionSO.setText("Elige un sistema operativo");
+        contenedor.add(descripcionSO, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 36, -1, -1));
 
         windows.setText("Windows");
         windows.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +60,7 @@ public class MiniEncuesta extends javax.swing.JFrame {
                 windowsActionPerformed(evt);
             }
         });
+        contenedor.add(windows, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 57, -1, -1));
 
         linux.setText("Linux");
         linux.addActionListener(new java.awt.event.ActionListener() {
@@ -63,6 +68,7 @@ public class MiniEncuesta extends javax.swing.JFrame {
                 linuxActionPerformed(evt);
             }
         });
+        contenedor.add(linux, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         mac.setText("Mac");
         mac.addActionListener(new java.awt.event.ActionListener() {
@@ -70,18 +76,26 @@ public class MiniEncuesta extends javax.swing.JFrame {
                 macActionPerformed(evt);
             }
         });
+        contenedor.add(mac, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 103, -1, -1));
+        contenedor.add(separador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 133, 224, 10));
 
         descripcionEspecialidad.setText("Elige tu especialidad");
+        contenedor.add(descripcionEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 144, -1, -1));
 
         programacion.setText("Programación");
+        contenedor.add(programacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 165, -1, -1));
 
         disenoGrafico.setText("Diseño gráfico");
+        contenedor.add(disenoGrafico, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 188, -1, -1));
 
         administracion.setText("Administración");
+        contenedor.add(administracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 211, -1, -1));
+        contenedor.add(separator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 224, 10));
 
-        jLabel1.setText("Horas que dedicas en el ordenador");
+        descripcionHoras.setText("Horas que dedicas en el ordenador");
 
         totalHoras.setText("0");
+        contenedor.add(totalHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 298, 14, -1));
 
         sliderHoras.setMaximum(10);
         sliderHoras.setPaintTicks(true);
@@ -92,6 +106,7 @@ public class MiniEncuesta extends javax.swing.JFrame {
                 sliderHorasStateChanged(evt);
             }
         });
+        contenedor.add(sliderHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 298, 149, -1));
 
         generar.setText("Generar");
         generar.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +114,7 @@ public class MiniEncuesta extends javax.swing.JFrame {
                 generarActionPerformed(evt);
             }
         });
+        contenedor.add(generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 335, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,7 +155,7 @@ public class MiniEncuesta extends javax.swing.JFrame {
                                     .addComponent(sliderHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGap(29, 29, 29)
-                                    .addComponent(jLabel1))))
+                                    .addComponent(descripcionHoras))))
                         .addGap(0, 35, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -167,7 +183,7 @@ public class MiniEncuesta extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(separator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(descripcionHoras)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sliderHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,6 +285,9 @@ public class MiniEncuesta extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MiniEncuesta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -281,11 +300,12 @@ public class MiniEncuesta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox administracion;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel contenedor;
     private javax.swing.JLabel descripcionEspecialidad;
+    private javax.swing.JLabel descripcionHoras;
     private javax.swing.JLabel descripcionSO;
     private javax.swing.JCheckBox disenoGrafico;
     private javax.swing.JButton generar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButton linux;
     private javax.swing.JRadioButton mac;
     private javax.swing.JCheckBox programacion;

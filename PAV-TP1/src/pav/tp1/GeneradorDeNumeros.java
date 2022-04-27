@@ -5,6 +5,8 @@
  */
 package pav.tp1;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Gerardo
@@ -116,9 +118,7 @@ public class GeneradorDeNumeros extends javax.swing.JFrame {
             textFieldNumeroMayor.setText(numero1Text);
         } else {
             textFieldNumeroMayor.setText(numero2Text);
-        }
-
-        
+        }       
     }//GEN-LAST:event_botonGeneradorActionPerformed
 
     /**
