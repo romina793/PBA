@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.curso.pedidos" default-lazy="false">
+  <class name="Persona" table="persona">
+     <id name= "id" type= "java.lang.integer">
+        <column name="id"/>
+        <generator class="identity"/>
+    </id>
+    <discriminator column="DISC" type="string"/>
+    <property name="nombre" type="string" optimistic-lock="true" unique="false"> 
+        <column lenght="50" name="nombre"/>
+    </property> 
+     <property name="apellido" type="string" optimistic-lock="true" unique="false"> 
+        <column lenght="50" name="apelldio"/>
+    </property> 
+     <property name="dni" type="long" optimistic-lock="true" unique="false"> 
+        <column lenght="10" name="dni"/>
+    </property> 
+     <property name="fechaNacimiento" type="date" optimistic-lock="true" unique="false"> 
+        <column lenght="10" name="fechaNacimiento"/>
+    </property> 
+     <property name="direccion" type="string" optimistic-lock="true" unique="false"> 
+        <column lenght="50" name="direccion"/>
+    </property> 
+    <!--agregamos clase usuario a la table padre-->
+    <subclass name="Usuario" extends="Persona" discriminator-value="USUARIO">
+        <property name="nombreUsuario"/>
+        <property name="password"/>
+    </subclass>
+  </class>
+</hibernate-mapping>
