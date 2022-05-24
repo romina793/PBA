@@ -2,8 +2,6 @@ package com.curso.pedidos;
 
 import java.util.*;
 import org.hibernate.*;
-import java.util.Scanner;
-
 
 
 public class Ejercicio2 {
@@ -44,6 +42,17 @@ public class Ejercicio2 {
         System.out.println(producto.toString());
         System.out.println(carritoCompras.toString());
         // Implementar consultas HQL...
+        //obtener todos los usuarios ordenados por nombre
+        List usuarios = session.createQuery(
+                "from Usuario as u order by u.name asc")
+                .list();
+        System.out.println(usuarios);
+
+        //obtener todos los productos cuyo precio sea mayor a 1000
+        List productos = session.createQuery(
+                "from Producto as p where p.precio > 1000")
+                .list();
+        System.out.println(productos);
         session.close();
 
     }
