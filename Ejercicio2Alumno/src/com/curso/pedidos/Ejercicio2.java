@@ -43,7 +43,7 @@ public class Ejercicio2 {
         // Implementar consultas HQL...
         //obtener todos los usuarios ordenados por nombre
         List <Usuario> usuarios = session.createQuery(
-                "from Usuario as u order by u.nombreUsuario asc")
+                "from Usuario as u order by u.nombreusuario asc")
                 .list();
         for (Usuario usr : usuarios) {
             System.out.println(usr.toString());
@@ -51,7 +51,7 @@ public class Ejercicio2 {
 
         //obtener todos los productos cuyo precio sea mayor a 1000
         List <Producto> productos = session.createQuery(
-                "from Producto as p where p.precioUnitario > 1000")
+                "from Producto as p where p.preciounitario > 1000")
                 .list();
         for (Producto prod : productos) {
             System.out.println(prod.toString());

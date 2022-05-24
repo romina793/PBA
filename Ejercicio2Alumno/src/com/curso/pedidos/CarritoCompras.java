@@ -7,7 +7,7 @@ public class CarritoCompras {
    int cantidadMaxItem = 10;
    Date fechaCreacion;
    Usuario usuario;
-   Vector<ItemCarrito> items = new Vector<ItemCarrito>();
+   List<ItemCarrito> items = new ArrayList<ItemCarrito>();
 
     public CarritoCompras() {
     }
@@ -36,11 +36,11 @@ public class CarritoCompras {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Vector<ItemCarrito> getItemsCarrito() {
+    public List<ItemCarrito> getItemsCarrito() {
         return items;
     }
 
-    public void setItemsCarrito(Vector<ItemCarrito> itemsCarrito) {
+    public void setItemsCarrito(List<ItemCarrito> itemsCarrito) {
         this.items = itemsCarrito;
     }
     @Override
