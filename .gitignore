@@ -13,5 +13,5 @@ private.properties
 /PAV-TP1/build/
 /Ejercicio2Alumno/dist/
 /Ejercicio2Alumno/build/*
-/Ejercicio2Alumno/nbproject/*
+/Ejercicio2Alumno/nbproject/private/
 /Ejercicio2Alumno/test/*
