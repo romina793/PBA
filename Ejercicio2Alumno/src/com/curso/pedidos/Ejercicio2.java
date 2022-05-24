@@ -3,7 +3,6 @@ package com.curso.pedidos;
 import java.util.*;
 import org.hibernate.*;
 
-
 public class Ejercicio2 {
 
     public static void main(String[] args) {
@@ -43,16 +42,20 @@ public class Ejercicio2 {
         System.out.println(carritoCompras.toString());
         // Implementar consultas HQL...
         //obtener todos los usuarios ordenados por nombre
-        List usuarios = session.createQuery(
-                "from Usuario as u order by u.name asc")
+        List <Usuario> usuarios = session.createQuery(
+                "from Usuario as u order by u.nombreUsuario asc")
                 .list();
-        System.out.println(usuarios);
+        for (Usuario usr : usuarios) {
+            System.out.println(usr.toString());
+        }
 
         //obtener todos los productos cuyo precio sea mayor a 1000
-        List productos = session.createQuery(
-                "from Producto as p where p.precio > 1000")
+        List <Producto> productos = session.createQuery(
+                "from Producto as p where p.precioUnitario > 1000")
                 .list();
-        System.out.println(productos);
+        for (Producto prod : productos) {
+            System.out.println(prod.toString());
+        }
         session.close();
 
     }
