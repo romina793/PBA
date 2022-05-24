@@ -2,19 +2,26 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.curso.pedidos" default-lazy="false">
-  <class name="CarritoCompras" table="carritocompras">
-     <id name= "id" type= "java.lang.integer">
-        <column name="id"/>
-        <generator class="identity"/>
-    </id>
-    <property name="cantidadMaxItem" type="int" optimistic-lock="true" unique="false"> 
-        <column lenght="10" name="cantidadMaxItem"/>
-    </property> 
-    <property name="fecha" type="Date" optimistic-lock="true" unique="false"> 
-        <column lenght="10" name="fechaCreacion"/>
-    </property> 
-    <one-to-one name="carritocompras" column = "UsuarioId" cascade="none"/>
-    <many-to-one column="itemCarritoId" name="itemCarrito" cascade="none"/>
+    <class name="CarritoCompras" table="carritocompras">
+        <id name= "id" type= "java.lang.integer">
+            <column name="id"/>
+            <generator class="foreign">
+                <param name="property">usuario</param>
+            </generator>        
+        </id>
+        <property name="cantidadMaxItem" type="int" optimistic-lock="true" unique="false"> 
+            <column length="10" name="cantidadMaxItem"/>
+        </property> 
+        <property name="fecha" type="Date" optimistic-lock="true" unique="false"> 
+            <column length="10" name="fechaCreacion"/>
+        </property> 
+        <one-to-one name="usuario" fetch="select"></one-to-one>
 
-  </class>
+        <list name="itemsCarrito" cascade="all-delete-orphan"> 
+            <key column="itemsCarrito" /> 
+            <index column="orden" /> 
+            <one-to-many class="ItemCarrito"/> 
+        </list>
+
+    </class>
 </hibernate-mapping>

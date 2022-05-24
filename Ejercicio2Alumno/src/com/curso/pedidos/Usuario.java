@@ -8,7 +8,8 @@ public class Usuario extends Persona {
     
      String nombreUsuario;
      String password;
-
+     CarritoCompras carrito;
+     
     public Usuario() {
     }
 
