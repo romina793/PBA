@@ -6,7 +6,9 @@ public class CarritoCompras {
    Integer id;
    int cantidadMaxItem = 10;
    Date fechaCreacion;
-
+   Usuario usuario;
+   Vector<ItemCarrito> items = new Vector<ItemCarrito>(); 
+   
     public CarritoCompras() {
     }
 
@@ -34,6 +36,14 @@ public class CarritoCompras {
         this.fechaCreacion = fechaCreacion;
     }
 
+    public Vector<ItemCarrito> getItemsCarrito() {
+        return items;
+    }
+
+    public void setItemsCarrito(Vector<ItemCarrito> itemsCarrito) {
+        this.items = itemsCarrito;
+    }
+    
     @Override
     public String toString() {
         return "CarritoCompras{" + "id=" + id + ", cantidadMaxItem=" + cantidadMaxItem + ", fechaCreacion=" + fechaCreacion + '}';

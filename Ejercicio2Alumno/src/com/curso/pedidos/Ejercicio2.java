@@ -13,8 +13,6 @@ public class Ejercicio2 {
        create(sf);
     }
     public static void create(SessionFactory sf) {
-
-    
         
         Usuario usuario = new Usuario();
         usuario.setNombreUsuario("Horacio");

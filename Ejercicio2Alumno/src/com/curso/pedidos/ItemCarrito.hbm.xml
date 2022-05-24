@@ -2,14 +2,14 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.curso.pedidos" default-lazy="false">
-  <class name="ItemCarrito" table="itemcarrito">
-    <id name= "id" type= "java.lang.integer">
-        <column name="id"/>
-        <generator class="identity"/>
-    </id>
-    <property name="cantidad" type="double" optimistic-lock="true" unique="false"> 
-        <column lenght="10" name="cantidad"/>
-    </property> 
-    <many-to-one column="producoId" name="producto" cascade="none"/>
-  </class>
+    <class name="ItemCarrito" table="itemcarrito">
+        <id name= "id" type= "java.lang.integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <property name="cantidad" type="double" optimistic-lock="true" unique="false"> 
+            <column length="10" name="cantidad"/>
+        </property> 
+        <many-to-one column="producoId" name="producto" cascade="none"/>
+    </class>
 </hibernate-mapping>

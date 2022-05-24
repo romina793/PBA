@@ -1,13 +1,10 @@
 package com.curso.pedidos;
 
-
-
-
-
 public class Usuario extends Persona {
     
      String nombreUsuario;
      String password;
+     CarritoCompras carrito;
 
     public Usuario() {
     }
@@ -16,8 +13,6 @@ public class Usuario extends Persona {
         super(apellido, dni);
         this.nombreUsuario = nombreUsuario;
     }
-
-  
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -43,10 +38,4 @@ public class Usuario extends Persona {
     public String toString() {
         return "Usuario{" + "nombreUsuario=" + nombreUsuario + ", password=" + password + '}';
     }
-
-   
-
-  
-
-
 }
