@@ -8,13 +8,13 @@
         <generator class="identity"/>
     </id>
     <property name="codigo" type="string" optimistic-lock="true" unique="false"> 
-        <column lenght="10" name="codigo"/>
+        <column length="10" name="codigo"/>
     </property> 
     <property name ="descripcion" type="string" optimistic-lock="true" unique="false">
-        <column lenght="50" name="descripcion"/>
+        <column length="50" name="descripcion"/>
     </property>
     <property name="preciounitario" type="double" optimistic-lock="true" unique="false">
-        <column lenght="10" name="precioUnitario"/>
+        <column length="10" name="precioUnitario"/>
     </property>          
   </class>
 </hibernate-mapping>

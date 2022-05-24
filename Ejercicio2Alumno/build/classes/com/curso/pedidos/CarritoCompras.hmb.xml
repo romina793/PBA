@@ -8,10 +8,10 @@
         <generator class="identity"/>
     </id>
     <property name="cantidadMaxItem" type="int" optimistic-lock="true" unique="false"> 
-        <column lenght="10" name="cantidadMaxItem"/>
+        <column length="10" name="cantidadMaxItem"/>
     </property> 
     <property name="fecha" type="Date" optimistic-lock="true" unique="false"> 
-        <column lenght="10" name="fechaCreacion"/>
+        <column length="10" name="fechaCreacion"/>
     </property> 
     <one-to-one name="carritocompras" column = "UsuarioId" cascade="none"/>
     <many-to-one column="itemCarritoId" name="itemCarrito" cascade="none"/>

@@ -8,7 +8,7 @@
         <generator class="identity"/>
     </id>
     <property name="cantidad" type="double" optimistic-lock="true" unique="false"> 
-        <column lenght="10" name="cantidad"/>
+        <column length="10" name="cantidad"/>
     </property> 
     <many-to-one column="producoId" name="producto" cascade="none"/>
   </class>

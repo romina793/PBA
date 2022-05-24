@@ -9,19 +9,19 @@
     </id>
     <discriminator column="DISC" type="string"/>
     <property name="nombre" type="string" optimistic-lock="true" unique="false"> 
-        <column lenght="50" name="nombre"/>
+        <column length="50" name="nombre"/>
     </property> 
      <property name="apellido" type="string" optimistic-lock="true" unique="false"> 
-        <column lenght="50" name="apelldio"/>
+        <column length="50" name="apelldio"/>
     </property> 
      <property name="dni" type="long" optimistic-lock="true" unique="false"> 
-        <column lenght="10" name="dni"/>
+        <column length="10" name="dni"/>
     </property> 
      <property name="fechaNacimiento" type="date" optimistic-lock="true" unique="false"> 
-        <column lenght="10" name="fechaNacimiento"/>
+        <column length="10" name="fechaNacimiento"/>
     </property> 
      <property name="direccion" type="string" optimistic-lock="true" unique="false"> 
-        <column lenght="50" name="direccion"/>
+        <column length="50" name="direccion"/>
     </property> 
     <!--agregamos clase usuario a la table padre-->
     <subclass name="Usuario" extends="Persona" discriminator-value="USUARIO">
