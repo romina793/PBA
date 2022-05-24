@@ -24,9 +24,11 @@
         <column length="50" name="direccion"/>
     </property> 
     <!--agregamos clase usuario a la table padre-->
-    <subclass name="Usuario" extends="Persona" discriminator-value="USUARIO">
+    <subclass name="Usuario" extends="Persona" discriminator-value="PERSONA">
         <property name="nombreUsuario"/>
         <property name="password"/>
+        <property name="carrito"/>
+        <one-to-one name="carrito" cascade="all" fetch="select"></one-to-one>
     </subclass>
   </class>
 </hibernate-mapping>
