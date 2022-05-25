@@ -12,16 +12,12 @@ import org.hibernate.service.ServiceRegistry;
 public class HibernateUtil {
 
     private static final SessionFactory sessionFactory;
-    private static final ServiceRegistry serviceRegistry;
     static {
        try {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
-        Configuration configuration = new Configuration();
-        configuration.configure();
-        serviceRegistry = new StandardServiceRegistryBuilder().applySettings( configuration.getProperties()).build();
-        sessionFactory = configuration.configure().buildSessionFactory(serviceRegistry);
-    
+            sessionFactory = new Configuration().configure().buildSessionFactory();
+
 
         //sessionFactory = new Configuration().configure().buildSessionFactory(ServiceRegistry serviceRegistry);
         }

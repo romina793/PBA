@@ -6,7 +6,7 @@ public class Producto {
     Integer id;
     String codigo;
     String descripcion;
-    double precioUnitario;
+    double preciounitario;
 
     public Producto(String codigo) {
         this.codigo = codigo;
@@ -15,10 +15,10 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String codigo, String descripcion, double precioUnitario) {
+    public Producto(String codigo, String descripcion, double preciounitario) {
         this.codigo = codigo;
         this.descripcion = descripcion;
-        this.precioUnitario = precioUnitario;
+        this.preciounitario = preciounitario;
     }
 
     public Integer getId() {
@@ -44,20 +44,17 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public double getPrecioUnitario() {
-        return precioUnitario;
+    public double getPreciounitario() {
+        return preciounitario;
     }
 
-    public void setPrecioUnitario(double precioUnitario) {
-        this.precioUnitario = precioUnitario;
+    public void setPreciounitario(double precioUnitario) {
+        this.preciounitario = precioUnitario;
     }
 
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", codigo=" + codigo + ", descripcion=" + descripcion + ", precioUnitario=" + precioUnitario + '}';
+        return "Producto{" + "id=" + id + ", codigo=" + codigo + ", descripcion=" + descripcion + ", preciounitario=" + preciounitario + '}';
     }
-
-
-
 
 }

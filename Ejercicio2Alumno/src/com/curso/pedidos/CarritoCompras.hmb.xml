@@ -3,7 +3,7 @@
 
 <hibernate-mapping package="com.curso.pedidos" default-lazy="false">
     <class name="CarritoCompras" table="carritocompras">
-        <id name= "id" type= "java.lang.integer">
+        <id name= "id" type= "java.lang.Integer">
             <column name="id"/>
             <generator class="foreign">
                 <param name="property">usuario</param>
@@ -12,7 +12,7 @@
         <property name="cantidadMaxItem" type="int" optimistic-lock="true" unique="false"> 
             <column length="10" name="cantidadMaxItem"/>
         </property> 
-        <property name="fecha" type="Date" optimistic-lock="true" unique="false"> 
+        <property name="fechaCreacion" type="java.util.Date" optimistic-lock="true" unique="false"> 
             <column length="10" name="fechaCreacion"/>
         </property> 
         <one-to-one name="usuario" fetch="select"></one-to-one>

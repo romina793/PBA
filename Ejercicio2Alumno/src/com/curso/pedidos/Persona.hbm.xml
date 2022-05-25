@@ -3,7 +3,7 @@
 
 <hibernate-mapping package="com.curso.pedidos" default-lazy="false">
   <class name="Persona" table="persona">
-     <id name= "id" type= "java.lang.integer">
+     <id name= "id" type= "java.lang.Integer">
         <column name="id"/>
         <generator class="identity"/>
     </id>
@@ -17,8 +17,8 @@
      <property name="dni" type="long" optimistic-lock="true" unique="false"> 
         <column length="10" name="dni"/>
     </property> 
-     <property name="fechaNacimiento" type="date" optimistic-lock="true" unique="false"> 
-        <column length="10" name="fechaNacimiento"/>
+     <property name="fechadeNacimiento" type="java.util.Date" optimistic-lock="true" unique="false"> 
+        <column length="10" name="fechadeNacimiento"/>
     </property> 
      <property name="direccion" type="string" optimistic-lock="true" unique="false"> 
         <column length="50" name="direccion"/>
@@ -27,8 +27,7 @@
     <subclass name="Usuario" extends="Persona" discriminator-value="PERSONA">
         <property name="nombreUsuario"/>
         <property name="password"/>
-        <property name="carrito"/>
-        <one-to-one name="carrito" cascade="all" fetch="select"></one-to-one>
+        <one-to-one name="carritocompras" cascade="all" fetch="select"></one-to-one>
     </subclass>
   </class>
 </hibernate-mapping>
