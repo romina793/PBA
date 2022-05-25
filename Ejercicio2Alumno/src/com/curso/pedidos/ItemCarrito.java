@@ -6,6 +6,8 @@ public class ItemCarrito{
     Producto producto;
     double cantidad;
 
+    public ItemCarrito() {
+    }
   
     public ItemCarrito(Producto producto, double cantidad) {
         this.producto = producto;
@@ -38,7 +40,12 @@ public class ItemCarrito{
 
     public double precio(){
     Producto precio = new Producto();
-    return precio.getPrecioUnitario();
+    return precio.getPreciounitario();
+    }
+
+    @Override
+    public String toString() {
+        return "ItemCarrito{" + "id=" + id + ", producto=" + producto + ", cantidad=" + cantidad + '}';
     }
 
 

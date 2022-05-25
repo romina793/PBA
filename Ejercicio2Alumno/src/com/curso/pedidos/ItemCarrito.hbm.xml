@@ -3,7 +3,7 @@
 
 <hibernate-mapping package="com.curso.pedidos" default-lazy="false">
   <class name="ItemCarrito" table="itemcarrito">
-    <id name= "id" type= "java.lang.integer">
+    <id name= "id" type= "java.lang.Integer">
         <column name="id"/>
         <generator class="identity"/>
     </id>

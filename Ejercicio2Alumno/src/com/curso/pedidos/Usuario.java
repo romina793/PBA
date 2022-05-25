@@ -1,5 +1,7 @@
 package com.curso.pedidos;
 
+import java.util.Date;
+
 
 
 
@@ -8,7 +10,7 @@ public class Usuario extends Persona {
     
      String nombreUsuario;
      String password;
-     CarritoCompras carrito;
+     CarritoCompras carritocompras;
      
     public Usuario() {
     }
@@ -36,18 +38,28 @@ public class Usuario extends Persona {
         this.password = password;
     }
 
-    void setDni(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public CarritoCompras getCarritocompras() {
+        return carritocompras;
+    }
+
+    public void setCarritocompras(CarritoCompras carrito) {
+        this.carritocompras = carrito;
+    }
+
+     @Override
+    public void setDni(Long dni) {
+        this.dni = dni;
+    }
+    
+     @Override
+    public Date getFechadeNacimiento() {
+        return fechadeNacimiento;
     }
 
     @Override
     public String toString() {
         return "Usuario{" + "nombreUsuario=" + nombreUsuario + ", password=" + password + '}';
     }
-
-   
-
-  
 
 
 }
