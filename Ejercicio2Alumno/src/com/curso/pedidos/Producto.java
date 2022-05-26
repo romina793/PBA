@@ -1,12 +1,11 @@
 package com.curso.pedidos;
 
-
-
 public class Producto {
+
     Integer id;
     String codigo;
     String descripcion;
-    double preciounitario;
+    double precioUnitario;
 
     public Producto(String codigo) {
         this.codigo = codigo;
@@ -15,10 +14,10 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String codigo, String descripcion, double preciounitario) {
+    public Producto(String codigo, String descripcion, double precioUnitario) {
         this.codigo = codigo;
         this.descripcion = descripcion;
-        this.preciounitario = preciounitario;
+        this.precioUnitario = precioUnitario;
     }
 
     public Integer getId() {
@@ -28,6 +27,7 @@ public class Producto {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getCodigo() {
         return codigo;
     }
@@ -44,17 +44,16 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public double getPreciounitario() {
-        return preciounitario;
+    public double getPrecioUnitario() {
+        return precioUnitario;
     }
 
-    public void setPreciounitario(double precioUnitario) {
-        this.preciounitario = precioUnitario;
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", codigo=" + codigo + ", descripcion=" + descripcion + ", preciounitario=" + preciounitario + '}';
+        return "Producto{Codigo= " + codigo + ", Descripcion= " + descripcion + ", Precio Unitario= " + precioUnitario + '}';
     }
-
 }

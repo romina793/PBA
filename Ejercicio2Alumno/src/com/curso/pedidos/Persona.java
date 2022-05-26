@@ -1,18 +1,18 @@
 package com.curso.pedidos;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
-
 public class Persona {
- Integer id;   
- String nombre;
- String apellido;
- Long dni;
- Date fechadeNacimiento;
- String direccion;
 
- public Persona() {
+    Integer id;
+    String nombre;
+    String apellido;
+    Long dni;
+    LocalDate fechaDeNacimiento;
+    String direccion;
+
+    public Persona() {
     }
 
     public Persona(String apellido, Long dni) {
@@ -52,12 +52,12 @@ public class Persona {
         this.dni = dni;
     }
 
-    public Date getFechadeNacimiento() {
-        return fechadeNacimiento;
+    public LocalDate getFechaDeNacimiento() {
+        return fechaDeNacimiento;
     }
 
-    public void setFechadeNacimiento(Date fechadeNacimiento) {
-        this.fechadeNacimiento = fechadeNacimiento;
+    public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) {
+        this.fechaDeNacimiento = fechaDeNacimiento;
     }
 
     public String getDireccion() {
@@ -66,6 +66,10 @@ public class Persona {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+    
+    public String getNombreCompleto() {
+        return apellido + ", " + nombre;
     }
 
     @Override
@@ -91,13 +95,4 @@ public class Persona {
         }
         return true;
     }
-
-    void setDni(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
-
-
-
 }

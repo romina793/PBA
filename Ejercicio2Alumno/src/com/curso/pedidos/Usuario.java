@@ -1,17 +1,11 @@
 package com.curso.pedidos;
 
-import java.util.Date;
-
-
-
-
-
 public class Usuario extends Persona {
-    
-     String nombreUsuario;
-     String password;
-     CarritoCompras carritocompras;
-     
+
+    String nombreUsuario;
+    String password;
+    CarritoCompras carritoCompras;
+
     public Usuario() {
     }
 
@@ -19,8 +13,6 @@ public class Usuario extends Persona {
         super(apellido, dni);
         this.nombreUsuario = nombreUsuario;
     }
-
-  
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -38,28 +30,16 @@ public class Usuario extends Persona {
         this.password = password;
     }
 
-    public CarritoCompras getCarritocompras() {
-        return carritocompras;
+    public CarritoCompras getCarritoCompras() {
+        return carritoCompras;
     }
 
-    public void setCarritocompras(CarritoCompras carrito) {
-        this.carritocompras = carrito;
-    }
-
-     @Override
-    public void setDni(Long dni) {
-        this.dni = dni;
-    }
-    
-     @Override
-    public Date getFechadeNacimiento() {
-        return fechadeNacimiento;
+    public void setCarritoCompras(CarritoCompras carritoCompras) {
+        this.carritoCompras = carritoCompras;
     }
 
     @Override
     public String toString() {
-        return "Usuario{" + "nombreUsuario=" + nombreUsuario + ", password=" + password + '}';
+        return "Usuario{Nombre de Usuario= " + nombreUsuario + ", Apellido= " + apellido + ", DNI= " + dni + "}";
     }
-
-
 }

@@ -1,100 +1,89 @@
 package com.curso.pedidos;
 
+import java.time.LocalDate;
 import java.util.*;
 import org.hibernate.*;
 
-/*
-PENDIENTES:
-- revisar que todas las clases se inicialicen con los parámetros que pide e inicializarlas así
-- despejar el Main con diferentes funciones
-- renombrar el proyecto
-- poner como constante el máximo de items
-- revisar variables de mapeao, respetar camelCase
-- Pasar las variables Date a LocalDate con fecha de nacimiento
-- Revisar los warnings en consola
-- Modificar toString()
-- Rompe en las consultas HQL, se puede separar en funciones como está en el repo ClaseHibernate y ver si de esa manersa funciona bien
-*/
- 
 public class Ejercicio2 {
 
     public static void main(String[] args) {
-       SessionFactory sf = HibernateUtil.getSessionFactory(); 
-       create(sf);
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Transaction tx = null;
+        try {
+            Session session = sf.openSession();
+            tx = session.beginTransaction();
+
+            Create(session);
+            Select(session);
+
+            tx.commit();
+        } catch (RuntimeException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            System.err.println("Ocurrio un error: " + e);
+        } finally {
+            sf.close();
+        }
     }
-    public static void create(SessionFactory sf) {
-        
-        Usuario usuario = new Usuario();
-        usuario.setNombre("Horacio");
-        usuario.setNombreUsuario("Hora_20");
-        usuario.setPassword("123456");
-        usuario.setApellido("perez");
-        usuario.setDni(24567890L);
-        //cambiar a fecha custom / Date() -> LocalDate()
-        Date fecha = new Date();
-        usuario.setFechadeNacimiento(fecha);
-        usuario.setDireccion("Libertador 123");
 
-        Producto producto = new Producto();
-        producto.setCodigo("M1");
-        producto.setDescripcion("Mesa de madera");
-        producto.setPreciounitario(3500.00);
-        
-        Producto producto2 = new Producto();
-        producto.setCodigo("MH");
-        producto.setDescripcion("Mesa de hierro");
-        producto.setPreciounitario(1060.00);
+    /**
+     * Persistencia de datos
+     * 
+     * @param session 
+     */
+    public static void Create(Session session) {
+        Usuario usuario1 = new Usuario("Hora_20", "Perez", 24567890L);
+        Usuario usuario2 = new Usuario("Admin", "Martinez", 32299777L);
 
-        ItemCarrito itemCarrito = new ItemCarrito(producto, 2);
+        Producto producto1 = new Producto("M1", "Mesa de madera", 3500.00);
+        Producto producto2 = new Producto("MH", "Mesa de hierro", 1060.00);
+
+        ItemCarrito itemCarrito1 = new ItemCarrito(producto1, 2);
         ItemCarrito itemCarrito2 = new ItemCarrito(producto2, 1);
-        
+
         CarritoCompras carritoCompras = new CarritoCompras();
         carritoCompras.setCantidadMaxItem(1);
-        carritoCompras.setFechaCreacion(new Date());
-        carritoCompras.setUsuario(usuario);
+        carritoCompras.setFechaCreacion(LocalDate.of(2022, 05, 26));
+        carritoCompras.setUsuario(usuario1);
 
         List<ItemCarrito> items = new ArrayList<>();
-        items.add(itemCarrito);
+        items.add(itemCarrito1);
         items.add(itemCarrito2);
         carritoCompras.setItemsCarrito(items);
-        
-        usuario.setCarritocompras(carritoCompras);
-        
-        // Obtenemos la session de hibernate         
-        Session session = sf.openSession();
-        // Iniciamos una transaccion         
-        Transaction trx = session.beginTransaction();
-         session.save(usuario);
-         session.save(producto);
-         session.save(producto2);
-         session.save(carritoCompras);
-         session.save(itemCarrito2);
-         session.save(itemCarrito);
-              
-        trx.commit();
-          System.out.println(usuario.toString());
-          System.out.println(producto.toString());
-          System.out.println(producto2.toString());
-          System.out.println(itemCarrito.toString());
-          System.out.println(itemCarrito2.toString());
-          System.out.println(carritoCompras.toString());
-        // Implementar consultas HQL...
-        //obtener todos los usuarios ordenados por nombre
+
+        usuario1.setCarritoCompras(carritoCompras);
+
+        session.save(usuario1);
+        session.save(usuario2);
+        session.save(producto1);
+        session.save(producto2);
+        session.save(carritoCompras);
+        session.save(itemCarrito1);
+        session.save(itemCarrito2);
+    }
+
+    /**
+     * Implementación de consultas HQL - Obtener todos los usuarios ordenados
+     * por nombre - Obtener todos los productos cuyo precio sea mayor a 1000
+     *
+     * @param session
+     */
+    private static void Select(Session session) {
+        System.out.println("\n######-USUARIOS-######");
         List<Usuario> usuarios = session.createQuery(
-                "From Usuario as u order by u.nombreusuario asc")
+                "From Usuario order by nombreusuario asc")
                 .list();
         for (Usuario usr : usuarios) {
             System.out.println(usr.toString());
         }
-           
-        //obtener todos los productos cuyo precio sea mayor a 1000
-        List <Producto> productos = session.createQuery(
-                "From Producto as p where p.preciounitario > 1000")
+
+        System.out.println("\n######-PRODUCTOS-######");
+        List<Producto> productos = session.createQuery(
+                "From Producto where preciounitario > 1000")
                 .list();
         for (Producto prod : productos) {
             System.out.println(prod.toString());
         }
-        session.close();
-
     }
 }

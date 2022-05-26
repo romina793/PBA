@@ -1,14 +1,14 @@
 package com.curso.pedidos;
 
+public class ItemCarrito {
 
-public class ItemCarrito{
     Integer id;
     Producto producto;
     double cantidad;
 
     public ItemCarrito() {
     }
-  
+
     public ItemCarrito(Producto producto, double cantidad) {
         this.producto = producto;
         this.cantidad = cantidad;
@@ -38,15 +38,12 @@ public class ItemCarrito{
         this.cantidad = cantidad;
     }
 
-    public double precio(){
-    Producto precio = new Producto();
-    return precio.getPreciounitario();
+    public double getPrecioItem() {
+        return producto.getPrecioUnitario();
     }
 
     @Override
     public String toString() {
-        return "ItemCarrito{" + "id=" + id + ", producto=" + producto + ", cantidad=" + cantidad + '}';
+        return "ItemCarrito{Producto= " + producto + ", Cantidad= " + cantidad + '}';
     }
-
-
 }

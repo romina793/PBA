@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.curso.pedidos" default-lazy="false">
-    <class name="CarritoCompras" table="carritocompras">
+    <class name="CarritoCompras" table="carritoCompras">
         <id name= "id" type= "java.lang.Integer">
             <column name="id"/>
             <generator class="foreign">
@@ -12,7 +12,7 @@
         <property name="cantidadMaxItem" type="int" optimistic-lock="true" unique="false"> 
             <column length="10" name="cantidadMaxItem"/>
         </property> 
-        <property name="fechaCreacion" type="java.util.Date" optimistic-lock="true" unique="false"> 
+        <property name="fechaCreacion" type="java.time.LocalDate" optimistic-lock="true" unique="false"> 
             <column length="10" name="fechaCreacion"/>
         </property> 
         <one-to-one name="usuario" fetch="select"></one-to-one>

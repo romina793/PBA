@@ -1,13 +1,15 @@
 package com.curso.pedidos;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class CarritoCompras {
-   Integer id;
-   int cantidadMaxItem = 10;
-   Date fechaCreacion;
-   Usuario usuario;
-   List<ItemCarrito> itemsCarrito = new ArrayList<>();
+
+    Integer id;
+    int cantidadMaxItem = 10;
+    LocalDate fechaCreacion;
+    Usuario usuario;
+    List<ItemCarrito> itemsCarrito = new ArrayList<>();
 
     public CarritoCompras() {
     }
@@ -19,7 +21,7 @@ public class CarritoCompras {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     public int getCantidadMaxItem() {
         return cantidadMaxItem;
     }
@@ -28,11 +30,11 @@ public class CarritoCompras {
         this.cantidadMaxItem = cantidadMaxItem;
     }
 
-    public Date getFechaCreacion() {
+    public LocalDate getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
+    public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
@@ -54,8 +56,6 @@ public class CarritoCompras {
 
     @Override
     public String toString() {
-        return "CarritoCompras{" + "id=" + id + ", cantidadMaxItem=" + cantidadMaxItem + ", fechaCreacion=" + fechaCreacion + '}';
+        return "CarritoCompras{CantidadMaxItem= " + cantidadMaxItem + ", Fecha de Creacion= " + fechaCreacion + '}';
     }
-   
 }
-
