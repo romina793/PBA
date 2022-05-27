@@ -37,9 +37,9 @@ public class Usuario extends Persona {
     public void setCarritoCompras(CarritoCompras carritoCompras) {
         this.carritoCompras = carritoCompras;
     }
-
+    
     @Override
     public String toString() {
-        return "Usuario{Nombre de Usuario= " + nombreUsuario + ", Apellido= " + apellido + ", DNI= " + dni + "}";
+        return "Usuario{" + "nombreUsuario=" + nombreUsuario + ", password=" + password + ", carritoCompras=" + carritoCompras.toString() + '}';
     }
 }

@@ -25,11 +25,11 @@ public class CarritoCompras {
     public int getCantidadMaxItem() {
         return cantidadMaxItem;
     }
-
+    
     public void setCantidadMaxItem(int cantidadMaxItem) {
         this.cantidadMaxItem = cantidadMaxItem;
     }
-
+    
     public LocalDate getFechaCreacion() {
         return fechaCreacion;
     }
@@ -56,6 +56,6 @@ public class CarritoCompras {
 
     @Override
     public String toString() {
-        return "CarritoCompras{CantidadMaxItem= " + cantidadMaxItem + ", Fecha de Creacion= " + fechaCreacion + '}';
+        return "CarritoCompras{" + "id=" + id + ", cantidadMaxItem=" + cantidadMaxItem + ", fechaCreacion=" + fechaCreacion + ", itemsCarrito=" + itemsCarrito.toString() + '}';
     }
 }
