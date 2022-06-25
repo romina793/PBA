@@ -2,11 +2,8 @@ package com.tp.vista;
 
 import com.tp.controlador.ControllerPersona;
 import com.tp.modelo.Articulo;
-import com.tp.modelo.Ciudad;
-import com.tp.modelo.Marca;
 import com.tp.modelo.Vendedor;
 import com.tp.util.HibernateUtil;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import org.hibernate.Session;
@@ -223,7 +220,6 @@ public class Menu extends javax.swing.JFrame {
                 System.out.println(vend.toString());
                 listModel.addElement(vend.toString());
             }  
-            
             jList1.setModel(listModel);
             jList1.updateUI();
         } catch (RuntimeException e) {
@@ -235,26 +231,6 @@ public class Menu extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // AGREGAR UN NUEVO VENDEDOR
         System.out.println("\n######-BOTÓN AGREGAR UN NUEVO VENDEDOR-######");
-        Session session = sf.openSession();
-                List<Articulo> articulos = new ArrayList<>();
-                try {
-            
-            articulos = session.createQuery(
-                    "From Articulo")
-                    .list();
-            for (Articulo art : articulos) {
-                System.out.println(art.toString());
-            }  
-           
-        } catch (RuntimeException e) {
-            System.err.println("Error al traer la lista de vendedores: " + e);
-        }
-        Marca marca = new Marca(1, "Motorola");
-        Articulo tv1 = new Articulo(1, "Televisor", "Televisor LED 32", 38000, 48000, marca);
-        Ciudad ciudad = new Ciudad("Posadas");
-
-        Vendedor nuevoVendedor = new Vendedor(4, 15, articulos, ciudad, "Nahuel", "Contreras", "Calle Falsa 123");
-        controllerPersona.registrar(session, nuevoVendedor);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
