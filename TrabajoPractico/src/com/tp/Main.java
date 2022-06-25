@@ -9,8 +9,23 @@ import com.tp.modelo.Ciudad;
 import com.tp.modelo.Marca;
 import com.tp.modelo.Vendedor;
 import com.tp.util.HibernateUtil;
+import com.tp.vista.Menu;
 import java.util.List;
+import javax.swing.JFrame;
 import org.hibernate.*;
+
+/* 
+PENDIENTES
+- AGREGAR UN FRAME A CADA ACCIÓN DEL MENU
+- Agregar un nuevo artículo. Los datos requeridos son Nombre, Código, Precio y Marca (las marcas deben estar precargadas en la base de datos).
+- AGREGAR LÓGICA EN CADA ACCIÓN PARA MOSTRAR LOS DATOS
+- AGREGAR UN README
+- RENOMBRAR LAS VARIABLES DEL FRAME PARA QUE QUEDEN UNIFICADAS
+- LOS DATOS QUE SE GUARDAN EN LA BASE HACERLOS EN OTRA CLASE
+- AGREGAR OPCIÓN PARA SUMAR DATOS A LA BASE DE DATOS DESDE EL FE?
+*/
+
+
 
 public class Main {
 
@@ -22,13 +37,23 @@ public class Main {
             tx = session.beginTransaction();
 
             registrarValoresIniciales(session);
-
+            
             tx.commit();
+            session.close();
         } catch (RuntimeException e) {
             System.err.println("Error al registrar valores iniciales: " + e);
-        } finally {
+        } 
+        
+        //Lo borro para poder usar la sessión desde el FE
+        /*
+        finally {
             sf.close();
         }
+        */
+        
+        JFrame frame = new Menu();
+        frame.pack();
+        frame.setVisible(true);
     }
 
     public static void registrarValoresIniciales(Session session) {
@@ -63,6 +88,6 @@ public class Main {
 
         controllerPersona.registrar(session, vendedor1);
         controllerPersona.registrar(session, vendedor2);
-        controllerPersona.registrar(session, vendedor3);
+        controllerPersona.registrar(session, vendedor3);      
     }
 }

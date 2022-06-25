@@ -87,4 +87,10 @@ public class Articulo {
     public void setMarca(Marca marca) {
         this.marca = marca;
     }
+
+    @Override
+    public String toString() {
+        return "Articulo{" + "id=" + id + ", codigo=" + codigo + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precioCosto=" + precioCosto + ", precioVenta=" + precioVenta + ", marca=" + marca + '}';
+    }
+    
 }
