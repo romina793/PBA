@@ -1,12 +1,16 @@
 package com.tp.vista;
 
+import com.tp.controlador.ControllerPersona;
 import com.tp.modelo.Articulo;
+import com.tp.modelo.Ciudad;
+import com.tp.modelo.Marca;
 import com.tp.modelo.Vendedor;
 import com.tp.util.HibernateUtil;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 /**
  * Integrantes:
@@ -16,6 +20,9 @@ import org.hibernate.Transaction;
  * @author Pozzutto Romina
  */
 public class Menu extends javax.swing.JFrame {
+    
+    SessionFactory sf = HibernateUtil.getSessionFactory();
+    ControllerPersona controllerPersona = new ControllerPersona();
 
     public Menu() {
         initComponents();
@@ -35,6 +42,8 @@ public class Menu extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -95,14 +104,23 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item1", "Item2", "Item3" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 29, Short.MAX_VALUE)
+                .addGap(31, 67, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE))
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -110,7 +128,7 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 30, Short.MAX_VALUE))
+                .addGap(71, 71, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +149,9 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                .addGap(52, 52, 52))
         );
 
         getContentPane().add(jPanel1, "card2");
@@ -160,7 +180,7 @@ public class Menu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // LISTAR TODOS LOS ARTICULOS
         System.out.println("\n######-BOTÓN LISTA DE ARTÍCULOS-######");
-        SessionFactory sf = HibernateUtil.getSessionFactory();
+        DefaultListModel listModel = new DefaultListModel();
         try {
             Session session = sf.openSession();
             System.out.println("\n######-ARTICULO-######");
@@ -169,7 +189,11 @@ public class Menu extends javax.swing.JFrame {
                     .list();
             for (Articulo art : articulo) {
                 System.out.println(art.toString());
+                listModel.addElement(art.toString());
             }
+            jList1.setModel(listModel);
+            jList1.updateUI();
+
         } catch (RuntimeException e) {
             System.err.println("Error al traer la lista de artículos: " + e);
         }
@@ -186,7 +210,9 @@ public class Menu extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // LISTAR TODOS LOS VENDEDORES
         System.out.println("\n######-BOTÓN LISTA DE VENDEDORES-######");
-                SessionFactory sf = HibernateUtil.getSessionFactory();
+               // SessionFactory sf = HibernateUtil.getSessionFactory();
+                DefaultListModel listModel = new DefaultListModel();
+
         try {
             Session session = sf.openSession();
             System.out.println("\n######-VENDEDORES-######");
@@ -195,16 +221,40 @@ public class Menu extends javax.swing.JFrame {
                     .list();
             for (Vendedor vend : vendedores) {
                 System.out.println(vend.toString());
-            }
+                listModel.addElement(vend.toString());
+            }  
+            
+            jList1.setModel(listModel);
+            jList1.updateUI();
         } catch (RuntimeException e) {
             System.err.println("Error al traer la lista de vendedores: " + e);
         }
-
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // AGREGAR UN NUEVO VENDEDOR
         System.out.println("\n######-BOTÓN AGREGAR UN NUEVO VENDEDOR-######");
+        Session session = sf.openSession();
+                List<Articulo> articulos = new ArrayList<>();
+                try {
+            
+            articulos = session.createQuery(
+                    "From Articulo")
+                    .list();
+            for (Articulo art : articulos) {
+                System.out.println(art.toString());
+            }  
+           
+        } catch (RuntimeException e) {
+            System.err.println("Error al traer la lista de vendedores: " + e);
+        }
+        Marca marca = new Marca(1, "Motorola");
+        Articulo tv1 = new Articulo(1, "Televisor", "Televisor LED 32", 38000, 48000, marca);
+        Ciudad ciudad = new Ciudad("Posadas");
+
+        Vendedor nuevoVendedor = new Vendedor(4, 15, articulos, ciudad, "Nahuel", "Contreras", "Calle Falsa 123");
+        controllerPersona.registrar(session, nuevoVendedor);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -268,10 +318,12 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
