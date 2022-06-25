@@ -36,6 +36,7 @@ public class Main {
             Session session = sf.openSession();
             tx = session.beginTransaction();
 
+            //ESTO DBERÍAMOS TENERLO EN LA BASE DE DATOS Y NO CARGARLO CADA VEZ QUE INICIAMOS
             registrarValoresIniciales(session);
             
             tx.commit();
@@ -84,10 +85,10 @@ public class Main {
                 "Franco", "Poleri", "Calle Falsa 345");
 
         Vendedor vendedor3 = new Vendedor(2, 10, articulos, ciudades.get(0),
-                "Romina", "Pozzutto", "Calle Falsa 678");
-
+                "Romina", "Pozzuto", "Calle Falsa 678");
+        
         controllerPersona.registrar(session, vendedor1);
         controllerPersona.registrar(session, vendedor2);
-        controllerPersona.registrar(session, vendedor3);      
+        controllerPersona.registrar(session, vendedor3);   
     }
 }

@@ -44,7 +44,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-5,0,0,2,8"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,102,0,0,3,27"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
@@ -60,21 +60,24 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="31" pref="67" max="32767" attributes="0"/>
+                  <EmptySpace min="31" pref="160" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="2" groupAlignment="2" attributes="0">
-                          <Component id="jButton6" alignment="2" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="2" pref="382" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane1" alignment="2" pref="473" max="32767" attributes="0"/>
+                      <Component id="jSeparator1" alignment="2" min="-2" pref="243" max="-2" attributes="0"/>
+                      <Component id="jButton1" alignment="2" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="jButton6" alignment="2" min="-2" pref="200" max="-2" attributes="0"/>
                       <Component id="jButton5" alignment="2" min="-2" pref="200" max="-2" attributes="0"/>
                       <Component id="jButton4" alignment="2" min="-2" pref="200" max="-2" attributes="0"/>
                       <Component id="jButton3" alignment="2" min="-2" pref="200" max="-2" attributes="0"/>
                       <Component id="jButton2" alignment="2" min="-2" pref="200" max="-2" attributes="0"/>
-                      <Component id="jSeparator1" alignment="2" min="-2" pref="243" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="2" min="-2" pref="200" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="2" min="-2" pref="159" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="113" pref="71" max="32767" attributes="0"/>
+                  <EmptySpace min="113" pref="162" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jButton7" min="-2" pref="196" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="301" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -88,6 +91,8 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton3" min="-2" max="-2" attributes="0"/>
@@ -97,8 +102,8 @@
                   <Component id="jButton5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="137" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="244" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -123,7 +128,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="2. Editar un art&#xed;culo"/>
+            <Property name="text" type="java.lang.String" value="3. Editar un art&#xed;culo"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -132,7 +137,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="3. Listar todos los vendedores"/>
+            <Property name="text" type="java.lang.String" value="4. Listar todos los vendedores"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -141,7 +146,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="4. Agregar un nuevo vendedor"/>
+            <Property name="text" type="java.lang.String" value="5. Agregar un nuevo vendedor"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
@@ -151,7 +156,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="5. Editar un vendedor"/>
+            <Property name="text" type="java.lang.String" value="6. Editar un vendedor"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -161,6 +166,7 @@
         <Component class="javax.swing.JButton" name="jButton6">
           <Properties>
             <Property name="text" type="java.lang.String" value="6. Asociar art&#xed;culos a un vendedor"/>
+            <Property name="actionCommand" type="java.lang.String" value="7. Asociar art&#xed;culos a un vendedor"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -187,6 +193,14 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="jButton7">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="2. Agregar un art&#xed;culo"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
