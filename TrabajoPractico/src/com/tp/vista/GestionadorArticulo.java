@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 /**
  * Integrantes:
@@ -30,8 +29,6 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     private List<Articulo> articulos;
     private List<Marca> marcas;
     private int filaSeleccionada = 0;
-    Transaction tx = null;
-
 
     /**
      * Creates new form GestionadorArticulo
@@ -371,17 +368,10 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         if (articulos.contains(articulo)) {
             JOptionPane.showMessageDialog(this, "El Artículo que desea agregar ya existe");
         } else {
-            
-            try {
-                agregarFila(articulo);
-                tx = session.beginTransaction();
-                articulos.add(articulo);
-                controllerArticulo.registrar(session, articulo);
-                tx.commit();
-                session.close();
-            } catch (RuntimeException e) {
-                System.err.println("Error al registrar un artículo: " + e);
-            }
+            agregarFila(articulo);
+
+            articulos.add(articulo);
+            controllerArticulo.registrar(session, articulo);
         }
     }
 

@@ -1,7 +1,6 @@
 package com.tp.dao;
 
 import com.tp.modelo.Persona;
-import com.tp.modelo.Vendedor;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -22,13 +21,6 @@ public class PersonaDaoImp implements IPersonaDao {
     @Override
     public List<Persona> obtener(Session session) {
         String sql = "from Persona order by id";
-        return session.createQuery(sql).list();
-    }
-    
-    @Override
-    public List<Vendedor> obtenerVendedores(Session session) {
-        String sql = "from Persona order by id";
-        System.out.println("PASA POR EL DAO PERSONA OBTENER VENDEDORES");
         return session.createQuery(sql).list();
     }
 }

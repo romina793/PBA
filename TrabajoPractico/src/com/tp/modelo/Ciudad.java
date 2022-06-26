@@ -1,6 +1,5 @@
 package com.tp.modelo;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
