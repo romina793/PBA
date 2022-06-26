@@ -13,7 +13,7 @@ import org.hibernate.Session;
  *
  * @author Baudino Gerardo
  * @author Poleri Franco
- * @author Pozzutto Romina
+ * @author Pozzuto Romina
  */
 public class ControllerCiudad {
 
