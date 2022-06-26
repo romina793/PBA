@@ -15,12 +15,12 @@ public class PersonaDaoImp implements IPersonaDao {
 
     @Override
     public void registrar(Session session, Persona persona) {
-        session.save(persona);
+        session.saveOrUpdate(persona);
     }
 
     @Override
     public List<Persona> obtener(Session session) {
-        String sql = "from persona order by id asc";
+        String sql = "from Persona order by id";
         return session.createQuery(sql).list();
     }
 }

@@ -8,7 +8,7 @@
         <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/vendedores</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">1234</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <!-- property name="hibernate.hbm2ddl.auto">create</property -->
     
         <mapping package="com.tp" resource="com/tp/mapeador/Articulo.hbm.xml"/>
         <mapping package="com.tp" resource="com/tp/mapeador/Ciudad.hbm.xml"/>

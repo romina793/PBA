@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false" package="com.tp">
+    <class name="com.tp.modelo.Articulo" table="articulo">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <property name="codigo" optimistic-lock="true" type="int" unique="true">
+            <column length="50" name="codigo"/>
+        </property>
+        <property name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="nombre"/>
+        </property>
+        <property name="descripcion" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="descripcion"/>
+        </property>
+        <property name="precioCosto" optimistic-lock="true" type="double" unique="false">
+            <column length="50" name="precioCosto"/>
+        </property>
+        <property name="precioVenta" optimistic-lock="true" type="double" unique="false">
+            <column length="50" name="precioVenta"/>
+        </property>
+        <one-to-one cascade="all" fetch="select" name="marca"/>
+    </class>
+</hibernate-mapping>

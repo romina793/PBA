@@ -3,8 +3,6 @@ package com.tp.controlador;
 import com.tp.dao.IPersonaDao;
 import com.tp.dao.PersonaDaoImp;
 import com.tp.modelo.Persona;
-import com.tp.vista.ViewPersona;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -17,8 +15,6 @@ import org.hibernate.Session;
  */
 public class ControllerPersona {
 
-    private ViewPersona vista = new ViewPersona();
-
     public ControllerPersona() {
     }
 
@@ -29,10 +25,8 @@ public class ControllerPersona {
     }
 
     // Llama al DAO para obtener todas las personas
-    public void verPersonas(Session session) {
-        List<Persona> personas = new ArrayList<Persona>();
+    public List<Persona> obtener(Session session) {
         IPersonaDao dao = new PersonaDaoImp();
-        personas = dao.obtener(session);
-        vista.verPersonas(personas);
+        return dao.obtener(session);
     }
 }

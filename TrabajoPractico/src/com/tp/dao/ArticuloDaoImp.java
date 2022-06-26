@@ -15,18 +15,18 @@ public class ArticuloDaoImp implements IArticuloDao {
 
     @Override
     public void registrar(Session session, Articulo articulo) {
-        session.save(articulo);
+        session.saveOrUpdate(articulo);
     }
 
     @Override
     public List<Articulo> obtener(Session session) {
-        String sql = "FROM ARTICULO ORDER BY ID";
+        String sql = "from Articulo order by id";
         return session.createQuery(sql).list();
     }
 
     @Override
     public Articulo obtenerPorId(Session session, int id) {
-        String sql = "FROM ARTICULO WHERE ID=" + id;
+        String sql = "from Articulo where id=" + id;
         return (Articulo) session.createQuery(sql).uniqueResult();
     }
 }

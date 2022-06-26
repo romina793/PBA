@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false" package="com.tp">
+    <class name="com.tp.modelo.Persona" table="persona">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <discriminator column="disc" type="string"/>
+        <property name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="nombre"/>
+        </property>
+        <property name="apellido" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="apellido"/>
+        </property>
+        <property name="direccion" optimistic-lock="true" type="string" unique="false">
+            <column length="100" name="direccion"/>
+        </property>
+        <!-- Agregamos clase Vendedor a la table padre -->
+        <subclass name="com.tp.modelo.Vendedor" extends="Persona" discriminator-value="persona">
+            <property name="cuit"/>
+            <property name="porcentajeDeComision"/>
+            <one-to-one fetch="select" name="ciudad"/>
+            <list cascade="all-delete-orphan" name="articulos">
+                <key column="articulos"/>
+                <index column="orden"/>
+                <one-to-many class="com.tp.modelo.Articulo"/>
+            </list>
+        </subclass>
+    </class>
+</hibernate-mapping>

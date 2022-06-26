@@ -16,19 +16,18 @@ public class MarcaDaoImp extends HibernateUtil implements IMarcaDao {
 
     @Override
     public void registrar(Session session, Marca marca) {
-        session.save(marca);
+        session.saveOrUpdate(marca);
     }
 
     @Override
     public List<Marca> obtener(Session session) {
-        String sql = "FROM MARCA ORDER BY ID";
+        String sql = "from Marca order by id";
         return session.createQuery(sql).list();
     }
 
     @Override
     public Marca obtenerPorId(Session session, int id) {
-        String sql = "FROM MARCA WHERE ID=" + id;
-        Marca a =  (Marca) session.createQuery(sql).uniqueResult();
-        return a;
+        String sql = "from Marca where id=" + id;
+        return (Marca) session.createQuery(sql).list().get(0);
     }
 }
