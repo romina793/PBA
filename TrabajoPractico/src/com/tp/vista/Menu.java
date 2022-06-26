@@ -1,5 +1,22 @@
 package com.tp.vista;
 
+import static com.tp.Main.registrarValoresIniciales;
+import com.tp.controlador.ControllerArticulo;
+import com.tp.controlador.ControllerCiudad;
+import com.tp.controlador.ControllerMarca;
+import com.tp.controlador.ControllerPersona;
+import com.tp.modelo.Articulo;
+import com.tp.modelo.Ciudad;
+import com.tp.modelo.Marca;
+import com.tp.modelo.Vendedor;
+import com.tp.util.HibernateUtil;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
 /**
  * Integrantes:
  * 
@@ -8,6 +25,9 @@ package com.tp.vista;
  * @author Pozzutto Romina
  */
 public class Menu extends javax.swing.JFrame {
+    
+    
+    ControllerPersona controllerPersona = new ControllerPersona();
 
     public Menu() {
         initComponents();
@@ -27,6 +47,9 @@ public class Menu extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jButton7 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -40,40 +63,89 @@ public class Menu extends javax.swing.JFrame {
 
         jButton1.setText("1. Listar todos los artículos");
         jButton1.setFocusable(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("2. Editar un artículo");
+        jButton2.setText("3. Editar un artículo");
         jButton2.setFocusable(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("3. Listar todos los vendedores");
+        jButton3.setText("4. Listar todos los vendedores");
         jButton3.setFocusable(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("4. Agregar un nuevo vendedor");
+        jButton4.setText("5. Agregar un nuevo vendedor");
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("5. Editar un vendedor");
+        jButton5.setText("6. Editar un vendedor");
         jButton5.setFocusable(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("6. Asociar artículos a un vendedor");
+        jButton6.setActionCommand("7. Asociar artículos a un vendedor");
         jButton6.setFocusable(false);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item1", "Item2", "Item3" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jButton7.setText("2. Agregar un artículo");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(31, 160, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 11, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(113, 162, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(301, 301, 301))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,6 +157,8 @@ public class Menu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7)
+                .addGap(4, 4, 4)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
@@ -94,7 +168,9 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addGap(52, 52, 52))
         );
 
         getContentPane().add(jPanel1, "card2");
@@ -119,6 +195,122 @@ public class Menu extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // LISTAR TODOS LOS ARTICULOS
+        System.out.println("\n######-BOTÓN LISTA DE ARTÍCULOS-######");
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        DefaultListModel listModel = new DefaultListModel();
+        try {
+            Session session = sf.openSession();
+            System.out.println("\n######-ARTICULO-######");
+            List<Articulo> articulo = session.createQuery(
+                    "From Articulo")
+                    .list();
+            for (Articulo art : articulo) {
+                System.out.println(art.toString());
+                listModel.addElement(art.toString());
+            }
+            jList1.setModel(listModel);
+            jList1.updateUI();
+
+        } catch (RuntimeException e) {
+            System.err.println("Error al traer la lista de artículos: " + e);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // EDITAR UN ARTICULO
+        //ESTE BOTÓN CREO QUE LO PODRÍAMOS PONER EN LA VISTA DE LA LISTA DE ARTICULOS, CON UN BOTÓN AL COSTADO QUE SEA EDITAR
+       System.out.println("\n######-BOTÓN EDITAR UN ARTÍCULO-######");
+           //    Articulo tv1 = new Articulo(1, "Televisor",
+            //    "Televisor LED 32", 38000, 48000, marca);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // LISTAR TODOS LOS VENDEDORES
+        System.out.println("\n######-BOTÓN LISTA DE VENDEDORES-######");
+                SessionFactory sf = HibernateUtil.getSessionFactory();
+                DefaultListModel listModel = new DefaultListModel();
+
+        try {
+            Session session = sf.openSession();
+            System.out.println("\n######-VENDEDORES-######");
+            List<Vendedor> vendedores = session.createQuery(
+                    "From Vendedor")
+                    .list();
+            for (Vendedor vend : vendedores) {
+                System.out.println(vend.toString());
+                listModel.addElement(vend.toString());
+            }  
+            jList1.setModel(listModel);
+            jList1.updateUI();
+        } catch (RuntimeException e) {
+            System.err.println("Error al traer la lista de vendedores: " + e);
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // AGREGAR UN NUEVO VENDEDOR
+        System.out.println("\n######-BOTÓN AGREGAR UN NUEVO VENDEDOR-######");
+        try {
+        ControllerCiudad controllerCiudad = new ControllerCiudad();
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+        List<Articulo> articulos = new ArrayList<>();
+        Transaction tx = null;
+
+        tx = session.beginTransaction();
+        List<Ciudad> ciudades = controllerCiudad.getCiudades();
+        ciudades.forEach(ciudad -> {
+            controllerCiudad.registrar(session, ciudad);
+        });
+        //ESTO DESPUÉS LO TOMAMOS DE UN FRAME
+        Vendedor nuevoVendedor = new Vendedor(4, 20, articulos, ciudades.get(0), "Nahuel", "Contreras", "Calle Falsa 123");
+        controllerPersona.registrar(session, nuevoVendedor);
+        tx.commit();
+        session.close();
+        } catch (RuntimeException e) {
+            System.err.println("Error al traer la lista de vendedores: " + e);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // EDITAR UN VENDEDOR
+        System.out.println("\n######-BOTÓN EDITAR UN VENDEDOR-######");
+
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // ASOCIAR ARTICULOS A UN VENDEDOR
+        System.out.println("\n######-BOTÓN ASOCIAR ARTICULOS UN VENDEDOR-######");
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        System.out.println("\n######-BOTÓN AGREGAR UN NUEVO ARTÍCULO-######");
+        try {
+        ControllerArticulo controllerArticulo = new ControllerArticulo();
+        SessionFactory sf = HibernateUtil.getSessionFactory();
+        Session session = sf.openSession();
+        Transaction tx = null;
+
+        tx = session.beginTransaction();
+        //ESTO DESPUÉS LO TOMAMOS DE UN FRAME
+        Marca marca = new Marca(15, "Apple");
+        Articulo nuevoArticulo = new Articulo(1, "iPhone",
+                "iPhone 11", 18000, 148000, marca);
+        controllerArticulo.registrar(session, nuevoArticulo);
+        tx.commit();
+        session.close();
+            
+        } catch (RuntimeException e) {
+            System.err.println("Error al traer la lista de vendedores: " + e);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,11 +361,14 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
