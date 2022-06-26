@@ -8,6 +8,7 @@ import com.tp.controlador.ControllerPersona;
 import com.tp.modelo.Articulo;
 import com.tp.modelo.Ciudad;
 import com.tp.modelo.Marca;
+import com.tp.modelo.Persona;
 import com.tp.modelo.Vendedor;
 import com.tp.util.HibernateUtil;
 import java.util.ArrayList;
@@ -224,8 +225,25 @@ public class Menu extends javax.swing.JFrame {
         // EDITAR UN ARTICULO
         //ESTE BOTÓN CREO QUE LO PODRÍAMOS PONER EN LA VISTA DE LA LISTA DE ARTICULOS, CON UN BOTÓN AL COSTADO QUE SEA EDITAR
        System.out.println("\n######-BOTÓN EDITAR UN ARTÍCULO-######");
-           //    Articulo tv1 = new Articulo(1, "Televisor",
-            //    "Televisor LED 32", 38000, 48000, marca);
+
+        try {
+            SessionFactory sf = HibernateUtil.getSessionFactory();
+            Session session = sf.openSession();
+            System.out.println("\n######-ARTÍCULOS-######");
+            Transaction tx = null;
+            //ARMAR EL FORMULARIO PARA COMPLETAR LOS DATOS Y ACTUALIZARLO
+            tx = session.beginTransaction();
+            ControllerArticulo controllerArticulo = new ControllerArticulo();
+            Articulo articuloDB = controllerArticulo.verArticuloPorId(session, 1);
+            articuloDB.setCodigo(1);
+            articuloDB.setNombre("Auto");
+            articuloDB.setDescripcion("Honda CRV");
+            controllerArticulo.actualizar(session, articuloDB);
+            tx.commit();
+            session.close();
+        } catch (RuntimeException e) {
+            System.err.println("Error al editar un artículo: " + e);
+        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -281,6 +299,25 @@ public class Menu extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // EDITAR UN VENDEDOR
         System.out.println("\n######-BOTÓN EDITAR UN VENDEDOR-######");
+        try {
+            SessionFactory sf = HibernateUtil.getSessionFactory();
+            Session session = sf.openSession();
+            System.out.println("\n######-VENDEDORES-######");
+            Transaction tx = null;
+            //ARMAR EL FORMULARIO PARA COMPLETAR LOS DATOS Y ACTUALIZARLO
+            tx = session.beginTransaction();
+            ControllerPersona controllerPersona = new ControllerPersona();
+            Vendedor vendedorDB = controllerPersona.verPersonaPorId(session, 4);
+            vendedorDB.setNombre("Camila");
+            vendedorDB.setApellido("López");
+            vendedorDB.setPorcentajeDeComision(40);
+            vendedorDB.setCuit(123);
+            controllerPersona.actualizar(session, vendedorDB);
+            tx.commit();
+            session.close();
+        } catch (RuntimeException e) {
+            System.err.println("Error al editar un vendedor: " + e);
+        }
 
     }//GEN-LAST:event_jButton5ActionPerformed
 

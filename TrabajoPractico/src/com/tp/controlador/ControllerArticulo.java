@@ -28,6 +28,12 @@ public class ControllerArticulo {
         IArticuloDao dao = new ArticuloDaoImp();
         dao.registrar(session, articulo);
     }
+    
+    // Llama al DAO para actualzar una articulo
+    public void actualizar(Session session, Articulo articulo) {
+        IArticuloDao dao = new ArticuloDaoImp();
+        dao.actualizar(session, articulo);
+    }
 
     // Llama al DAO para obtener todos los articulos
     public void verArticulos(Session session) {
@@ -38,10 +44,11 @@ public class ControllerArticulo {
     }
 
     // Llama al DAO para obtener el articulo segun el id
-    public void verArticuloPorId(Session session, int id) {
+    public Articulo verArticuloPorId(Session session, int id) {
         IArticuloDao dao = new ArticuloDaoImp();
         Articulo articulo = dao.obtenerPorId(session, id);
         vista.verArticulo(articulo);
+        return articulo;
     }
 
     /**

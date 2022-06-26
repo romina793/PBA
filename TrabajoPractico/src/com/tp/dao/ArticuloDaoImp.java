@@ -17,6 +17,11 @@ public class ArticuloDaoImp implements IArticuloDao {
     public void registrar(Session session, Articulo articulo) {
         session.save(articulo);
     }
+    
+    @Override
+    public void actualizar(Session session, Articulo articulo) {
+        session.update(articulo);
+    }
 
     @Override
     public List<Articulo> obtener(Session session) {
@@ -26,7 +31,7 @@ public class ArticuloDaoImp implements IArticuloDao {
 
     @Override
     public Articulo obtenerPorId(Session session, int id) {
-        String sql = "FROM ARTICULO WHERE ID=" + id;
+        String sql = "From Articulo WHERE id=" + id;
         return (Articulo) session.createQuery(sql).uniqueResult();
     }
 }
