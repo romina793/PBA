@@ -31,11 +31,7 @@ CREATE TABLE `articulo` (
   `descripcion` varchar(100) DEFAULT NULL,
   `precioCosto` double DEFAULT NULL,
   `precioVenta` double DEFAULT NULL,
-  `articulos` int DEFAULT NULL,
-  `orden` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_kb8gdcn5rwdv0d74yfjyxpbba` (`articulos`),
-  CONSTRAINT `FK_kb8gdcn5rwdv0d74yfjyxpbba` FOREIGN KEY (`articulos`) REFERENCES `persona` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -45,7 +41,7 @@ CREATE TABLE `articulo` (
 
 LOCK TABLES `articulo` WRITE;
 /*!40000 ALTER TABLE `articulo` DISABLE KEYS */;
-INSERT INTO `articulo` VALUES (1,1,'Televisor','Televisor LED 32',38000,48000,3,0),(2,1,'Televisor','Televisor LED 43',40000,49000,3,1),(3,1,'Televisor','Televisor LED 55',42000,50000,3,2),(4,1,'Televisor','Televisor LED 65',50000,59000,3,3),(5,1,'Celular','Pulgada de Celular 6.43',40000,50000,3,4),(6,1,'Celular','Pulgada de Celular 6.53',60000,66000,3,5),(7,1,'Celular','Pulgada de Celular 6.55',64000,67000,3,6),(8,1,'Celular','Pulgada de Celular 6.78',42000,50000,3,7);
+INSERT INTO `articulo` VALUES (1,1,'Televisor','Televisor LED 32',38000,48000),(2,1,'Televisor','Televisor LED 43',40000,49000),(3,1,'Televisor','Televisor LED 55',42000,50000),(4,1,'Televisor','Televisor LED 65',50000,59000),(5,1,'Celular','Pulgada de Celular 6.43',40000,50000),(6,1,'Celular','Pulgada de Celular 6.53',60000,66000),(7,1,'Celular','Pulgada de Celular 6.55',64000,67000),(8,1,'Celular','Pulgada de Celular 6.78',42000,50000);
 /*!40000 ALTER TABLE `articulo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-26  3:47:38
+-- Dump completed on 2022-06-26 11:30:58

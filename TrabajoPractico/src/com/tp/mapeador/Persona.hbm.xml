@@ -17,14 +17,14 @@
             <column length="100" name="direccion"/>
         </property>
         <!-- Agregamos clase Vendedor a la table padre -->
-        <subclass name="com.tp.modelo.Vendedor" extends="Persona" discriminator-value="persona">
+        <subclass name="com.tp.modelo.Vendedor" extends="Persona" discriminator-value="vendedor">
             <property name="cuit"/>
             <property name="porcentajeDeComision"/>
-            <one-to-one fetch="select" name="ciudad"/>
+            <many-to-one fetch="select" name="ciudad"/>
             <list cascade="all-delete-orphan" name="articulos">
-                <key column="articulos"/>
-                <index column="orden"/>
-                <one-to-many class="com.tp.modelo.Articulo"/>
+                <key column="Id_vendedor"/>
+                <index column="id"/>
+                <many-to-many class="com.tp.modelo.Articulo"/>
             </list>
         </subclass>
     </class>

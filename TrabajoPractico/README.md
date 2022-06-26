@@ -3,7 +3,7 @@
 ## Integrantes:
 *- Baudino Gerardo*
 *- Poleri Franco*
-*- Pozzutto Romina*
+*- Pozzuto Romina*
 
 ## Ejecución:
 1. Abrir MySQL Workbench y ejecutar los archivos con extensión .sql ubicados en el directorio crear-db

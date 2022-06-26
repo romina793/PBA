@@ -7,7 +7,7 @@ import com.tp.vista.Menu;
  *
  * @author Baudino Gerardo
  * @author Poleri Franco
- * @author Pozzutto Romina
+ * @author Pozzuto Romina
  */
 public class Main {
 

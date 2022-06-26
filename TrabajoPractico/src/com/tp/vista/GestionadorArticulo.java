@@ -17,7 +17,7 @@ import org.hibernate.SessionFactory;
  *
  * @author Baudino Gerardo
  * @author Poleri Franco
- * @author Pozzutto Romina
+ * @author Pozzuto Romina
  */
 public class GestionadorArticulo extends javax.swing.JFrame {
 
@@ -73,6 +73,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         jTextFieldPrecioVenta = new javax.swing.JTextField();
         jLabelMarca = new javax.swing.JLabel();
         jComboBoxMarcas = new javax.swing.JComboBox<>();
+        jButtonLimpiar = new javax.swing.JButton();
         jMenuBarSalir = new javax.swing.JMenuBar();
         jMenuSalir = new javax.swing.JMenu();
         jMenuItemSalir = new javax.swing.JMenuItem();
@@ -163,6 +164,13 @@ public class GestionadorArticulo extends javax.swing.JFrame {
 
         jComboBoxMarcas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin especificar" }));
 
+        jButtonLimpiar.setText("Limpiar");
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
+
         jMenuSalir.setText("Opciones");
 
         jMenuItemSalir.setText("Salir");
@@ -190,7 +198,9 @@ public class GestionadorArticulo extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jButtonAgregar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButtonActualizar))
+                            .addComponent(jButtonActualizar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonLimpiar))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
@@ -244,7 +254,8 @@ public class GestionadorArticulo extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAgregar)
-                    .addComponent(jButtonActualizar))
+                    .addComponent(jButtonActualizar)
+                    .addComponent(jButtonLimpiar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -271,11 +282,10 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         if (requeridos.isEmpty()) {
             borrarFila(filaSeleccionada);
             agregar();
-            
-            jButtonActualizar.setEnabled(false);
         } else {
             JOptionPane.showMessageDialog(this, requeridos);
-        }        
+        }
+        jButtonActualizar.setEnabled(false);
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jTableArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableArticulosMouseClicked
@@ -298,6 +308,16 @@ public class GestionadorArticulo extends javax.swing.JFrame {
             jComboBoxMarcas.setSelectedIndex(indexOf + 1);
         }
     }//GEN-LAST:event_jTableArticulosMouseClicked
+
+    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+        jButtonActualizar.setEnabled(false);
+        jTextFieldCodigo.setText("");
+        jTextFieldNombre.setText("");
+        jTextFieldDescripcion.setText("");
+        jTextFieldPrecioCosto.setText("");
+        jTextFieldPrecioVenta.setText("");
+        jComboBoxMarcas.setSelectedIndex(0);
+    }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
     private void cargarArticulos() {
         articulos = controllerArticulo.obtener(session);
@@ -367,7 +387,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTableArticulos.getModel();
         defaultTableModel.addRow(fila);
     }
-    
+
     private void borrarFila(int indice) {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTableArticulos.getModel();
         defaultTableModel.removeRow(indice);
@@ -387,6 +407,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonAgregar;
+    private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JComboBox<String> jComboBoxMarcas;
     private javax.swing.JLabel jLabelCodigo;
     private javax.swing.JLabel jLabelDescripcion;

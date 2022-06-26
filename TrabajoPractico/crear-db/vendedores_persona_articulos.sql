@@ -18,28 +18,31 @@ USE `vendedores`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ciudad`
+-- Table structure for table `persona_articulos`
 --
 
-DROP TABLE IF EXISTS `ciudad`;
+DROP TABLE IF EXISTS `persona_articulos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ciudad` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `pais` varchar(50) DEFAULT NULL,
-  `provincia` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `persona_articulos` (
+  `Id_vendedor` int NOT NULL,
+  `elt` int NOT NULL,
+  `id` int NOT NULL,
+  PRIMARY KEY (`Id_vendedor`,`id`),
+  KEY `FK_a0j1ofstkifavpk0ug84k34s2` (`elt`),
+  CONSTRAINT `FK_a0j1ofstkifavpk0ug84k34s2` FOREIGN KEY (`elt`) REFERENCES `articulo` (`id`),
+  CONSTRAINT `FK_fvubh3eua3iro4arxtwkyephi` FOREIGN KEY (`Id_vendedor`) REFERENCES `persona` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ciudad`
+-- Dumping data for table `persona_articulos`
 --
 
-LOCK TABLES `ciudad` WRITE;
-/*!40000 ALTER TABLE `ciudad` DISABLE KEYS */;
-INSERT INTO `ciudad` VALUES (1,'Argentina','Entre Rios'),(2,'Argentina','Buenos Aires'),(3,'Argentina','Santa Fe'),(4,'Argentina','Mendoza'),(5,'Argentina','Cordoba');
-/*!40000 ALTER TABLE `ciudad` ENABLE KEYS */;
+LOCK TABLES `persona_articulos` WRITE;
+/*!40000 ALTER TABLE `persona_articulos` DISABLE KEYS */;
+INSERT INTO `persona_articulos` VALUES (1,1,1),(1,1,2),(1,1,3),(1,1,4),(2,2,5),(2,2,6),(2,2,7),(3,3,1),(3,3,2),(3,3,8);
+/*!40000 ALTER TABLE `persona_articulos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-26 11:30:59
+-- Dump completed on 2022-06-26 11:30:58

@@ -7,7 +7,7 @@ import java.util.Objects;
  *
  * @author Baudino Gerardo
  * @author Poleri Franco
- * @author Pozzutto Romina
+ * @author Pozzuto Romina
  */
 public class Ciudad {
 

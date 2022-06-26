@@ -1,22 +1,14 @@
 package com.tp.vista;
 
-import com.tp.controlador.ControllerArticulo;
-import com.tp.controlador.ControllerPersona;
-import com.tp.modelo.Articulo;
-import com.tp.modelo.Marca;
 import com.tp.util.HibernateUtil;
-import java.util.List;
-import javax.swing.DefaultListModel;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 /**
  * Integrantes:
- * 
+ *
  * @author Baudino Gerardo
  * @author Poleri Franco
- * @author Pozzutto Romina
+ * @author Pozzuto Romina
  */
 public class Menu extends javax.swing.JFrame {
 
@@ -24,7 +16,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -125,7 +117,7 @@ public class Menu extends javax.swing.JFrame {
 
         this.dispose();
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu;
