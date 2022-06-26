@@ -3,6 +3,7 @@ package com.tp.dao;
 import com.tp.modelo.Articulo;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  * Integrantes:
@@ -13,6 +14,8 @@ import org.hibernate.Session;
  */
 public class ArticuloDaoImp implements IArticuloDao {
 
+    Transaction tx = null;
+    
     @Override
     public void registrar(Session session, Articulo articulo) {
         session.saveOrUpdate(articulo);

@@ -103,7 +103,8 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnGestionarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGestionarVendedorActionPerformed
-
+        GestionadorVendedor gestionadorVendedor = new GestionadorVendedor();
+        gestionadorVendedor.setVisible(true);
     }//GEN-LAST:event_jbtnGestionarVendedorActionPerformed
 
     private void jbtnGestionarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGestionarArticuloActionPerformed
