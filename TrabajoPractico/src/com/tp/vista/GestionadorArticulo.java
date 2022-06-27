@@ -183,7 +183,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
             }
         });
 
-        jLabelVendedor.setText("Vendedor:");
+        jLabelVendedor.setText("Cuit Vendedor:");
 
         jComboBoxVendedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin especificar" }));
 
@@ -250,7 +250,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jComboBoxMarcas, 0, 255, Short.MAX_VALUE)
                                     .addComponent(jComboBoxVendedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,7 +396,8 @@ public class GestionadorArticulo extends javax.swing.JFrame {
                 marca
         );
 
-        if (articulos.contains(articulo)) {
+        boolean tieneVendedor = estaAsociadoVendedor(articulo);
+        if (articulos.contains(articulo) && !tieneVendedor) {
             JOptionPane.showMessageDialog(this, "El Artículo que desea agregar ya existe");
         } else {
             
@@ -412,6 +413,15 @@ public class GestionadorArticulo extends javax.swing.JFrame {
                 System.err.println("Error al registrar un artículo: " + e);
             }
         }
+    }
+    
+    private boolean estaAsociadoVendedor(Articulo articulo) {
+        String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
+        Vendedor vendedor = getVendedor(cuitVendedor);
+        if (vendedor.getArticulos().contains(articulo)) {
+            return false;
+        }
+        return true;
     }
 
     private void agregarFila(Articulo articulo) {
