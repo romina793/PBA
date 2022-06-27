@@ -415,7 +415,6 @@ public class GestionadorArticulo extends javax.swing.JFrame {
 
     private void agregarFila(Articulo articulo) {
         String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
-        System.out.println(cuitVendedor);
         String vendedor = getVendedor(cuitVendedor);
 
         
