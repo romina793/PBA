@@ -205,7 +205,7 @@
                 <Column editable="false" title="Precio Costo" type="java.lang.String"/>
                 <Column editable="false" title="Precio Venta" type="java.lang.String"/>
                 <Column editable="false" title="Marca" type="java.lang.String"/>
-                <Column editable="false" title="Vendedor" type="java.lang.Object"/>
+                <Column editable="false" title="Cuit Vendedor" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
