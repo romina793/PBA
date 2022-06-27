@@ -20,11 +20,11 @@
         <subclass name="com.tp.modelo.Vendedor" extends="Persona" discriminator-value="vendedor">
             <property name="cuit"/>
             <property name="porcentajeDeComision"/>
-            <many-to-one name="ciudad" column="ciudad" cascade="none"/>
-            <list cascade="all-delete-orphan" name="articulos">
-                <key column="Id_vendedor"/>
-                <index column="id"/>
-                <many-to-many class="com.tp.modelo.Articulo"/>
+            <many-to-one name="ciudad" column="ciudad_id" cascade="none"/>
+            <list cascade="all-delete-orphan" table="vendedor_articulo" name="articulos">
+                <key column="vendedor_id"/>
+                <list-index column="ORDEN"/>
+                <many-to-many class="com.tp.modelo.Articulo" column="Articulo_Id"/>
             </list>
         </subclass>
     </class>

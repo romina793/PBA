@@ -405,6 +405,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
                 tx = session.beginTransaction();
                 articulos.add(articulo);
                 controllerArticulo.registrar(session, articulo);
+                asociarVendedor();
                 tx.commit();
                 session.close();
             } catch (RuntimeException e) {
@@ -415,7 +416,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
 
     private void agregarFila(Articulo articulo) {
         String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
-        String vendedor = getVendedor(cuitVendedor);
+        String vendedor = getVendedorCuit(cuitVendedor);
 
         
         String[] fila = {
@@ -436,7 +437,35 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         defaultTableModel.removeRow(indice);
     }
     
-    private String getVendedor(String cuitVendedor) {
+    private void asociarVendedor() {
+        String descripcion = jComboBoxMarcas.getSelectedItem().toString();
+        Marca marca = marcaSegunDescripcion(descripcion);
+        String cuit = String.valueOf(jComboBoxVendedor.getSelectedItem().toString());
+        Vendedor vendedor = getVendedor(cuit);
+        Articulo articulo = new Articulo(
+                Integer.valueOf(jTextFieldCodigo.getText().trim()),
+                jTextFieldNombre.getText().trim(),
+                jTextFieldDescripcion.getText().trim(),
+                Double.valueOf(jTextFieldPrecioCosto.getText().trim()),
+                Double.valueOf(jTextFieldPrecioVenta.getText().trim()),
+                marca
+        );
+
+        if (vendedor != null) {
+            vendedor.getArticulos().add(articulo);
+        }
+    }
+    
+    private Vendedor getVendedor(String cuitVendedor) {
+        for (Vendedor vendedor : vendedores) {
+            if (String.valueOf(vendedor.getCuit()).equals(cuitVendedor)) {
+                return vendedor;
+            }
+        }
+        return null;
+    }
+    
+    private String getVendedorCuit(String cuitVendedor) {
         for (Vendedor vendedor : vendedores) {
             if ( String.valueOf(vendedor.getCuit()).equals(cuitVendedor)) {
                 return String.valueOf(vendedor.getCuit());

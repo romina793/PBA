@@ -21,6 +21,6 @@
         <property name="precioVenta" optimistic-lock="true" type="double" unique="false">
             <column length="50" name="precioVenta"/>
         </property>
-        <many-to-one cascade="none" name="marca" column="marca"/>
+        <many-to-one cascade="none" name="marca" column="marca_id"/>
     </class>
 </hibernate-mapping>
