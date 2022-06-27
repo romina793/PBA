@@ -4,7 +4,6 @@ import com.tp.controlador.ControllerCiudad;
 import com.tp.controlador.ControllerPersona;
 import com.tp.modelo.Articulo;
 import com.tp.modelo.Ciudad;
-import com.tp.modelo.Persona;
 import com.tp.modelo.Vendedor;
 import com.tp.util.HibernateUtil;
 import java.util.ArrayList;
@@ -29,7 +28,6 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     private final SessionFactory sessionFactory;
     private final Session session;
 
-    private List<Persona> personas;
     private List<Vendedor> vendedores;
     private List<Ciudad> ciudades;
     private List<Articulo> articulos;
@@ -44,7 +42,6 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         controllerCiudad = new ControllerCiudad();
         sessionFactory = HibernateUtil.getSessionFactory();
         session = sessionFactory.openSession();
-        personas = new ArrayList<>();
         vendedores = new ArrayList<>();
         ciudades = new ArrayList<>();
         articulos = new ArrayList<>();
