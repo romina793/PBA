@@ -28,7 +28,6 @@ public class PersonaDaoImp implements IPersonaDao {
     @Override
     public List<Vendedor> obtenerVendedores(Session session) {
         String sql = "from Persona order by id";
-        System.out.println("PASA POR EL DAO PERSONA OBTENER VENDEDORES");
         return session.createQuery(sql).list();
     }
 }
