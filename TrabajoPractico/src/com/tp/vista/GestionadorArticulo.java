@@ -2,8 +2,10 @@ package com.tp.vista;
 
 import com.tp.controlador.ControllerArticulo;
 import com.tp.controlador.ControllerMarca;
+import com.tp.controlador.ControllerPersona;
 import com.tp.modelo.Articulo;
 import com.tp.modelo.Marca;
+import com.tp.modelo.Vendedor;
 import com.tp.util.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +26,13 @@ public class GestionadorArticulo extends javax.swing.JFrame {
 
     private final ControllerArticulo controllerArticulo;
     private final ControllerMarca controllerMarca;
+    private final ControllerPersona controllerPersona;
     private final SessionFactory sessionFactory;
     private final Session session;
 
     private List<Articulo> articulos;
     private List<Marca> marcas;
+    private List<Vendedor> vendedores;
     private int filaSeleccionada = 0;
     Transaction tx = null;
 
@@ -39,14 +43,17 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     public GestionadorArticulo() {
         controllerArticulo = new ControllerArticulo();
         controllerMarca = new ControllerMarca();
+        controllerPersona = new ControllerPersona();
         sessionFactory = HibernateUtil.getSessionFactory();
         session = sessionFactory.openSession();
         articulos = new ArrayList<>();
         marcas = new ArrayList<>();
+        vendedores = new ArrayList<>();
 
         initComponents();
         cargarArticulos();
         cargarMarcas();
+        cargarVendedores();
     }
 
     /**
@@ -77,6 +84,8 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         jLabelMarca = new javax.swing.JLabel();
         jComboBoxMarcas = new javax.swing.JComboBox<>();
         jButtonLimpiar = new javax.swing.JButton();
+        jLabelVendedor = new javax.swing.JLabel();
+        jComboBoxVendedor = new javax.swing.JComboBox<>();
         jMenuBarSalir = new javax.swing.JMenuBar();
         jMenuSalir = new javax.swing.JMenu();
         jMenuItemSalir = new javax.swing.JMenuItem();
@@ -112,14 +121,14 @@ public class GestionadorArticulo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Nombre", "Descripción", "Precio Costo", "Precio Venta", "Marca"
+                "Código", "Nombre", "Descripción", "Precio Costo", "Precio Venta", "Marca", "Vendedor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -174,6 +183,10 @@ public class GestionadorArticulo extends javax.swing.JFrame {
             }
         });
 
+        jLabelVendedor.setText("Vendedor:");
+
+        jComboBoxVendedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin especificar" }));
+
         jMenuSalir.setText("Opciones");
 
         jMenuItemSalir.setText("Salir");
@@ -197,42 +210,47 @@ public class GestionadorArticulo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButtonAgregar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButtonActualizar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButtonLimpiar))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelDescripcion)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabelCodigo)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabelNombre)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldNombre)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelPrecioCosto)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabelPrecioVenta)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextFieldPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabelMarca)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxMarcas, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jButtonAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonActualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonLimpiar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelDescripcion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabelCodigo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabelNombre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldNombre)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelPrecioCosto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabelPrecioVenta)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelMarca, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelVendedor)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBoxMarcas, 0, 255, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxVendedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +276,9 @@ public class GestionadorArticulo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAgregar)
                     .addComponent(jButtonActualizar)
-                    .addComponent(jButtonLimpiar))
+                    .addComponent(jButtonLimpiar)
+                    .addComponent(jLabelVendedor)
+                    .addComponent(jComboBoxVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -320,6 +340,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         jTextFieldPrecioCosto.setText("");
         jTextFieldPrecioVenta.setText("");
         jComboBoxMarcas.setSelectedIndex(0);
+        jComboBoxVendedor.setSelectedIndex(0);
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
     private void cargarArticulos() {
@@ -333,6 +354,13 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         marcas = controllerMarca.obtener(session);
         marcas.forEach(marca -> {
             jComboBoxMarcas.addItem(marca.getDescripcion());
+        });
+    }
+    
+    private void cargarVendedores() {
+        vendedores = controllerPersona.obtenerVendedores(session);
+        vendedores.forEach(vendedores -> {
+            jComboBoxVendedor.addItem(String.valueOf(vendedores.getCuit()));
         });
     }
 
@@ -358,7 +386,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     private void agregar() {
         String descripcion = jComboBoxMarcas.getSelectedItem().toString();
         Marca marca = marcaSegunDescripcion(descripcion);
-
+        
         Articulo articulo = new Articulo(
                 Integer.valueOf(jTextFieldCodigo.getText().trim()),
                 jTextFieldNombre.getText().trim(),
@@ -377,6 +405,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
                 tx = session.beginTransaction();
                 articulos.add(articulo);
                 controllerArticulo.registrar(session, articulo);
+                asociarVendedor();
                 tx.commit();
                 session.close();
             } catch (RuntimeException e) {
@@ -386,13 +415,18 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     }
 
     private void agregarFila(Articulo articulo) {
+        String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
+        String vendedor = getVendedorCuit(cuitVendedor);
+
+        
         String[] fila = {
             String.valueOf(articulo.getCodigo()),
             articulo.getNombre(),
             articulo.getDescripcion(),
             String.valueOf(articulo.getPrecioCosto()),
             String.valueOf(articulo.getPrecioVenta()),
-            articulo.getMarca() != null ? articulo.getMarca().getDescripcion() : "Sin especificar"
+            articulo.getMarca() != null ? articulo.getMarca().getDescripcion() : "Sin especificar", 
+            vendedor    
         };
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTableArticulos.getModel();
         defaultTableModel.addRow(fila);
@@ -401,6 +435,43 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     private void borrarFila(int indice) {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTableArticulos.getModel();
         defaultTableModel.removeRow(indice);
+    }
+    
+    private void asociarVendedor() {
+        String descripcion = jComboBoxMarcas.getSelectedItem().toString();
+        Marca marca = marcaSegunDescripcion(descripcion);
+        String cuit = String.valueOf(jComboBoxVendedor.getSelectedItem().toString());
+        Vendedor vendedor = getVendedor(cuit);
+        Articulo articulo = new Articulo(
+                Integer.valueOf(jTextFieldCodigo.getText().trim()),
+                jTextFieldNombre.getText().trim(),
+                jTextFieldDescripcion.getText().trim(),
+                Double.valueOf(jTextFieldPrecioCosto.getText().trim()),
+                Double.valueOf(jTextFieldPrecioVenta.getText().trim()),
+                marca
+        );
+
+        if (vendedor != null) {
+            vendedor.getArticulos().add(articulo);
+        }
+    }
+    
+    private Vendedor getVendedor(String cuitVendedor) {
+        for (Vendedor vendedor : vendedores) {
+            if (String.valueOf(vendedor.getCuit()).equals(cuitVendedor)) {
+                return vendedor;
+            }
+        }
+        return null;
+    }
+    
+    private String getVendedorCuit(String cuitVendedor) {
+        for (Vendedor vendedor : vendedores) {
+            if ( String.valueOf(vendedor.getCuit()).equals(cuitVendedor)) {
+                return String.valueOf(vendedor.getCuit());
+            }
+        }
+        return "Sin especificar";
     }
 
     private Marca marcaSegunDescripcion(String descripcion) {
@@ -419,6 +490,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JComboBox<String> jComboBoxMarcas;
+    private javax.swing.JComboBox<String> jComboBoxVendedor;
     private javax.swing.JLabel jLabelCodigo;
     private javax.swing.JLabel jLabelDescripcion;
     private javax.swing.JLabel jLabelMarca;
@@ -426,6 +498,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPrecioCosto;
     private javax.swing.JLabel jLabelPrecioVenta;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelVendedor;
     private javax.swing.JMenuBar jMenuBarSalir;
     private javax.swing.JMenuItem jMenuItemSalir;
     private javax.swing.JMenu jMenuSalir;
