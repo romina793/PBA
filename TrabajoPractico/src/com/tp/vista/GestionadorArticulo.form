@@ -102,7 +102,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -332,7 +332,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelVendedor">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Vendedor:"/>
+        <Property name="text" type="java.lang.String" value="Cuit Vendedor:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBoxVendedor">
