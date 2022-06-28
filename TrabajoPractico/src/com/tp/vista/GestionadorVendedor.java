@@ -6,6 +6,7 @@ import com.tp.modelo.Articulo;
 import com.tp.modelo.Ciudad;
 import com.tp.modelo.Vendedor;
 import com.tp.util.HibernateUtil;
+import com.tp.util.Utiles;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -28,12 +29,12 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     private final SessionFactory sessionFactory;
     private final Session session;
 
+    private Transaction tx = null;
     private List<Vendedor> vendedores;
     private List<Ciudad> ciudades;
     private List<Articulo> articulos;
     private int filaSeleccionada = 0;
-    Transaction tx = null;
-       
+
     /**
      * Creates new form GestionadorVendedor
      */
@@ -49,6 +50,7 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         initComponents();
         cargarVendedores();
         cargarCiudades();
+        cargarTotalRegistros();
     }
 
     /**
@@ -79,6 +81,10 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         jTextFieldApellido = new javax.swing.JTextField();
         jTextFieldDireccion = new javax.swing.JTextField();
         jTextFieldComision = new javax.swing.JTextField();
+        jLabelAccion = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabelTotalRegistros = new javax.swing.JLabel();
+        jLabelTotal = new javax.swing.JLabel();
         jMenuBarSalir = new javax.swing.JMenuBar();
         jMenuSalir = new javax.swing.JMenu();
         jMenuItemSalir = new javax.swing.JMenuItem();
@@ -176,6 +182,11 @@ public class GestionadorVendedor extends javax.swing.JFrame {
 
         jLabelComision.setText("Comisión: ");
 
+        jLabelAccion.setText("Acciones");
+
+        jLabelTotalRegistros.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabelTotalRegistros.setText("Total de registros:");
+
         jMenuSalir.setText("Opciones");
 
         jMenuItemSalir.setText("Salir");
@@ -197,57 +208,52 @@ public class GestionadorVendedor extends javax.swing.JFrame {
             .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelNombre)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addComponent(jLabelCuit)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTextFieldCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                                        .addComponent(jLabelComision))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabelApellido)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldComision, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(19, 19, 19)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                                .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(139, 139, 139))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(jLabelDireccion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldDireccion))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelNombre)
+                                .addComponent(jLabelCuit))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelApellido)
+                                .addComponent(jLabelComision))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldComision, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelCiudad)
+                                .addComponent(jLabelDireccion))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jComboBoxCiudad, 0, 191, Short.MAX_VALUE)
+                                .addComponent(jTextFieldDireccion)))
+                        .addComponent(jLabelAccion))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(jLabelCiudad)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBoxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelTotalRegistros)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelTotal)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jPanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombre)
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,13 +270,21 @@ public class GestionadorVendedor extends javax.swing.JFrame {
                     .addComponent(jLabelComision)
                     .addComponent(jTextFieldComision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(jLabelAccion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAgregar)
                     .addComponent(jButtonActualizar)
                     .addComponent(jButtonLimpiar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTotalRegistros)
+                    .addComponent(jLabelTotal))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -280,6 +294,8 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         String requeridos = evaluarDatosRequeridos();
         if (requeridos.isEmpty()) {
             agregar();
+            limpiar();
+            cargarTotalRegistros();
         } else {
             JOptionPane.showMessageDialog(this, requeridos);
         }
@@ -294,10 +310,12 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         if (requeridos.isEmpty()) {
             borrarFila(filaSeleccionada);
             agregar();
+
+            jButtonActualizar.setEnabled(false);
+            limpiar();
         } else {
             JOptionPane.showMessageDialog(this, requeridos);
         }
-        jButtonActualizar.setEnabled(false);
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jTableVendedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVendedoresMouseClicked
@@ -307,7 +325,10 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         Vendedor vendedorSeleccionado = vendedores.get(filaSeleccionada);
 
         jTextFieldNombre.setText(vendedorSeleccionado.getNombre());
+        jTextFieldApellido.setText(vendedorSeleccionado.getApellido());
+        jTextFieldDireccion.setText(vendedorSeleccionado.getDireccion());
         jTextFieldCuit.setText(String.valueOf(vendedorSeleccionado.getCuit()));
+        jTextFieldComision.setText(String.valueOf(vendedorSeleccionado.getPorcentajeDeComision()));
 
         Ciudad ciudad = vendedorSeleccionado.getCiudad();
         if (ciudad == null) {
@@ -319,13 +340,7 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableVendedoresMouseClicked
 
     private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
-        jButtonActualizar.setEnabled(false);
-        jTextFieldNombre.setText("");
-        jTextFieldApellido.setText("");
-        jTextFieldDireccion.setText("");
-        jTextFieldCuit.setText("");
-        jTextFieldComision.setText("");
-        jComboBoxCiudad.setSelectedIndex(0);
+        limpiar();
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
     private void cargarVendedores() {
@@ -342,12 +357,20 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         });
     }
 
+    private void cargarTotalRegistros() {
+        jLabelTotal.setText(String.valueOf(vendedores.size()));
+    }
+
     private String evaluarDatosRequeridos() {
         if (jTextFieldNombre.getText().isEmpty()) {
             return "Nombre es un dato requerido";
         }
         if (jTextFieldCuit.getText().isEmpty()) {
             return "Cuit es un dato requerido";
+        }
+        if (!Utiles.esNumerico(jTextFieldCuit.getText())) {
+            jTextFieldCuit.setText("");
+            return "Cuit debe ser un dato númerico";
         }
         if (jTextFieldApellido.getText().isEmpty()) {
             return "Apellido es un dato requerido";
@@ -358,6 +381,10 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         if (jTextFieldComision.getText().isEmpty()) {
             return "Comisión es un dato requerido";
         }
+        if (!Utiles.esDouble(jTextFieldComision.getText())) {
+            jTextFieldComision.setText("");
+            return "Comisión debe ser un dato númerico";
+        }
         if (jComboBoxCiudad.getSelectedItem().toString() == "Sin especificar") {
             return "Ciudad es un dato requerido";
         }
@@ -367,10 +394,10 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     private void agregar() {
         String provincia = jComboBoxCiudad.getSelectedItem().toString();
         Ciudad ciudad = ciudadSegunProvincia(provincia);
- 
+
         Vendedor vendedor = new Vendedor(
                 Integer.valueOf(jTextFieldCuit.getText().trim()),
-                Integer.valueOf(jTextFieldComision.getText().trim()),
+                Double.valueOf(jTextFieldComision.getText().trim()),
                 articulos,
                 ciudad,
                 jTextFieldNombre.getText().trim(),
@@ -388,11 +415,9 @@ public class GestionadorVendedor extends javax.swing.JFrame {
                 vendedores.add(vendedor);
                 controllerPersona.registrar(session, vendedor);
                 tx.commit();
-                session.close();
             } catch (RuntimeException e) {
-                System.err.println("Error al registrar un vendedor: " + e);
+                JOptionPane.showMessageDialog(this, "Error al registrar un vendedor");
             }
-
         }
     }
 
@@ -414,6 +439,16 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         defaultTableModel.removeRow(indice);
     }
 
+    private void limpiar() {
+        jButtonActualizar.setEnabled(false);
+        jTextFieldNombre.setText("");
+        jTextFieldApellido.setText("");
+        jTextFieldDireccion.setText("");
+        jTextFieldCuit.setText("");
+        jTextFieldComision.setText("");
+        jComboBoxCiudad.setSelectedIndex(0);
+    }
+
     private Ciudad ciudadSegunProvincia(String descripcion) {
         Ciudad resultado = new Ciudad("Argentina", "Sin especificar");
         for (Ciudad ciudad : ciudades) {
@@ -430,6 +465,7 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JComboBox<String> jComboBoxCiudad;
+    private javax.swing.JLabel jLabelAccion;
     private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelCiudad;
     private javax.swing.JLabel jLabelComision;
@@ -437,11 +473,14 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDireccion;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelTotal;
+    private javax.swing.JLabel jLabelTotalRegistros;
     private javax.swing.JMenuBar jMenuBarSalir;
     private javax.swing.JMenuItem jMenuItemSalir;
     private javax.swing.JMenu jMenuSalir;
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableVendedores;
     private javax.swing.JTextField jTextFieldApellido;
     private javax.swing.JTextField jTextFieldComision;

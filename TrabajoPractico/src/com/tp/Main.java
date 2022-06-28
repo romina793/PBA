@@ -17,7 +17,7 @@ public class Main {
             menu.pack();
             menu.setVisible(true);
         } catch (Exception e) {
-            System.err.println("Error al iniciar el programa");
+            System.err.println("Error al iniciar el programa" + e);
         }
     }
 }

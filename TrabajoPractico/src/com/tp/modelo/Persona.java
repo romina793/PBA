@@ -11,10 +11,10 @@ import java.util.Objects;
  */
 public class Persona {
 
-    private int id;
-    private String nombre;
-    private String apellido;
-    private String direccion;
+    protected int id;
+    protected String nombre;
+    protected String apellido;
+    protected String direccion;
 
     public Persona() {
     }

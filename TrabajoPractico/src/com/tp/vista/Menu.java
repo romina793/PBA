@@ -80,7 +80,7 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jbtnGestionarArticulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnGestionarVendedor)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, "card2");

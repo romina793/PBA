@@ -7,6 +7,7 @@ import com.tp.modelo.Articulo;
 import com.tp.modelo.Marca;
 import com.tp.modelo.Vendedor;
 import com.tp.util.HibernateUtil;
+import com.tp.util.Utiles;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -30,12 +31,11 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     private final SessionFactory sessionFactory;
     private final Session session;
 
+    private Transaction tx = null;
     private List<Articulo> articulos;
     private List<Marca> marcas;
     private List<Vendedor> vendedores;
     private int filaSeleccionada = 0;
-    Transaction tx = null;
-
 
     /**
      * Creates new form GestionadorArticulo
@@ -54,6 +54,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         cargarArticulos();
         cargarMarcas();
         cargarVendedores();
+        cargarTotalRegistros();
     }
 
     /**
@@ -86,6 +87,11 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         jButtonLimpiar = new javax.swing.JButton();
         jLabelVendedor = new javax.swing.JLabel();
         jComboBoxVendedor = new javax.swing.JComboBox<>();
+        jLabelAccion = new javax.swing.JLabel();
+        jSeparator = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        jLabelTotalRegistros = new javax.swing.JLabel();
+        jLabelTotal = new javax.swing.JLabel();
         jMenuBarSalir = new javax.swing.JMenuBar();
         jMenuSalir = new javax.swing.JMenu();
         jMenuItemSalir = new javax.swing.JMenuItem();
@@ -121,14 +127,14 @@ public class GestionadorArticulo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Nombre", "Descripción", "Precio Costo", "Precio Venta", "Marca", "Vendedor"
+                "Código", "Nombre", "Descripción", "Precio Costo", "Precio Venta", "Marca", "Cuit Vendedor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -187,6 +193,13 @@ public class GestionadorArticulo extends javax.swing.JFrame {
 
         jComboBoxVendedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin especificar" }));
 
+        jLabelAccion.setText("Acciones");
+
+        jLabel1.setText("Asociar artículo a un vendedor");
+
+        jLabelTotalRegistros.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabelTotalRegistros.setText("Total de registros:");
+
         jMenuSalir.setText("Opciones");
 
         jMenuItemSalir.setText("Salir");
@@ -208,55 +221,76 @@ public class GestionadorArticulo extends javax.swing.JFrame {
             .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jButtonAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonActualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonLimpiar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabelDescripcion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelCodigo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(25, 25, 25)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabelNombre)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNombre)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelPrecioCosto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabelPrecioVenta)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldDescripcion))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelMarca, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabelVendedor)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBoxMarcas, 0, 255, Short.MAX_VALUE)
-                                    .addComponent(jComboBoxVendedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jLabelPrecioCosto)
+                                        .addGap(8, 8, 8)
+                                        .addComponent(jTextFieldPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabelPrecioVenta)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTextFieldPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelVendedor)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBoxVendedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelMarca)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBoxMarcas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(10, 10, 10))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonActualizar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabelAccion))
+                                .addGap(0, 340, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelTotalRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelTotal)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jPanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCodigo)
                     .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,7 +306,13 @@ public class GestionadorArticulo extends javax.swing.JFrame {
                     .addComponent(jTextFieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelMarca)
                     .addComponent(jComboBoxMarcas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelAccion)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAgregar)
                     .addComponent(jButtonActualizar)
@@ -281,6 +321,10 @@ public class GestionadorArticulo extends javax.swing.JFrame {
                     .addComponent(jComboBoxVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelTotalRegistros)
+                    .addComponent(jLabelTotal))
                 .addContainerGap())
         );
 
@@ -291,6 +335,8 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         String requeridos = evaluarDatosRequeridos();
         if (requeridos.isEmpty()) {
             agregar();
+            limpiar();
+            cargarTotalRegistros();
         } else {
             JOptionPane.showMessageDialog(this, requeridos);
         }
@@ -305,10 +351,12 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         if (requeridos.isEmpty()) {
             borrarFila(filaSeleccionada);
             agregar();
+            
+            jButtonActualizar.setEnabled(false);
+            limpiar();
         } else {
             JOptionPane.showMessageDialog(this, requeridos);
         }
-        jButtonActualizar.setEnabled(false);
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
     private void jTableArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableArticulosMouseClicked
@@ -333,20 +381,13 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableArticulosMouseClicked
 
     private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
-        jButtonActualizar.setEnabled(false);
-        jTextFieldCodigo.setText("");
-        jTextFieldNombre.setText("");
-        jTextFieldDescripcion.setText("");
-        jTextFieldPrecioCosto.setText("");
-        jTextFieldPrecioVenta.setText("");
-        jComboBoxMarcas.setSelectedIndex(0);
-        jComboBoxVendedor.setSelectedIndex(0);
+        limpiar();
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
     private void cargarArticulos() {
         articulos = controllerArticulo.obtener(session);
         articulos.forEach(articulo -> {
-            agregarFila(articulo);
+            agregarFila(articulo, "");
         });
     }
 
@@ -356,29 +397,45 @@ public class GestionadorArticulo extends javax.swing.JFrame {
             jComboBoxMarcas.addItem(marca.getDescripcion());
         });
     }
-    
+
     private void cargarVendedores() {
         vendedores = controllerPersona.obtenerVendedores(session);
-        vendedores.forEach(vendedores -> {
-            jComboBoxVendedor.addItem(String.valueOf(vendedores.getCuit()));
+        vendedores.forEach(vendedor -> {
+            jComboBoxVendedor.addItem(String.valueOf(vendedor.getCuit()));
         });
+    }
+
+    private void cargarTotalRegistros() {
+        jLabelTotal.setText(String.valueOf(articulos.size()));
     }
 
     private String evaluarDatosRequeridos() {
         if (jTextFieldCodigo.getText().isEmpty()) {
             return "Código es un dato requerido";
         }
+        if (!Utiles.esNumerico(jTextFieldCodigo.getText())) {
+            jTextFieldCodigo.setText("");
+            return "Código debe ser un dato númerico";
+        }
         if (jTextFieldNombre.getText().isEmpty()) {
             return "Nombre es un dato requerido";
-        }
-        if (jTextFieldDescripcion.getText().isEmpty()) {
-            return "Descripción es un dato requerido";
         }
         if (jTextFieldPrecioCosto.getText().isEmpty()) {
             return "Precio de Costo es un dato requerido";
         }
+        if (!Utiles.esDouble(jTextFieldPrecioCosto.getText())) {
+            jTextFieldPrecioCosto.setText("");
+            return "Precio de Costo debe ser un dato númerico";
+        }
         if (jTextFieldPrecioVenta.getText().isEmpty()) {
             return "Precio de Venta es un dato requerido";
+        }
+        if (!Utiles.esDouble(jTextFieldPrecioVenta.getText())) {
+            jTextFieldPrecioVenta.setText("");
+            return "Precio de Venta debe ser un dato númerico";
+        }
+        if (jTextFieldDescripcion.getText().isEmpty()) {
+            return "Descripción es un dato requerido";
         }
         return "";
     }
@@ -386,7 +443,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     private void agregar() {
         String descripcion = jComboBoxMarcas.getSelectedItem().toString();
         Marca marca = marcaSegunDescripcion(descripcion);
-        
+
         Articulo articulo = new Articulo(
                 Integer.valueOf(jTextFieldCodigo.getText().trim()),
                 jTextFieldNombre.getText().trim(),
@@ -400,43 +457,37 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         if (articulos.contains(articulo) && !tieneVendedor) {
             JOptionPane.showMessageDialog(this, "El Artículo que desea agregar ya existe");
         } else {
-            
             try {
-                agregarFila(articulo);
+                String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
+                agregarFila(articulo, cuitVendedor);
                 tx = session.beginTransaction();
                 articulos.add(articulo);
                 controllerArticulo.registrar(session, articulo);
                 asociarVendedor();
                 tx.commit();
-                session.close();
             } catch (RuntimeException e) {
-                System.err.println("Error al registrar un artículo: " + e);
+                JOptionPane.showMessageDialog(this, "Error al registrar un artículo");
             }
         }
     }
-    
+
     private boolean estaAsociadoVendedor(Articulo articulo) {
-        String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
-        Vendedor vendedor = getVendedor(cuitVendedor);
-        if (vendedor.getArticulos().contains(articulo)) {
-            return false;
+        Vendedor vendedor = getVendedor();
+        if (vendedor != null) {
+            return vendedor.getArticulos().contains(articulo);
         }
-        return true;
+        return false;
     }
 
-    private void agregarFila(Articulo articulo) {
-        String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
-        String vendedor = getVendedorCuit(cuitVendedor);
-
-        
+    private void agregarFila(Articulo articulo, String cuitVendedor) {
         String[] fila = {
             String.valueOf(articulo.getCodigo()),
             articulo.getNombre(),
             articulo.getDescripcion(),
             String.valueOf(articulo.getPrecioCosto()),
             String.valueOf(articulo.getPrecioVenta()),
-            articulo.getMarca() != null ? articulo.getMarca().getDescripcion() : "Sin especificar", 
-            vendedor    
+            articulo.getMarca() != null ? articulo.getMarca().getDescripcion() : "Sin especificar",
+            cuitVendedor.contains("Sin especificar") || cuitVendedor.isEmpty() ? "Sin especificar" : cuitVendedor
         };
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTableArticulos.getModel();
         defaultTableModel.addRow(fila);
@@ -446,12 +497,11 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTableArticulos.getModel();
         defaultTableModel.removeRow(indice);
     }
-    
+
     private void asociarVendedor() {
         String descripcion = jComboBoxMarcas.getSelectedItem().toString();
         Marca marca = marcaSegunDescripcion(descripcion);
-        String cuit = String.valueOf(jComboBoxVendedor.getSelectedItem().toString());
-        Vendedor vendedor = getVendedor(cuit);
+        Vendedor vendedor = getVendedor();
         Articulo articulo = new Articulo(
                 Integer.valueOf(jTextFieldCodigo.getText().trim()),
                 jTextFieldNombre.getText().trim(),
@@ -460,13 +510,24 @@ public class GestionadorArticulo extends javax.swing.JFrame {
                 Double.valueOf(jTextFieldPrecioVenta.getText().trim()),
                 marca
         );
-
         if (vendedor != null) {
             vendedor.getArticulos().add(articulo);
         }
     }
-    
-    private Vendedor getVendedor(String cuitVendedor) {
+
+    private void limpiar() {
+        jButtonActualizar.setEnabled(false);
+        jTextFieldCodigo.setText("");
+        jTextFieldNombre.setText("");
+        jTextFieldDescripcion.setText("");
+        jTextFieldPrecioCosto.setText("");
+        jTextFieldPrecioVenta.setText("");
+        jComboBoxMarcas.setSelectedIndex(0);
+        jComboBoxVendedor.setSelectedIndex(0);
+    }
+
+    private Vendedor getVendedor() {
+        String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
         for (Vendedor vendedor : vendedores) {
             if (String.valueOf(vendedor.getCuit()).equals(cuitVendedor)) {
                 return vendedor;
@@ -474,10 +535,11 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         }
         return null;
     }
-    
-    private String getVendedorCuit(String cuitVendedor) {
+
+    private String getCuit() {
+        String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
         for (Vendedor vendedor : vendedores) {
-            if ( String.valueOf(vendedor.getCuit()).equals(cuitVendedor)) {
+            if (String.valueOf(vendedor.getCuit()).equals(cuitVendedor)) {
                 return String.valueOf(vendedor.getCuit());
             }
         }
@@ -501,6 +563,8 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JComboBox<String> jComboBoxMarcas;
     private javax.swing.JComboBox<String> jComboBoxVendedor;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelAccion;
     private javax.swing.JLabel jLabelCodigo;
     private javax.swing.JLabel jLabelDescripcion;
     private javax.swing.JLabel jLabelMarca;
@@ -508,12 +572,15 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPrecioCosto;
     private javax.swing.JLabel jLabelPrecioVenta;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelTotal;
+    private javax.swing.JLabel jLabelTotalRegistros;
     private javax.swing.JLabel jLabelVendedor;
     private javax.swing.JMenuBar jMenuBarSalir;
     private javax.swing.JMenuItem jMenuItemSalir;
     private javax.swing.JMenu jMenuSalir;
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator;
     private javax.swing.JTable jTableArticulos;
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldDescripcion;

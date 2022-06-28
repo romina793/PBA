@@ -15,7 +15,7 @@ import org.hibernate.Transaction;
 public class ArticuloDaoImp implements IArticuloDao {
 
     Transaction tx = null;
-    
+
     @Override
     public void registrar(Session session, Articulo articulo) {
         session.saveOrUpdate(articulo);

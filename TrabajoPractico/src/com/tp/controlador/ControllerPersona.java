@@ -36,4 +36,4 @@ public class ControllerPersona {
         IPersonaDao dao = new PersonaDaoImp();
         return dao.obtenerVendedores(session);
     }
-}
+    }

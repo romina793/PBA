@@ -18,6 +18,5 @@ public interface IPersonaDao {
 
     public List<Persona> obtener(Session session);
     
-    public List<Vendedor> obtenerVendedores(Session session);
-
+    public List<Vendedor> obtenerVendedores(Session session);  
 }
