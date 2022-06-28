@@ -293,9 +293,22 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         String requeridos = evaluarDatosRequeridos();
         if (requeridos.isEmpty()) {
-            agregar();
+            String provincia = jComboBoxCiudad.getSelectedItem().toString();
+            Ciudad ciudad = ciudadSegunProvincia(provincia);
+
+            Vendedor vendedor = new Vendedor(
+                    Integer.valueOf(jTextFieldCuit.getText().trim()),
+                    Double.valueOf(jTextFieldComision.getText().trim()),
+                    articulos,
+                    ciudad,
+                    jTextFieldNombre.getText().trim(),
+                    jTextFieldApellido.getText().trim(),
+                    jTextFieldDireccion.getText().trim()
+            );
+            registrar(vendedor);
             limpiar();
             cargarTotalRegistros();
+            JOptionPane.showMessageDialog(this, "Vendedor agregado!");
         } else {
             JOptionPane.showMessageDialog(this, requeridos);
         }
@@ -308,10 +321,13 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         String requeridos = evaluarDatosRequeridos();
         if (requeridos.isEmpty()) {
-            agregar();
+            Vendedor vendedor = actualizarVendedor();
+            borrarFila();
 
+            registrar(vendedor);
             jButtonActualizar.setEnabled(false);
             limpiar();
+            JOptionPane.showMessageDialog(this, "Vendedor actualizado!");
         } else {
             JOptionPane.showMessageDialog(this, requeridos);
         }
@@ -390,33 +406,32 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         return "";
     }
 
-    private void agregar() {
+    private Vendedor actualizarVendedor() {
+        Vendedor vendedor = vendedores.get(filaSeleccionada);
+
+        vendedor.setNombre(jTextFieldNombre.getText().trim());
+        vendedor.setApellido(jTextFieldApellido.getText().trim());
+        vendedor.setDireccion(jTextFieldDireccion.getText().trim());
+        vendedor.setCuit(Integer.valueOf(jTextFieldCuit.getText().trim()));
+        vendedor.setPorcentajeDeComision(Double.valueOf(jTextFieldComision.getText().trim()));
+        vendedor.setArticulos(articulos);
+
         String provincia = jComboBoxCiudad.getSelectedItem().toString();
         Ciudad ciudad = ciudadSegunProvincia(provincia);
+        vendedor.setCiudad(ciudad);
 
-        Vendedor vendedor = new Vendedor(
-                Integer.valueOf(jTextFieldCuit.getText().trim()),
-                Double.valueOf(jTextFieldComision.getText().trim()),
-                articulos,
-                ciudad,
-                jTextFieldNombre.getText().trim(),
-                jTextFieldApellido.getText().trim(),
-                jTextFieldDireccion.getText().trim()
-        );
+        return vendedor;
+    }
 
-        if (vendedores.contains(vendedor)) {
-            JOptionPane.showMessageDialog(this, "El Vendedor ya existe");
-        } else {
-            borrarFila(filaSeleccionada);
-            agregarFila(vendedor);
-            vendedores.add(vendedor);
-            try {
-                tx = session.beginTransaction();                
-                controllerPersona.registrar(session, vendedor);
-                tx.commit();
-            } catch (RuntimeException e) {
-                JOptionPane.showMessageDialog(this, "Error al registrar un vendedor");
-            }
+    private void registrar(Vendedor vendedor) {
+        agregarFila(vendedor);
+        vendedores.add(vendedor);
+        try {
+            tx = session.beginTransaction();
+            controllerPersona.registrar(session, vendedor);
+            tx.commit();
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(this, "Error al registrar un vendedor");
         }
     }
 
@@ -433,9 +448,10 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         defaultTableModel.addRow(fila);
     }
 
-    private void borrarFila(int indice) {
+    private void borrarFila() {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTableVendedores.getModel();
-        defaultTableModel.removeRow(indice);
+        defaultTableModel.removeRow(filaSeleccionada);
+        vendedores.remove(filaSeleccionada);
     }
 
     private void limpiar() {

@@ -334,9 +334,20 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         String requeridos = evaluarDatosRequeridos();
         if (requeridos.isEmpty()) {
-            agregar();
+            String descripcion = jComboBoxMarcas.getSelectedItem().toString();
+            Marca marca = marcaSegunDescripcion(descripcion);
+            Articulo articulo = new Articulo(
+                    Integer.valueOf(jTextFieldCodigo.getText().trim()),
+                    jTextFieldNombre.getText().trim(),
+                    jTextFieldDescripcion.getText().trim(),
+                    Double.valueOf(jTextFieldPrecioCosto.getText().trim()),
+                    Double.valueOf(jTextFieldPrecioVenta.getText().trim()),
+                    marca
+            );
+            registrar(articulo);
             limpiar();
             cargarTotalRegistros();
+            JOptionPane.showMessageDialog(this, "Artículo agregado!");
         } else {
             JOptionPane.showMessageDialog(this, requeridos);
         }
@@ -349,10 +360,13 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         String requeridos = evaluarDatosRequeridos();
         if (requeridos.isEmpty()) {
-            agregar();
+            Articulo articulo = actualizarArticulo();
+            borrarFila();
 
+            registrar(articulo);
             jButtonActualizar.setEnabled(false);
             limpiar();
+            JOptionPane.showMessageDialog(this, "Artículo actualizado!");
         } else {
             JOptionPane.showMessageDialog(this, requeridos);
         }
@@ -439,35 +453,33 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         return "";
     }
 
-    private void agregar() {
+    private Articulo actualizarArticulo() {
+        Articulo articulo = articulos.get(filaSeleccionada);
+
+        articulo.setCodigo(Integer.valueOf(jTextFieldCodigo.getText().trim()));
+        articulo.setNombre(jTextFieldNombre.getText().trim());
+        articulo.setDescripcion(jTextFieldDescripcion.getText().trim());
+        articulo.setPrecioCosto(Double.valueOf(jTextFieldPrecioCosto.getText().trim()));
+        articulo.setPrecioVenta(Double.valueOf(jTextFieldPrecioVenta.getText().trim()));
+
         String descripcion = jComboBoxMarcas.getSelectedItem().toString();
         Marca marca = marcaSegunDescripcion(descripcion);
+        articulo.setMarca(marca);
 
-        Articulo articulo = new Articulo(
-                Integer.valueOf(jTextFieldCodigo.getText().trim()),
-                jTextFieldNombre.getText().trim(),
-                jTextFieldDescripcion.getText().trim(),
-                Double.valueOf(jTextFieldPrecioCosto.getText().trim()),
-                Double.valueOf(jTextFieldPrecioVenta.getText().trim()),
-                marca
-        );
+        return articulo;
+    }
 
-        boolean tieneVendedor = estaAsociadoVendedor(articulo);
-        if (articulos.contains(articulo) && !tieneVendedor) {
-            JOptionPane.showMessageDialog(this, "El Artículo ya existe");
-        } else {
-            borrarFila(filaSeleccionada);
-            String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
-            agregarFila(articulo, cuitVendedor);
-            articulos.add(articulo);
-            try {
-                tx = session.beginTransaction();
-                controllerArticulo.registrar(session, articulo);
-                asociarVendedor();
-                tx.commit();
-            } catch (RuntimeException e) {
-                JOptionPane.showMessageDialog(this, "Error al registrar un artículo");
-            }
+    private void registrar(Articulo articulo) {
+        String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
+        agregarFila(articulo, cuitVendedor);
+        articulos.add(articulo);
+        try {
+            tx = session.beginTransaction();
+            controllerArticulo.registrar(session, articulo);
+            asociarVendedor();
+            tx.commit();
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(this, "Error al registrar un artículo");
         }
     }
 
@@ -493,9 +505,9 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         defaultTableModel.addRow(fila);
     }
 
-    private void borrarFila(int indice) {
+    private void borrarFila() {
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTableArticulos.getModel();
-        defaultTableModel.removeRow(indice);
+        defaultTableModel.removeRow(filaSeleccionada);
     }
 
     private void asociarVendedor() {
