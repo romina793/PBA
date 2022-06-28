@@ -24,6 +24,12 @@ public class ControllerArticulo {
         dao.registrar(session, articulo);
     }
 
+    // Llama al DAO para borrar una articulo
+    public void borrar(Session session, Articulo articulo) {
+        IArticuloDao dao = new ArticuloDaoImp();
+        dao.borrar(session, articulo);
+    }
+
     // Llama al DAO para obtener todos los articulos
     public List<Articulo> obtener(Session session) {
         IArticuloDao dao = new ArticuloDaoImp();

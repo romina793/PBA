@@ -14,6 +14,8 @@ import org.hibernate.Session;
 public interface IArticuloDao {
 
     public void registrar(Session session, Articulo articulo);
+    
+    public void borrar(Session session, Articulo articulo);
 
     public List<Articulo> obtener(Session session);
 

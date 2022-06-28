@@ -24,16 +24,22 @@ public class ControllerPersona {
         IPersonaDao dao = new PersonaDaoImp();
         dao.registrar(session, persona);
     }
+    
+    // Llama al DAO para borrar una persona
+    public void borrar(Session session, Persona persona) {
+        IPersonaDao dao = new PersonaDaoImp();
+        dao.borrar(session, persona);
+    }
 
     // Llama al DAO para obtener todas las personas
     public List<Persona> obtener(Session session) {
         IPersonaDao dao = new PersonaDaoImp();
         return dao.obtener(session);
     }
-    
+
     // Llama al DAO para obtener todas los vendedores
     public List<Vendedor> obtenerVendedores(Session session) {
         IPersonaDao dao = new PersonaDaoImp();
         return dao.obtenerVendedores(session);
     }
-    }
+}

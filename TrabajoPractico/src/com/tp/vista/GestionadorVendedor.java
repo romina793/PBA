@@ -85,6 +85,7 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabelTotalRegistros = new javax.swing.JLabel();
         jLabelTotal = new javax.swing.JLabel();
+        jButtonBorrar = new javax.swing.JButton();
         jMenuBarSalir = new javax.swing.JMenuBar();
         jMenuSalir = new javax.swing.JMenu();
         jMenuItemSalir = new javax.swing.JMenuItem();
@@ -187,6 +188,14 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         jLabelTotalRegistros.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabelTotalRegistros.setText("Total de registros:");
 
+        jButtonBorrar.setText("Borrar");
+        jButtonBorrar.setEnabled(false);
+        jButtonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarActionPerformed(evt);
+            }
+        });
+
         jMenuSalir.setText("Opciones");
 
         jMenuItemSalir.setText("Salir");
@@ -209,7 +218,6 @@ public class GestionadorVendedor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -238,15 +246,19 @@ public class GestionadorVendedor extends javax.swing.JFrame {
                                 .addComponent(jTextFieldDireccion)))
                         .addComponent(jLabelAccion))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelTotalRegistros)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelTotal)))
+                        .addComponent(jLabelTotal))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jButtonAgregar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonActualizar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -277,7 +289,8 @@ public class GestionadorVendedor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAgregar)
                     .addComponent(jButtonActualizar)
-                    .addComponent(jButtonLimpiar))
+                    .addComponent(jButtonLimpiar)
+                    .addComponent(jButtonBorrar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -335,6 +348,7 @@ public class GestionadorVendedor extends javax.swing.JFrame {
 
     private void jTableVendedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVendedoresMouseClicked
         jButtonActualizar.setEnabled(true);
+        jButtonBorrar.setEnabled(true);
 
         filaSeleccionada = jTableVendedores.rowAtPoint(evt.getPoint());
         Vendedor vendedorSeleccionado = vendedores.get(filaSeleccionada);
@@ -357,6 +371,22 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
         limpiar();
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
+
+    private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
+        Vendedor vendedor = vendedores.get(filaSeleccionada);
+        borrarFila();
+        try {
+            tx = session.beginTransaction();
+            controllerPersona.borrar(session, vendedor);
+            tx.commit();
+            jButtonBorrar.setEnabled(false);
+            limpiar();
+            cargarTotalRegistros();
+            JOptionPane.showMessageDialog(this, "Vendedor eliminado!");
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(this, "Error al registrar un vendedor");
+        }
+    }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     private void cargarVendedores() {
         vendedores = controllerPersona.obtenerVendedores(session);
@@ -414,7 +444,7 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         vendedor.setDireccion(jTextFieldDireccion.getText().trim());
         vendedor.setCuit(Integer.valueOf(jTextFieldCuit.getText().trim()));
         vendedor.setPorcentajeDeComision(Double.valueOf(jTextFieldComision.getText().trim()));
-        
+
         String provincia = jComboBoxCiudad.getSelectedItem().toString();
         Ciudad ciudad = ciudadSegunProvincia(provincia);
         vendedor.setCiudad(ciudad);
@@ -477,6 +507,7 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonAgregar;
+    private javax.swing.JButton jButtonBorrar;
     private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JComboBox<String> jComboBoxCiudad;
     private javax.swing.JLabel jLabelAccion;

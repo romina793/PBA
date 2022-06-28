@@ -18,6 +18,11 @@ public class PersonaDaoImp implements IPersonaDao {
     public void registrar(Session session, Persona persona) {
         session.saveOrUpdate(persona);
     }
+    
+    @Override
+    public void borrar(Session session, Persona persona) {
+        session.delete(persona);
+    }
 
     @Override
     public List<Persona> obtener(Session session) {
