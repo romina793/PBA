@@ -414,8 +414,7 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         vendedor.setDireccion(jTextFieldDireccion.getText().trim());
         vendedor.setCuit(Integer.valueOf(jTextFieldCuit.getText().trim()));
         vendedor.setPorcentajeDeComision(Double.valueOf(jTextFieldComision.getText().trim()));
-        vendedor.setArticulos(articulos);
-
+        
         String provincia = jComboBoxCiudad.getSelectedItem().toString();
         Ciudad ciudad = ciudadSegunProvincia(provincia);
         vendedor.setCiudad(ciudad);
