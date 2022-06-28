@@ -349,9 +349,8 @@ public class GestionadorArticulo extends javax.swing.JFrame {
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         String requeridos = evaluarDatosRequeridos();
         if (requeridos.isEmpty()) {
-            borrarFila(filaSeleccionada);
             agregar();
-            
+
             jButtonActualizar.setEnabled(false);
             limpiar();
         } else {
@@ -455,13 +454,14 @@ public class GestionadorArticulo extends javax.swing.JFrame {
 
         boolean tieneVendedor = estaAsociadoVendedor(articulo);
         if (articulos.contains(articulo) && !tieneVendedor) {
-            JOptionPane.showMessageDialog(this, "El Artículo que desea agregar ya existe");
+            JOptionPane.showMessageDialog(this, "El Artículo ya existe");
         } else {
+            borrarFila(filaSeleccionada);
+            String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
+            agregarFila(articulo, cuitVendedor);
+            articulos.add(articulo);
             try {
-                String cuitVendedor = jComboBoxVendedor.getSelectedItem().toString();
-                agregarFila(articulo, cuitVendedor);
                 tx = session.beginTransaction();
-                articulos.add(articulo);
                 controllerArticulo.registrar(session, articulo);
                 asociarVendedor();
                 tx.commit();

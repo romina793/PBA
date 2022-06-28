@@ -308,7 +308,6 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
         String requeridos = evaluarDatosRequeridos();
         if (requeridos.isEmpty()) {
-            borrarFila(filaSeleccionada);
             agregar();
 
             jButtonActualizar.setEnabled(false);
@@ -406,13 +405,13 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         );
 
         if (vendedores.contains(vendedor)) {
-            JOptionPane.showMessageDialog(this, "El Vendedor que desea agregar ya existe");
+            JOptionPane.showMessageDialog(this, "El Vendedor ya existe");
         } else {
+            borrarFila(filaSeleccionada);
             agregarFila(vendedor);
-
+            vendedores.add(vendedor);
             try {
-                tx = session.beginTransaction();
-                vendedores.add(vendedor);
+                tx = session.beginTransaction();                
                 controllerPersona.registrar(session, vendedor);
                 tx.commit();
             } catch (RuntimeException e) {
