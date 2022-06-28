@@ -551,6 +551,8 @@ public class GestionadorArticulo extends javax.swing.JFrame {
 
     private void limpiar() {
         jButtonActualizar.setEnabled(false);
+        jButtonBorrar.setEnabled(false);
+
         jTextFieldCodigo.setText("");
         jTextFieldNombre.setText("");
         jTextFieldDescripcion.setText("");

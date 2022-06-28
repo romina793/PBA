@@ -485,6 +485,8 @@ public class GestionadorVendedor extends javax.swing.JFrame {
 
     private void limpiar() {
         jButtonActualizar.setEnabled(false);
+        jButtonBorrar.setEnabled(false);
+
         jTextFieldNombre.setText("");
         jTextFieldApellido.setText("");
         jTextFieldDireccion.setText("");
