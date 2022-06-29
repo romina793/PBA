@@ -63,12 +63,7 @@ public class Vendedor extends Persona {
 
     @Override
     public String toString() {
-        return "Vendedor{"
-                + "cuit=" + cuit
-                + ", porcentajeDeComision=" + porcentajeDeComision
-                + ", articulos=" + articulos
-                + ", ciudad=" + ciudad
-                + '}';
+        return "CUIT: " + getCuit() + " - " + getNombre() + ", " + getApellido();
     }
 
     @Override

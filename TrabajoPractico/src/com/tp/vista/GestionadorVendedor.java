@@ -27,7 +27,6 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     private final ControllerPersona controllerPersona;
     private final ControllerCiudad controllerCiudad;
     private final SessionFactory sessionFactory;
-    private final Session session;
 
     private Transaction tx = null;
     private List<Vendedor> vendedores;
@@ -42,12 +41,12 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         controllerPersona = new ControllerPersona();
         controllerCiudad = new ControllerCiudad();
         sessionFactory = HibernateUtil.getSessionFactory();
-        session = sessionFactory.openSession();
         vendedores = new ArrayList<>();
         ciudades = new ArrayList<>();
         articulos = new ArrayList<>();
 
         initComponents();
+        
         cargarVendedores();
         cargarCiudades();
         cargarTotalRegistros();
@@ -318,10 +317,13 @@ public class GestionadorVendedor extends javax.swing.JFrame {
                     jTextFieldApellido.getText().trim(),
                     jTextFieldDireccion.getText().trim()
             );
-            registrar(vendedor);
-            limpiar();
-            cargarTotalRegistros();
-            JOptionPane.showMessageDialog(this, "Vendedor agregado!");
+            boolean esVendedorExistente = esVendedorExistente(vendedor);
+            if (esVendedorExistente) {
+                JOptionPane.showMessageDialog(this, "El vendedor ya existe en la lista");
+            } else {
+                registrar(vendedor);
+                JOptionPane.showMessageDialog(this, "Vendedor agregado!");
+            }
         } else {
             JOptionPane.showMessageDialog(this, requeridos);
         }
@@ -335,11 +337,7 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         String requeridos = evaluarDatosRequeridos();
         if (requeridos.isEmpty()) {
             Vendedor vendedor = actualizarVendedor();
-            borrarFila();
-
             registrar(vendedor);
-            jButtonActualizar.setEnabled(false);
-            limpiar();
             JOptionPane.showMessageDialog(this, "Vendedor actualizado!");
         } else {
             JOptionPane.showMessageDialog(this, requeridos);
@@ -373,15 +371,15 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
     private void jButtonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarActionPerformed
-        Vendedor vendedor = vendedores.get(filaSeleccionada);
-        borrarFila();
         try {
+            Vendedor vendedor = vendedores.get(filaSeleccionada);
+            Session session = sessionFactory.openSession();
             tx = session.beginTransaction();
             controllerPersona.borrar(session, vendedor);
             tx.commit();
-            jButtonBorrar.setEnabled(false);
             limpiar();
-            cargarTotalRegistros();
+            session.clear();
+            session.close();
             JOptionPane.showMessageDialog(this, "Vendedor eliminado!");
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(this, "Error al registrar un vendedor");
@@ -389,17 +387,23 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBorrarActionPerformed
 
     private void cargarVendedores() {
+        Session session = sessionFactory.openSession();
         vendedores = controllerPersona.obtenerVendedores(session);
         vendedores.forEach(vendedor -> {
             agregarFila(vendedor);
         });
+        session.clear();
+        session.close();
     }
 
     private void cargarCiudades() {
+        Session session = sessionFactory.openSession();
         ciudades = controllerCiudad.obtener(session);
         ciudades.forEach(ciudad -> {
             jComboBoxCiudad.addItem(ciudad.getProvincia());
         });
+        session.clear();
+        session.close();
     }
 
     private void cargarTotalRegistros() {
@@ -410,19 +414,19 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         if (jTextFieldNombre.getText().isEmpty()) {
             return "Nombre es un dato requerido";
         }
-        if (jTextFieldCuit.getText().isEmpty()) {
-            return "Cuit es un dato requerido";
-        }
-        if (!Utiles.esNumerico(jTextFieldCuit.getText())) {
-            jTextFieldCuit.setText("");
-            return "Cuit debe ser un dato númerico";
-        }
         if (jTextFieldApellido.getText().isEmpty()) {
             return "Apellido es un dato requerido";
         }
         if (jTextFieldDireccion.getText().isEmpty()) {
             return "Dirección es un dato requerido";
         }
+        if (jTextFieldCuit.getText().isEmpty()) {
+            return "Cuit es un dato requerido";
+        }
+        if (!Utiles.esNumerico(jTextFieldCuit.getText())) {
+            jTextFieldCuit.setText("");
+            return "Cuit debe ser un dato númerico";
+        }        
         if (jTextFieldComision.getText().isEmpty()) {
             return "Comisión es un dato requerido";
         }
@@ -453,12 +457,14 @@ public class GestionadorVendedor extends javax.swing.JFrame {
     }
 
     private void registrar(Vendedor vendedor) {
-        agregarFila(vendedor);
-        vendedores.add(vendedor);
         try {
+            Session session = sessionFactory.openSession();
             tx = session.beginTransaction();
             controllerPersona.registrar(session, vendedor);
             tx.commit();
+            limpiar();
+            session.clear();
+            session.close();
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(this, "Error al registrar un vendedor");
         }
@@ -493,6 +499,11 @@ public class GestionadorVendedor extends javax.swing.JFrame {
         jTextFieldCuit.setText("");
         jTextFieldComision.setText("");
         jComboBoxCiudad.setSelectedIndex(0);
+
+        DefaultTableModel defaultTableModel = (DefaultTableModel) jTableVendedores.getModel();
+        defaultTableModel.setNumRows(0);
+        cargarVendedores();
+        cargarTotalRegistros();
     }
 
     private Ciudad ciudadSegunProvincia(String descripcion) {
@@ -504,6 +515,10 @@ public class GestionadorVendedor extends javax.swing.JFrame {
             }
         }
         return resultado;
+    }
+
+    private boolean esVendedorExistente(Vendedor vendedor) {
+        return vendedores.stream().anyMatch((ven) -> (ven.equals(vendedor)));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
