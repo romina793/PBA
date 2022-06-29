@@ -49,7 +49,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         vendedores = new ArrayList<>();
 
         initComponents();
-        
+
         cargarMarcas();
         cargarVendedores();
         cargarArticulos();
@@ -394,6 +394,13 @@ public class GestionadorArticulo extends javax.swing.JFrame {
             int indexOf = marcas.indexOf(marca);
             jComboBoxMarcas.setSelectedIndex(indexOf + 1);
         }
+        Vendedor vendedor = getVendedor(articuloSeleccionado);
+        if (vendedor == null) {
+            jComboBoxVendedor.setSelectedIndex(0);
+        } else {
+            int indexOf = vendedores.indexOf(vendedor);
+            jComboBoxVendedor.setSelectedIndex(indexOf + 1);
+        }
     }//GEN-LAST:event_jTableArticulosMouseClicked
 
     private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
@@ -531,7 +538,7 @@ public class GestionadorArticulo extends javax.swing.JFrame {
             String.valueOf(articulo.getPrecioCosto()),
             String.valueOf(articulo.getPrecioVenta()),
             articulo.getMarca() != null ? articulo.getMarca().getDescripcion() : "Sin especificar",
-            getCuitVendedor(articulo)
+            getCuitVendedorSegunArticulo(articulo)
         };
         DefaultTableModel defaultTableModel = (DefaultTableModel) jTableArticulos.getModel();
         defaultTableModel.addRow(fila);
@@ -584,14 +591,26 @@ public class GestionadorArticulo extends javax.swing.JFrame {
         return null;
     }
 
-    private String getCuitVendedor(Articulo articulo) {
+    private Vendedor getVendedor(Articulo articulo) {
+        String cuitVendedor = getCuitVendedorSegunArticulo(articulo);
+        if (!cuitVendedor.equals("Sin especificar")) {
+            for (Vendedor vendedor : vendedores) {
+                if (String.valueOf(vendedor.getCuit()).equals(cuitVendedor)) {
+                    return vendedor;
+                }
+            }
+        }
+        return null;
+    }
+
+    private String getCuitVendedorSegunArticulo(Articulo articulo) {
         for (Vendedor vendedor : vendedores) {
             List<Articulo> articulosVendedor = vendedor.getArticulos();
             if (articulosVendedor.contains(articulo)) {
-                 return String.valueOf(vendedor.getCuit());
+                return String.valueOf(vendedor.getCuit());
             }
         }
-         return "Sin especificar";
+        return "Sin especificar";
     }
 
     private Marca marcaSegunDescripcion(String descripcion) {
